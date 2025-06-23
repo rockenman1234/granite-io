@@ -6,7 +6,9 @@ from .best_of_n import (
     PRMBestOfNCompositeIOProcessor
 )
 
-# Expose public symbols at `granite_io.io.process_reward_model` to save users from typing
+# Expose public symbols at `granite_io.io.process_reward_model` 
+# to save users from typing
+
 __all__ = [
     "ProcessRewardModelIOProcessor",
     "PRMBestOfNCompositeIOProcessor"
