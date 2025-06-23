@@ -113,7 +113,7 @@ def test_run_model(lora_server: LocalVLLMServer, fake_date: str):
     """
     Run a chat completion through the LoRA adapter using the I/O processor.
     """
-    backend = lora_server.make_lora_backend("answerability")
+    backend = lora_server.make_lora_backend("answerability_prediction")
     io_proc = AnswerabilityIOProcessor(backend)
 
     # Pass our example input thorugh the I/O processor and retrieve the result
