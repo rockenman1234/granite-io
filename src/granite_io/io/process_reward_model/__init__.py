@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
 
-#TODO: fill this
 # Local
 from .best_of_n import (
     ProcessRewardModelIOProcessor,

@@ -32,8 +32,76 @@ from granite_io.types import (
 
 class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate):
     # calls the process reward model to obtain token logprobs of assistant turns to obtain PRM rewards
-    # TODO: test OpenAI API if there are no token logprobs
-    # TODO: better error checking if no assistant turns or steps found
+    """
+    I/O processor for the PRM intrinsic, AKA the Granite 3.2 8B Instruct
+    Math PRM LoRA. See model card [here](
+        https://huggingface.co/ibm-granite/granite-3.3-8b-lora-math-prm).
+        
+    The model must be prompted with a variant of the Granite 3.3 prompt. The model needs
+    the logprobs of the input (i.e. user question and assistant response) to calculate the
+    Reward score. 
+    
+    The processor as input a chat completion request and returns a completion with a 0.0 to 1.0 PRM score as a
+    string in the content field. 
+    
+    Example input to the IO processor's :func`acreate_chat_completion()` call: 
+    
+    ```
+    {
+        "messages": [
+            {
+                "role": "user", "content": "Weng earns $12 an hour for babysitting. Yesterday, 
+                she just did 50 minutes of babysitting. How much did she earn?"
+            }
+            {
+                "role": "assistant", "content": "Weng earns $12 per hour for babysitting. Since 
+                she only worked for 50 minutes yesterday, we need to calculate her earnings based 
+                on the fraction of an hour she worked.\n\nFirst, convert 50 minutes into hours:\n
+                \\[ 50 \\text{ minutes} = \\frac{50}{60} \\text{ hours} = \\frac{5}{6} \\text{ hours} \\]
+                \n\nNext, calculate her earnings by multiplying the fraction of an hour by her hourly rate:
+                \n\\[ \\text{Earnings} = 12 \\times \\frac{5}{6} \\]\n\nPerform the multiplication:\n
+                \\[ \\text{Earnings} = 12 \\times \\frac{5}{6} = 12 \\times 0.8333\\ldots = 10 \\]\n\n
+                Therefore, Weng earned $10 for 50 minutes of babysitting."
+            },
+        ],
+        ], "generate_inputs": {
+            "temperature": 0.0, "max_tokens": 4096,
+        }
+    }
+    ```
+    
+    Example prompt that the IO processor would send to the model if it received the
+    above input, after breaking down into steps and adding the artifical PRM response turns: 
+    ``` "<|start_of_role|>system<|end_of_role|>Knowledge Cutoff Date: April 2024.\nToday's Date: June 23, 2025.
+    \nYou are Granite, developed by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>
+    Weng earns $12 an hour for babysitting. Yesterday, she just did 50 minutes of babysitting.How much did she earn? Weng earns
+    $12 per hour for babysitting. Since she only worked for 50 minutes yesterday, we need to calculate her earnings based on 
+    the fraction of an hour she worked. Is this response correct so far (Y/N)?<|end_of_text|>\n <|start_of_role|>assistant
+    <|end_of_role|>Y<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>First, convert 50 minutes into hours:\n\\[ 50 
+    \\text{ minutes} = \\frac{50}{60} \\text{ hours} = \\frac{5}{6} \\text{ hours} \\] Is this response correct so far 
+    (Y/N)?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>Y<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Next, 
+    calculate her earnings by multiplying the fraction of an hour by her hourly rate:\n\\[ \\text{Earnings} = 12 \\times \\frac{5}{6} 
+    \\] Is this response correct so far (Y/N)?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>Y<|end_of_text|>\n
+    <|start_of_role|>user<|end_of_role|>Perform the multiplication:\n\\[ \\text{Earnings} = 12 \\times \\frac{5}{6} = 12 
+    \\times 0.8333\\ldots = 10 \\] Is this response correct so far (Y/N)?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>
+    Y<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Therefore, Weng earned $10 for 50 minutes of babysitting. 
+    Is this response correct so far (Y/N)?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>Y<|end_of_text|>\n"```
+    
+    
+    Example of processed output from this IO processor for the above raw model output:
+    ```
+    {
+        "results": [
+            {
+                "next_message": {
+                    "role": "assistant",
+                    "content": "0.989"
+                }
+            }
+        ]
+    }
+    ```
+    """
     
     def __init__(self, backend):
         super().__init__(backend=backend)
@@ -74,10 +142,12 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
         assert assistant_response is not None, "No assistant responsefound"
 
         # break assistant response into steps, format with generation prompt to send to backend
-        response_steps = [
-                        item.strip() for item in assistant_response.split('\n')
-                        if item.strip() not in ["", "\\[", "\\]"]
-                        ]
+        response_steps = assistant_response.split("\n\n")
+        if len(response_steps) == 1:
+            # no "\n\n" in generation, split on single newline
+            response_steps = assistant_response.split('\n')
+        
+        assert len(response_steps) > 0, "No steps found for scoring"
         
         # create a ChatCompletionInputs object with the correct formatted messages
         if system_message is not None:
@@ -148,7 +218,6 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
 
             prm_score = sum(correct_token_probs)/len(correct_token_probs)
 
-            #TODO: is there a way to get the original assistant message for "raw"?
             results.append(
                 ChatCompletionResult(
                     next_message=AssistantMessage(
@@ -175,8 +244,6 @@ class PRMBestOfNCompositeIOProcessor(InputOutputProcessor):
     each reponse, and returns the response with the highest PRM score
     """
 
-    # TODO: testing needed
-
     def __init__(
         self,
         generator: InputOutputProcessor,
@@ -202,12 +269,11 @@ class PRMBestOfNCompositeIOProcessor(InputOutputProcessor):
         # Run PRM scoring on all completions in parallel
         futures = []
         for result in generator_output.results:
-            # acreate_chat_completion() [look at base.py line #243]: calls inputs_to_generate_inputs(), backend.pipeline()
             futures.append(
                 self._prm.acreate_chat_completion(
                     inputs.with_next_message(
                         result.next_message
-                    )
+                    ).with_addl_generate_params({"n": 1, "temperature": 0.0})
                 )
             )
 
