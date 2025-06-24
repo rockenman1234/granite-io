@@ -65,7 +65,6 @@ class OpenAIBackend(Backend):
                         stop_reason=choice.finish_reason,
                         tokens=choice.logprobs.tokens,
                         token_logprobs=choice.logprobs.token_logprobs,
-
                     )
                 )
             else:
@@ -75,6 +74,6 @@ class OpenAIBackend(Backend):
                         completion_tokens=[],  # Not part of the OpenAI spec
                         stop_reason=choice.finish_reason,
                     )
-            )
+                )
 
         return GenerateResults(results=results)

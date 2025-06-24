@@ -5,6 +5,8 @@ I/O processor for the Granite process reward model intrinsic.
 
 See model card at https://huggingface.co/ibm-granite/granite-3.3-8b-lora-math-prm
 """
+
+# Standard
 import math
 
 # Local
@@ -18,16 +20,14 @@ from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor impo
     Granite3Point3Inputs,
 )
 from granite_io.types import (
-    UserMessage,
     AssistantMessage,
     ChatCompletionInputs,
     ChatCompletionResult,
     ChatCompletionResults,
     GenerateInputs,
     GenerateResults,
+    UserMessage,
 )
-
-
 
 
 class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate):
@@ -113,9 +113,7 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
         ]
     }
     """
-    
 
-    
     def __init__(self, backend):
         super().__init__(backend=backend)
 
@@ -124,17 +122,15 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
 
         # PRM specific tokens of interest
         self.generation_prompt = "Is this response correct so far (Y/N)?"
-        self.correct_token="Y"
-
+        self.correct_token = "Y"
 
     def inputs_to_generate_inputs(
         self, inputs: ChatCompletionInputs, add_generation_prompt: bool = True
-        ) -> GenerateInputs:
-        
-        # formats inputs to what the PRM requires: 
+    ) -> GenerateInputs:
+        # formats inputs to what the PRM requires:
         # turns of response + generation_prompt + assistant turn
 
-        # first, take the incoming inputs and break them into 
+        # first, take the incoming inputs and break them into
         # user question and assistant response
         # create copy of inputs so that we dont modify in place
         inputs = Granite3Point3Inputs.model_validate(inputs.model_dump())
@@ -144,62 +140,62 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
             "PRM BoN only implemented for single turn at the moment"
         )
 
-        user_message =  None
-        assistant_response  = None
+        user_message = None
+        assistant_response = None
         system_message = None
 
         for message in messages:
             if message.role == "user":
                 assert user_message is None, (
-                    "multiple user messages: "
-                    "PRM BoN only implemented for single turn"
+                    "multiple user messages: PRM BoN only implemented for single turn"
                 )
                 user_message = message.content
             elif message.role == "assistant":
                 assert assistant_response is None, (
-                    "multiple user messages: "
-                    "PRM BoN only implemented for single turn"
+                    "multiple user messages: PRM BoN only implemented for single turn"
                 )
                 assistant_response = message.content
             elif message.role == "system":
                 system_message = message
-        
-        assert user_message is not None,  "No user input/question found"
+
+        assert user_message is not None, "No user input/question found"
         assert assistant_response is not None, "No assistant response found"
 
-        # break assistant response into steps, 
+        # break assistant response into steps,
         # format with generation prompt to send to backend
         response_steps = assistant_response.split("\n\n")
         if len(response_steps) == 1:
             # no "\n\n" in generation, split on single newline
             response_steps = assistant_response.split("\n")
-        
+
         assert len(response_steps) > 0, "No steps found for scoring"
-        
-        # create a ChatCompletionInputs object with 
+
+        # create a ChatCompletionInputs object with
         # the correct formatted messages
         formatted_messages = [system_message] if system_message is not None else []
-        
+
         for s_idx, step in enumerate(response_steps):
-            if s_idx  == 0: 
-                formatted_messages.append(UserMessage(content = user_message + " " 
-                                    + step + " " 
-                                    + self.generation_prompt ))
+            if s_idx == 0:
+                formatted_messages.append(
+                    UserMessage(
+                        content=user_message + " " + step + " " + self.generation_prompt
+                    )
+                )
             else:
-                formatted_messages.append(UserMessage(content = step + " " 
-                                    + self.generation_prompt ))
+                formatted_messages.append(
+                    UserMessage(content=step + " " + self.generation_prompt)
+                )
 
-            #append the last asst turn
-            formatted_messages.append(AssistantMessage(content = self.correct_token))
-        
+            # append the last asst turn
+            formatted_messages.append(AssistantMessage(content=self.correct_token))
 
-        # update the inputs to contain the list of 
-        # newly formatted messages instead of the 
+        # update the inputs to contain the list of
+        # newly formatted messages instead of the
         # original user-response pair
         inputs = inputs.with_messages(formatted_messages)
         inputs = Granite3Point3Inputs.model_validate(inputs.model_dump())
 
-        # update the prompt with the echo and logprobs 
+        # update the prompt with the echo and logprobs
         # (reference: https://github.com/vllm-project/vllm/issues/6508)
         prompt = self.base_input_processor.transform(inputs, False)
         if inputs.generate_inputs is not None:
@@ -222,11 +218,10 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
                 }
             )
         return result
-    
+
     def output_to_result(
         self, output: GenerateResults, inputs: ChatCompletionInputs | None = None
-        ) -> ChatCompletionResults:
-
+    ) -> ChatCompletionResults:
         # Modified OpenAI backend `process_output` to include tokens and logprobs
 
         # get the scores from the PRM logprobs
@@ -239,15 +234,15 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
             print(raw_result.token_logprobs)
             for i, (token, logprob) in enumerate(
                 zip(raw_result.tokens, raw_result.token_logprobs, strict=True)
-                ):
+            ):
                 if token == self.correct_token:
                     try:
                         if (
-                                raw_result.tokens[i - 3]
-                                + raw_result.tokens[i - 2]
-                                + raw_result.tokens[i - 1]
-                                == assistant_turn_string
-                            ):
+                            raw_result.tokens[i - 3]
+                            + raw_result.tokens[i - 2]
+                            + raw_result.tokens[i - 1]
+                            == assistant_turn_string
+                        ):
                             # get probabilites by taking the exponent of logprobs
                             correct_token_probs.append(math.exp(logprob))
                     except IndexError:
@@ -256,7 +251,7 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
                 "No assistant turns with correct token found"
             )
 
-            prm_score = sum(correct_token_probs)/len(correct_token_probs)
+            prm_score = sum(correct_token_probs) / len(correct_token_probs)
 
             results.append(
                 ChatCompletionResult(
@@ -266,7 +261,7 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
                     )
                 )
             )
-        
+
         return ChatCompletionResults(results=results)
 
 
@@ -280,8 +275,8 @@ class AssistantMessageWithScore(AssistantMessage):
 
 class PRMBestOfNCompositeIOProcessor(InputOutputProcessor):
     """
-    Composite I/O processor that generates multiple responses, 
-    calculates the PRM score for each reponse, 
+    Composite I/O processor that generates multiple responses,
+    calculates the PRM score for each reponse,
     and returns the response with the highest PRM score
     """
 
@@ -318,17 +313,14 @@ class PRMBestOfNCompositeIOProcessor(InputOutputProcessor):
                 )
             )
 
-        # Process results as they come back. 
+        # Process results as they come back.
         all_results = []
         for result, future in zip(generator_output.results, futures, strict=True):
             prm_output = await future
             prm_score = float(prm_output.results[0].next_message.content)
 
-            all_results.append({
-                "result": result,
-                "prm_score": prm_score
-            })
-        
+            all_results.append({"result": result, "prm_score": prm_score})
+
         assert len(all_results) == len(generator_output.results)
 
         # select response with maximum PRM score.
@@ -342,8 +334,9 @@ class PRMBestOfNCompositeIOProcessor(InputOutputProcessor):
             )
             processed_results = [
                 selected_response["result"].model_copy(
-                update={"next_message": message_with_score})
-                ]
+                    update={"next_message": message_with_score}
+                )
+            ]
         else:
             processed_results = [selected_response["result"]]
 
