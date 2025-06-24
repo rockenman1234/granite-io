@@ -27,6 +27,8 @@ from granite_io.types import (
     GenerateResults,
 )
 
+_LORA_NAME = "hallucination_detection"
+
 _EXAMPLE_CHAT_INPUT = Granite3Point3Inputs.model_validate(
     {
         "messages": [
@@ -235,7 +237,7 @@ def test_run_model(lora_server: LocalVLLMServer, fake_date: str):
     """
     Run a chat completion through the LoRA adapter using the I/O processor.
     """
-    lora_backend = lora_server.make_lora_backend("hallucinations")
+    lora_backend = lora_server.make_lora_backend(_LORA_NAME)
     io_proc = HallucinationsIOProcessor(lora_backend)
     override_date_for_testing(fake_date)  # For consistent VCR output
 
@@ -251,7 +253,7 @@ def test_run_composite(lora_server: LocalVLLMServer, fake_date: str):
     Run a chat completion through the LoRA adapter using the composite I/O processor.
     """
     granite_backend = lora_server.make_backend()
-    lora_backend = lora_server.make_lora_backend("hallucinations")
+    lora_backend = lora_server.make_lora_backend(_LORA_NAME)
     granite_io_proc = make_io_processor("Granite 3.3", backend=granite_backend)
     io_proc = HallucinationsCompositeIOProcessor(granite_io_proc, lora_backend)
     override_date_for_testing(fake_date)  # For consistent VCR output
@@ -269,7 +271,7 @@ def test_run_processor(lora_server: LocalVLLMServer, fake_date: str):
     """
     Run a chat completion through the LoRA adapter using the composite I/O processor.
     """
-    lora_backend = lora_server.make_lora_backend("hallucinations")
+    lora_backend = lora_server.make_lora_backend(_LORA_NAME)
     io_proc = HallucinationsIOProcessor(lora_backend)
     request_proc = RewriteRequestProcessor(io_proc)
     override_date_for_testing(fake_date)  # For consistent VCR output

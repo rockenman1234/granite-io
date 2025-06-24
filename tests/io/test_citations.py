@@ -226,7 +226,7 @@ def test_run_model(lora_server: LocalVLLMServer, fake_date: str):
     """
     Run a chat completion through the LoRA adapter using the I/O processor.
     """
-    backend = lora_server.make_lora_backend("citations")
+    backend = lora_server.make_lora_backend("citation_generation")
     io_proc = CitationsIOProcessor(backend)
     override_date_for_testing(fake_date)  # For consistent VCR output
 
@@ -244,7 +244,7 @@ def test_run_composite(lora_server: LocalVLLMServer, fake_date: str):
     Run a chat completion through the LoRA adapter using the composite I/O processor.
     """
     granite_backend = lora_server.make_backend()
-    lora_backend = lora_server.make_lora_backend("citations")
+    lora_backend = lora_server.make_lora_backend("citation_generation")
     granite_io_proc = make_io_processor("Granite 3.3", backend=granite_backend)
     io_proc = CitationsCompositeIOProcessor(granite_io_proc, lora_backend)
     override_date_for_testing(fake_date)  # For consistent VCR output
