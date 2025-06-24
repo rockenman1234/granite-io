@@ -33,6 +33,7 @@ handler.setFormatter(
 logger.addHandler(handler)
 
 
+# pylint: disable-next=too-many-instance-attributes
 class LocalVLLMServer:
     """
     Class that manages a vLLM server subprocess on the local machine.
