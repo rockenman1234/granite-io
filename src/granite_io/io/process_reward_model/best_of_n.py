@@ -57,18 +57,18 @@ class ProcessRewardModelIOProcessor(ModelDirectInputOutputProcessorWithGenerate)
     worked for 50 minutes yesterday, we need to calculate her earnings based on \
     the fraction of an hour she worked.\n\nFirst, convert 50 minutes into hours:\n\
 
-    \[ 50 \\text{ minutes} = \
+    [ 50 \\text{ minutes} = \
     \\frac{50}{60} \\text{ hours} = \\frac{5}{6} \\text{ hours} \\]
 
     \n\nNext, calculate her \
     earnings by multiplying the fraction of an hour by her hourly rate:\n\
 
-    \[ \\text{Earnings} \
+    [ \\text{Earnings} \
     = 12 \\times \\frac{5}{6} \\]
 
     \n\nPerform the multiplication:\n\
 
-    \[ \\text{Earnings} = 12 \
+    [ \\text{Earnings} = 12 \
     \\times \\frac{5}{6} = 12 \\times 0.8333\\ldots = 10 \\]
 
     \n\nTherefore, Weng earned $10 \
