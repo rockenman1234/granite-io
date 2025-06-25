@@ -113,7 +113,7 @@ def test_run_composite(lora_server: LocalVLLMServer, fake_date: str):
     # Check that the process returns one final answer
     input_without_msg = _EXAMPLE_CHAT_INPUT_CORRECT.model_copy(
         update={"messages": _EXAMPLE_CHAT_INPUT_CORRECT.messages[:-1]}
-    ).with_addl_generate_params({"temperature": 1.0, "n": 5})
+    ).with_addl_generate_params({"temperature": 1.0, "n": 5, "max_tokens": 2048})
     override_date_for_testing(fake_date)  # For consistent VCR output
     results = io_proc.create_chat_completion(input_without_msg)
     assert len(results.results) == 1
