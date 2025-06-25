@@ -66,14 +66,13 @@ def test_input():
     Today's Date: {_TODAYS_DATE}.
     You are Granite, developed by IBM. You are a helpful AI assistant.<|end_of_text|>
     <|start_of_role|>user<|end_of_role|>What is the square of 5+1? \
-    To find the square of 5+1, we first calculate 5+1=6. \
-    Is this response correct so far (Y/N)?<|end_of_text|>
+To find the square of 5+1, we first calculate 5+1=6. \
+Is this response correct so far (Y/N)?<|end_of_text|>
     <|start_of_role|>assistant<|end_of_role|>Y<|end_of_text|>
     <|start_of_role|>user<|end_of_role|> The square of 6 is 36. \
-    Is this response correct so far (Y/N)?<|end_of_text|>
+Is this response correct so far (Y/N)?<|end_of_text|>
     <|start_of_role|>assistant<|end_of_role|>Y<|end_of_text|>
     """)
-
     assert output.strip() == expected_output.strip()
 
 
