@@ -48,7 +48,7 @@ openai = [
 ]
 litellm = [
     "litellm >= 1.63.14, < 2.0",
-    "python-dotenv==1.1.0",
+    "python-dotenv==1.1.1",
 ]
 vllm = [
     "vllm",
