@@ -26,6 +26,6 @@ return:
           - data: ${ results }
             contribute: [result]
       until: ${ valid }
-      max_iterations: ${ k }
+      maxIterations: ${ k }
       join:
         as: lastOf
