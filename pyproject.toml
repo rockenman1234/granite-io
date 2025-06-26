@@ -48,11 +48,10 @@ openai = [
 ]
 litellm = [
     "litellm >= 1.63.14, < 2.0",
-    "python-dotenv==1.1.0",
+    "python-dotenv==1.1.1",
 ]
 vllm = [
     "vllm",
-    "flashinfer-python",  # For top-k/top-p decoding
 ]
 voting = [
     "pandas",
@@ -72,11 +71,11 @@ dev = [
     "pytest-html",
     "pytest-recording~=0.13.2",
     "pytest-retry~=1.7",
-    "ruff==0.11.10",
+    "ruff==0.12.0",
     "tox",
     "anywidget",
     "ipywidgets",
-    "vcrpy==5.1.0",  # pin to avoid flakey newer
+    "vcrpy==6.0.2",  # pin to avoid flakey newer
     "granite-io[transformers]",
     "granite-io[nltk]",
     "granite-io[openai]",
@@ -85,8 +84,13 @@ dev = [
     "granite-io[vllm]",
     "granite-io[retriever]",
 ]
+
+# Dependencies needed for running notebooks. Update as required.
 notebook = [
-    "notebook"
+    "notebook",
+    "aiohttp",  # For AIO in notebooks
+    "granite-io[openai]",
+    "granite-io[voting]"
 ]
 all = [
     "granite-io[dev]",

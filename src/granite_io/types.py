@@ -27,6 +27,7 @@ class Hallucination(pydantic.BaseModel):
 
     hallucination_id: str
     risk: str
+    reasoning: Optional[str] = None
     response_text: str
     response_begin: int
     response_end: int
@@ -118,13 +119,19 @@ class FunctionDefinition(pydantic.BaseModel):
     # define an object type for such a schema, instead using a dictionary.
     parameters: dict[str, Any] | None = None
 
+    model_config = pydantic.ConfigDict(
+        # Enforce strict formatting of function schema, unlike the parent JSON object.
+        extra="forbid"
+    )
+
     def to_openai_json(self) -> dict:
         """
         :returns: JSON representation of this function, as the Python equivalent of the
             standard JSON used in the OpenAI chat completions API for the `tools`
             argument.
         """
-        raise NotImplementedError("TODO: Implement this")
+        # The Jinja templates whose behavior we emulate just pass through JSON data.
+        return self.model_dump()
 
 
 class GenerateInputs(pydantic.BaseModel):
@@ -172,7 +179,7 @@ class GenerateInputs(pydantic.BaseModel):
     top_p: Optional[float] = None
     user: Optional[str] = None
     extra_headers: Optional[Mapping[str, str]] = None
-    extra_body: Optional[Mapping[str, Any]] = None
+    extra_body: Optional[Mapping[str, Any]] = {}
 
     model_config = pydantic.ConfigDict(
         # Pass through arbitrary additional keyword arguments for handling by model- or

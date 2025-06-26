@@ -102,6 +102,44 @@ strategy for managing dividend income."}
     ]
 }
 """,
+    "functions": """
+{
+    "messages":
+    [
+        {"role": "user", "content": "Where is my money?"}
+    ],
+    "tools":[
+        {
+            "name": "get_current_weather",
+            "description": "Get the current weather",
+            "parameters": {
+                "type": "object",
+                "location": {
+                    "type": "string",
+                    "description": "The city and state, e.g. San Francisco, CA"
+                }
+            }
+        },
+        {
+            "name": "find_money",
+            "description": "Locate a person's money.",
+            "parameters": {
+                "type": "object",
+                "name": {
+                    "type": "string",
+                    "description": "Full legal name of the person"
+                },
+                "age": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "How old the person is"
+                }
+            }
+        }
+    ]
+    
+}
+""",
 }
 
 
@@ -351,7 +389,6 @@ def test_completion_presence_param(backend_3_3: Backend):
 
 
 @pytest.mark.vcr
-@pytest.mark.vcr
 def test_run_processor(backend_3_3: Backend, input_json_str: str):
     inputs = ChatCompletionInputs.model_validate_json(input_json_str)
     io_processor = make_io_processor(_GRANITE_3_3_MODEL_NAME, backend=backend_3_3)
@@ -449,6 +486,13 @@ def test_citation_hallucination_parsing(
     inputs, output, exp_document, exp_citation, exp_hallucination, exp_resp
 ):
     """Test the parsing logic for Rag and hallucinations output"""
+
+    # Controls must be explicitly enabled, see issue #173.
+    controls = ControlsRecord()
+    controls.citations = True
+    controls.hallucinations = True
+    inputs.controls = controls
+
     proc = Granite3Point3InputOutputProcessor()
     generated = GenerateResults(
         results=[
@@ -464,8 +508,7 @@ def test_citation_hallucination_parsing(
     assert result.hallucinations == exp_hallucination
 
 
-@pytest.mark.vcr(record_mode="new_episodes")
-@pytest.mark.block_network
+@pytest.mark.vcr
 def test_multiple_return(backend_3_3: Backend, input_json_str: str):
     inputs = ChatCompletionInputs.model_validate_json(input_json_str)
     inputs = inputs.model_copy(

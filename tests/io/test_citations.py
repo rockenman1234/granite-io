@@ -14,13 +14,13 @@ import pytest
 from granite_io import make_io_processor
 from granite_io.backend.vllm_server import LocalVLLMServer
 from granite_io.io.citations import CitationsCompositeIOProcessor, CitationsIOProcessor
-from granite_io.io.granite_3_2.input_processors.granite_3_2_input_processor import (
-    Granite3Point2Inputs,
+from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
+    Granite3Point3Inputs,
     override_date_for_testing,
 )
 from granite_io.types import GenerateResult, GenerateResults
 
-_EXAMPLE_CHAT_INPUT = Granite3Point2Inputs.model_validate(
+_EXAMPLE_CHAT_INPUT = Granite3Point3Inputs.model_validate(
     {
         "messages": [
             {
@@ -125,8 +125,8 @@ def test_canned_input():
     expected_prompt = f"""\
 <|start_of_role|>system<|end_of_role|>Knowledge Cutoff Date: April 2024.
 Today's Date: {_TODAYS_DATE}.
-You are Granite, developed by IBM.Write the response to the user's input by strictly aligning with the facts in the provided documents. If the information needed to answer the question is not available in the documents, inform the user that the question cannot be answered based on the available data.<|end_of_text|>
-<|start_of_role|>documents<|end_of_role|>Document 0
+You are Granite, developed by IBM. Write the response to the user's input by strictly aligning with the facts in the provided documents. If the information needed to answer the question is not available in the documents, inform the user that the question cannot be answered based on the available data.<|end_of_text|>
+<|start_of_role|>document {{"document_id": "1"}}<|end_of_role|>
 <c0> Git Repos and Issue Tracking is an IBM-hosted component of the Continuous Delivery service. <c1> All of the data that you provide to Git Repos and Issue Tracking, including but not limited to source files, issues, pull requests, and project configuration properties, is managed securely within Continuous Delivery. <c2> However, Git Repos and Issue Tracking supports various mechanisms for exporting, sending, or otherwise sharing data to users and third parties. <c3> The ability of Git Repos and Issue Tracking to share information is typical of many social coding platforms. <c4> However, such sharing might conflict with regulatory controls that apply to your business. <c5> After you create a project in Git Repos and Issue Tracking, but before you entrust any files, issues, records, or other data with the project, review the project settings and change any settings that you deem necessary to protect your data. <c6> Settings to review include visibility levels, email notifications, integrations, web hooks, access tokens, deploy tokens, and deploy keys. <c7> Project visibility levels 
 
 Git Repos and Issue Tracking projects can have one of the following visibility levels: private, internal, or public. <c8> * Private projects are visible only to project members. <c9> This setting is the default visibility level for new projects, and is the most secure visibility level for your data. <c10> * Internal projects are visible to all users that are logged in to IBM Cloud. <c11> * Public projects are visible to anyone. <c12> To limit project access to only project members, complete the following steps:
@@ -135,9 +135,8 @@ Git Repos and Issue Tracking projects can have one of the following visibility l
 
 1. <c13> From the project sidebar, click Settings > General. <c14> 2. <c15> On the General Settings page, click Visibility > project features > permissions. <c16> 3. <c17> Locate the Project visibility setting. <c18> 4. <c19> Select Private, if it is not already selected. <c20> 5. <c21> Click Save changes. <c22> Project membership 
 
-Git Repos and Issue Tracking is a cloud hosted social coding environment that is available to all Continuous Delivery users. <c23> If you are a Git Repos and Issue Tracking project Maintainer or Owner, you can invite any user and group members to the project. <c24> IBM Cloud places no restrictions on who you can invite to a project.
-
-Document 1
+Git Repos and Issue Tracking is a cloud hosted social coding environment that is available to all Continuous Delivery users. <c23> If you are a Git Repos and Issue Tracking project Maintainer or Owner, you can invite any user and group members to the project. <c24> IBM Cloud places no restrictions on who you can invite to a project.<|end_of_text|>
+<|start_of_role|>document {{"document_id": "2"}}<|end_of_role|>
 <c25> After you create a project in Git Repos and Issue Tracking, but before you entrust any files, issues, records, or other data with the project, review the project settings and change any settings that are necessary to protect your data. <c26> Settings to review include visibility levels, email notifications, integrations, web hooks, access tokens, deploy tokens, and deploy keys. <c27> Project visibility levels 
 
 Git Repos and Issue Tracking projects can have one of the following visibility levels: private, internal, or public. <c28> * Private projects are visible only to project members. <c29> This setting is the default visibility level for new projects, and is the most secure visibility level for your data. <c30> * Internal projects are visible to all users that are logged in to IBM Cloud. <c31> * Public projects are visible to anyone. <c32> To limit project access to only project members, complete the following steps:
@@ -150,10 +149,9 @@ By default, Git Repos and Issue Tracking notifies project members by way of emai
 
 
 
-1. <c47> From the project sidebar, click Settings > General. <c48> 2. <c49> On the **General Settings **page, click Visibility > project features > permissions. <c50> 3. <c51> Select the Disable email notifications checkbox. <c52> 4. <c53> Click Save changes. <c54> Project integrations and webhooks<|end_of_text|>
-<|start_of_role|>user<|end_of_role|>What is the visibility level of Git Repos and Issue Tracking projects?<|end_of_text|>
+1. <c47> From the project sidebar, click Settings > General. <c48> 2. <c49> On the **General Settings **page, click Visibility > project features > permissions. <c50> 3. <c51> Select the Disable email notifications checkbox. <c52> 4. <c53> Click Save changes. <c54> Project integrations and webhooks<|end_of_text|><|start_of_role|>user<|end_of_role|>What is the visibility level of Git Repos and Issue Tracking projects?<|end_of_text|>
 <|start_of_role|>assistant<|end_of_role|><r0> Git Repos and Issue Tracking projects can have one of the following visibility levels: private, internal, or public. <r1> Private projects are visible only to project members, internal projects are visible to all users that are logged in to IBM Cloud, and public projects are visible to anyone. <r2> By default, new projects are set to private visibility level, which is the most secure for your data.<|end_of_text|>
-<|start_of_role|>system<|end_of_role|>Split the last assistant response into individual sentences. For each sentence in the response, identify the statement IDs from the documents that it references. Ensure that your output includes all response sentence IDs, and for each response sentence ID, provide the corresponding referring document sentence IDs.<|end_of_text|>\
+<|start_of_role|>system<|end_of_role|>Split the last assistant response into individual sentences. For each sentence in the response, identify the statement IDs from the documents that it references. Ensure that your output includes all response sentence IDs, and for each response sentence ID, provide the list of corresponding referring document sentence IDs. The output must be a json structure.<|end_of_text|>\
 """  # noqa: E501
     assert output.prompt == expected_prompt
 
@@ -168,7 +166,7 @@ def test_canned_output():
     # Map raw input to just the citation offsets
     raw_output_to_expected = [
         (
-            '{"<r0>": ["<c7>"], "<r1>": ["<c8>", "<c10>", "<c11>"]}',
+            '[{"r": 0, "c": [7]}, {"r": 1, "c": [8, 10, 11]}]',
             [
                 {
                     "context_begin": 1034,
@@ -196,7 +194,7 @@ def test_canned_output():
                 },
             ],
         ),
-        ('{"<r0>": [], "<r1>": []}', []),
+        ('[{"r": 0, "c": []}, {"r": 1, "c": []}]', []),
         # IO processor currently raises an exception for debugging in this case.
         # ("<invalid model response>", "ERROR"),
     ]
@@ -228,11 +226,11 @@ def test_run_model(lora_server: LocalVLLMServer, fake_date: str):
     """
     Run a chat completion through the LoRA adapter using the I/O processor.
     """
-    backend = lora_server.make_lora_backend("citations")
+    backend = lora_server.make_lora_backend("citation_generation")
     io_proc = CitationsIOProcessor(backend)
     override_date_for_testing(fake_date)  # For consistent VCR output
 
-    # Pass our example input thorugh the I/O processor and retrieve the result
+    # Pass our example input through the I/O processor and retrieve the result
 
     chat_result = io_proc.create_chat_completion(_EXAMPLE_CHAT_INPUT)
 
@@ -246,8 +244,8 @@ def test_run_composite(lora_server: LocalVLLMServer, fake_date: str):
     Run a chat completion through the LoRA adapter using the composite I/O processor.
     """
     granite_backend = lora_server.make_backend()
-    lora_backend = lora_server.make_lora_backend("citations")
-    granite_io_proc = make_io_processor("Granite 3.2", backend=granite_backend)
+    lora_backend = lora_server.make_lora_backend("citation_generation")
+    granite_io_proc = make_io_processor("Granite 3.3", backend=granite_backend)
     io_proc = CitationsCompositeIOProcessor(granite_io_proc, lora_backend)
     override_date_for_testing(fake_date)  # For consistent VCR output
 

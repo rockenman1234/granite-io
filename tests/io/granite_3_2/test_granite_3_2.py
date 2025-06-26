@@ -40,6 +40,9 @@ from granite_io.io.granite_3_2.output_processors.granite_3_2_output_processor im
     _COT_END_ALTERNATIVES,
     _COT_START_ALTERNATIVES,
 )
+from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
+    override_date_for_testing,
+)
 from granite_io.types import (
     AssistantMessage,
     ChatCompletionInputs,
@@ -99,6 +102,45 @@ INPUT_JSON_STRS = {
         {"role": "user", "content": "Hi, I would like some advice on the best tax \
 strategy for managing dividend income."}
     ]
+}
+""",
+    "functions": """
+{
+    "messages":
+    [
+        {"role": "user", "content": "Where is my money? I'm Joe User and I'm 27 years \
+old."}
+    ],
+    "tools":[
+        {
+            "name": "get_current_weather",
+            "description": "Get the current weather",
+            "parameters": {
+                "type": "object",
+                "location": {
+                    "type": "string",
+                    "description": "The city and state, e.g. San Francisco, CA"
+                }
+            }
+        },
+        {
+            "name": "find_money",
+            "description": "Locate a person's money.",
+            "parameters": {
+                "type": "object",
+                "name": {
+                    "type": "string",
+                    "description": "Full legal name of the person"
+                },
+                "age": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "How old the person is"
+                }
+            }
+        }
+    ]
+    
 }
 """,
 }
@@ -240,6 +282,9 @@ def test_same_input_string(
     inputs = ChatCompletionInputs.model_validate_json(input_json_str)
     io_proc_str = Granite3Point2InputOutputProcessor().inputs_to_string(inputs)
 
+    print(f"{io_proc_str=}")
+    print(f"{transformers_str=}")
+
     assert io_proc_str == transformers_str
 
 
@@ -354,8 +399,10 @@ def test_completion_presence_param(backend_x: Backend):
 
 
 @pytest.mark.vcr(record_mode="new_episodes")
-@pytest.mark.vcr
-def test_run_processor(backend_x: Backend, input_json_str: str):
+def test_run_processor(backend_x: Backend, input_json_str: str, fake_date: str):
+    # Granite 3.2 prompt includes date string. Change the date so that the prompt is
+    # consistent with the vcrpy recording of past network traffic.
+    override_date_for_testing(fake_date)
     inputs = ChatCompletionInputs.model_validate_json(input_json_str)
     io_processor = make_io_processor(_GRANITE_3_2_MODEL_NAME, backend=backend_x)
     outputs: ChatCompletionResults = io_processor.create_chat_completion(inputs)
@@ -363,15 +410,17 @@ def test_run_processor(backend_x: Backend, input_json_str: str):
     assert isinstance(outputs, ChatCompletionResults)
     assert len(outputs.results) == 1
 
-    content = outputs.results[0].next_message.content
-    assert content  # Make sure we don't get empty result (I had a bug)
+    next_msg = outputs.results[0].next_message
+    assert (
+        next_msg.content or next_msg.tool_calls
+    )  # Make sure we don't get empty result
 
     # Test for stop reason
     if inputs.generate_inputs and inputs.generate_inputs.stop:
         stop = inputs.generate_inputs.stop
         # Note: currently transformers includes the stop tokens,
         # but OpenAI does not. So, either endswith or not-in.
-        assert stop not in content
+        assert stop not in next_msg.content
         assert outputs.results[0].next_message.stop_reason == "stop"
 
     # TODO: Verify outputs in greater detail

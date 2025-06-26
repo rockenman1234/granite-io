@@ -5,7 +5,6 @@ import collections.abc
 
 # Third Party
 import pytest
-import torch
 
 # Local
 from granite_io import make_backend
@@ -19,11 +18,26 @@ from granite_io.io.consts import (
 from granite_io.io.granite_3_2.input_processors.granite_3_2_input_processor import (
     override_date_for_testing as g32_override_date_for_testing,
 )
+from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
+    override_date_for_testing as g33_override_date_for_testing,
+)
+from granite_io.io.rag_agent_lib import obtain_lora
+
+
+def _no_pings_please(request):
+    """pytest request filter that removes ping requests."""
+    if "ping" in request.path:
+        print(f"Filtering out request {request}")
+        return None
+    return request
 
 
 @pytest.fixture(scope="session")
 def vcr_config():
-    return {"filter_headers": ["authorization"]}
+    return {
+        "filter_headers": ["authorization"],
+        "before_record_request": _no_pings_please,
+    }
 
 
 def backend_openai() -> Backend:
@@ -100,6 +114,7 @@ def fake_date():
     # Cleanup code. Augment as needed as we add new IO processors with date-dependent
     # prompts.
     g32_override_date_for_testing(None)
+    g33_override_date_for_testing(None)
 
 
 @pytest.fixture(
@@ -118,37 +133,66 @@ def backend_3_3(request) -> Backend:
 
 
 @pytest.fixture(scope="session")
-def lora_server() -> collections.abc.Generator[LocalVLLMServer, object, None]:
+def lora_server_session_scoped() -> collections.abc.Generator[
+    LocalVLLMServer, object, None
+]:
     """
-    Fixture that runs a local vLLM server. The server uses a fixed port because the
-    ``vcrpy`` package requires fixed local ports.
+    Session-scoped fixture that runs a local vLLM server.
+
+    The server uses a fixed port because the ``vcrpy`` package requires fixed local
+    ports.
+
+    Test cases that use ``vcrpy`` should use the :func:`lora_server()` fixture so that
+    they skip actually starting up the server unless they are planning to perform
+    network I/O.
 
     :returns: vLLM server with all the LoRAs for which we currently have IO processors
 
     """
-    if not torch.cuda.is_available():
-        pytest.xfail("GPU required to run vLLM. vLLM required to run model.")
 
-    # Currently all adapters are trained on Granite 3.2 8B
-    base_model = "ibm-granite/granite-3.2-8b-instruct"
-    lora_adapters = [
-        # Format is server name, model name
-        (
-            "answerability",
-            "ibm-granite/granite-3.2-8b-lora-rag-answerability-prediction",
-        ),
-        ("certainty", "ibm-granite/granite-uncertainty-3.2-8b-lora"),
-        ("citations", "ibm-granite/granite-3.2-8b-lora-rag-citation-generation"),
-        (
-            "hallucinations",
-            "ibm-granite/granite-3.2-8b-lora-rag-hallucination-detection",
-        ),
-        ("query_rewrite", "ibm-granite/granite-3.2-8b-lora-rag-query-rewrite"),
+    # Updated to use Granite 3.3 8B with latest LoRA adapters
+    base_model = "ibm-granite/granite-3.3-8b-instruct"
+
+    # LoRA adapter short names - these will be resolved to local paths using
+    # obtain_lora()
+    lora_adapter_names = [
+        "answerability_prediction",  # Maps to answerability_prediction_lora
+        "certainty",  # Maps to certainty_lora
+        "citation_generation",  # Maps to citation_generation_lora
+        "hallucination_detection",  # Maps to hallucination_detection_lora
+        "query_rewrite",  # Maps to query_rewrite_lora
+        "context_relevancy",  # Maps to context_relevancy_lora
     ]
 
-    server = LocalVLLMServer(base_model, lora_adapters=lora_adapters, port=35782)
-    server.wait_for_startup(200)
+    # Download and get local paths for all LoRA adapters
+    lora_adapters = []
+    for lora_name in lora_adapter_names:
+        try:
+            lora_path = obtain_lora(lora_name)
+            lora_adapters.append((lora_name, str(lora_path)))
+            print(f"✅ Downloaded LoRA adapter: {lora_name} -> {lora_path}")
+        except (OSError, ValueError, RuntimeError) as e:
+            print(f"❌ Failed to download LoRA adapter {lora_name}: {e}")
+            # Continue with other adapters
+
+    server = LocalVLLMServer(
+        base_model, lora_adapters=lora_adapters, port=35782, max_model_len=8192
+    )
+    # server.wait_for_startup(200)
     yield server
 
     # Shutdown code runs at end of test session
     server.shutdown()
+
+
+@pytest.fixture(scope="function")
+# pylint: disable-next=redefined-outer-name
+def lora_server(lora_server_session_scoped, vcr):
+    """
+    Wrapper for :func:`lora_server_session_scoped()` that triggers server startup only
+    from tests that have ``vcrpy`` recording active.
+    """
+    if not vcr.write_protected:
+        # Recording active; ensure server is running
+        lora_server_session_scoped.wait_for_startup(200)
+    return lora_server_session_scoped
