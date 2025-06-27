@@ -1,0 +1,6 @@
+site_name: IBM Granite-IO Documentation
+nav:
+  - Quick Start: index.md
+  - API Reference: api.md
+  - Design: design.md
+theme: readthedocs
