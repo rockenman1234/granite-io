@@ -35,15 +35,175 @@ print(outputs.results[0].next_message.content)
 
 ## Types
 
+The `granite_io.types` module provides comprehensive data models for working with chat completions, model inputs/outputs, and structured data like citations and hallucinations.
+
 ### Core Data Models
 
-- **UserMessage, AssistantMessage, ToolResultMessage, SystemMessage**: Message types for chat input/output.
-- **ChatCompletionInputs**: Inputs to a chat completion call.
-- **ChatCompletionResults**: Outputs of a chat completion call.
-- **GenerateInputs, GenerateResults**: Inputs/outputs for low-level generation APIs.
-- **Citation, Document, Hallucination**: Data models for RAG and output parsing.
+#### Chat Messages
 
-See [types.py](https://github.com/ibm-granite/granite-io/blob/main/src/granite_io/types.py) for full details.
+**UserMessage**
+- Represents a user's message in a conversation
+- Fields: `content` (str), `role` (always "user")
+
+**AssistantMessage**
+- Represents the model's response
+- Fields:
+  - `content` (str): The main response text
+  - `role` (always "assistant")
+  - `tool_calls` (list[FunctionCall]): Function calls made by the model
+  - `reasoning_content` (str | None): Model's reasoning/thinking process
+  - `citations` (list[Citation] | None): References to source documents
+  - `documents` (list[Document] | None): Source documents used
+  - `hallucinations` (list[Hallucination] | None): Detected hallucinations
+  - `stop_reason` (str | None): Why the model stopped generating
+  - `raw` (property): Raw response content before parsing
+
+**SystemMessage**
+- Represents system instructions
+- Fields: `content` (str), `role` (always "system")
+
+**ToolResultMessage**
+- Represents results from function/tool calls
+- Fields: `content` (str), `role` (always "tool"), `tool_call_id` (str)
+
+#### Function Calling
+
+**FunctionCall**
+- Represents a function call made by the model
+- Fields:
+  - `id` (str | None): Unique identifier for the call
+  - `name` (str): Name of the function to call
+  - `arguments` (dict[str, Any] | None): Arguments for the function
+
+**FunctionDefinition**
+- Defines a function that the model can call
+- Fields:
+  - `name` (str): Function name
+  - `description` (str | None): Function description
+  - `parameters` (dict[str, Any] | None): JSON schema for parameters
+- Methods:
+  - `to_openai_json()`: Convert to OpenAI-compatible format
+
+#### RAG and Citations
+
+**Document**
+- Represents a source document for RAG
+- Fields:
+  - `doc_id` (str): Unique document identifier
+  - `text` (str): Document content
+
+**Citation**
+- Represents a citation in the model's response
+- Fields:
+  - `citation_id` (str): Unique citation identifier
+  - `doc_id` (str): Reference to source document
+  - `context_text` (str): Text from the source document
+  - `context_begin` (int): Start position in source document
+  - `context_end` (int): End position in source document
+  - `response_text` (str): Text in the response being cited
+  - `response_begin` (int): Start position in response
+  - `response_end` (int): End position in response
+
+#### Hallucination Detection
+
+**Hallucination**
+- Represents detected hallucination in model output
+- Fields:
+  - `hallucination_id` (str): Unique hallucination identifier
+  - `risk` (str): Risk level of the hallucination
+  - `reasoning` (str | None): Explanation of why it's flagged
+  - `response_text` (str): The hallucinated text
+  - `response_begin` (int): Start position in response
+  - `response_end` (int): End position in response
+
+#### Input/Output Models
+
+**ChatCompletionInputs**
+- Main input class for chat completion requests
+- Fields:
+  - `messages` (list[ChatMessage]): Conversation history
+  - `tools` (list[FunctionDefinition]): Available functions
+  - `generate_inputs` (GenerateInputs | None): Generation parameters
+- Methods:
+  - `with_messages(new_messages)`: Create copy with new message list
+  - `with_next_message(message)`: Add message to conversation
+  - `with_addl_generate_params(params)`: Add generation parameters
+
+**ChatCompletionResults**
+- Container for multiple chat completion results
+- Fields: `results` (list[ChatCompletionResult])
+
+**ChatCompletionResult**
+- Single chat completion result
+- Fields: `next_message` (ChatMessage)
+
+**GenerateInputs**
+- Low-level generation parameters for backends
+- Fields include all standard generation parameters:
+  - `prompt` (str | list): Input prompt(s)
+  - `model` (str): Model name/ID
+  - `max_tokens` (int): Maximum tokens to generate
+  - `temperature` (float): Randomness control (0.0-1.0)
+  - `top_p` (float): Nucleus sampling parameter
+  - `n` (int): Number of completions to generate
+  - `stop` (str | list[str]): Stop sequences
+  - `frequency_penalty` (float): Penalize frequent tokens
+  - `presence_penalty` (float): Penalize new tokens
+  - `logit_bias` (dict): Token bias adjustments
+  - `stream` (bool): Enable streaming
+  - `user` (str): User identifier
+  - `extra_headers` (dict): Additional HTTP headers
+  - `extra_body` (dict): Additional request body data
+
+**GenerateResults**
+- Container for multiple generation results
+- Fields: `results` (list[GenerateResult])
+
+**GenerateResult**
+- Single generation result from backend
+- Fields:
+  - `completion_string` (str): Generated text
+  - `completion_tokens` (list[int]): Token IDs (if available)
+  - `stop_reason` (str): Why generation stopped
+
+### Usage Examples
+
+```python
+from granite_io.types import (
+    UserMessage, AssistantMessage, ChatCompletionInputs,
+    Document, Citation, FunctionDefinition
+)
+
+# Create a simple chat input
+messages = [
+    UserMessage(content="What is the capital of France?")
+]
+inputs = ChatCompletionInputs(messages=messages)
+
+# Add documents for RAG
+documents = [
+    Document(doc_id="doc1", text="Paris is the capital of France...")
+]
+
+# Define a function the model can call
+function = FunctionDefinition(
+    name="get_weather",
+    description="Get current weather for a location",
+    parameters={
+        "type": "object",
+        "properties": {
+            "location": {"type": "string", "description": "City name"}
+        }
+    }
+)
+
+# Create inputs with RAG and function calling
+inputs = ChatCompletionInputs(
+    messages=messages,
+    documents=documents,
+    tools=[function]
+)
+```
 
 ---
 
