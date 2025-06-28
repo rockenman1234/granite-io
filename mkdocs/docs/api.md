@@ -1,16 +1,6 @@
 # API Reference
 
-This page documents the main public API of the `granite-io` framework. It is organized by module and includes class/function signatures, docstrings, and usage examples. For more details, see the source code and docstrings.
-
-## Table of Contents
-
-- [Top-level API](#top-level-api)
-- [Types](#types)
-- [Input/Output Processors](#inputoutput-processors)
-- [Backends](#backends)
-- [Visualization](#visualization)
-- [Utilities](#utilities)
-- [API in Practice: Example Scripts](#api-in-practice-example-scripts)
+This page documents the main public API of the `granite-io` framework. It is organized by module and includes class/function signatures, docstrings, and usage examples.
 
 ---
 
@@ -368,5 +358,3 @@ load_dotenv()
 io_processor = make_io_processor(model_type, backend=make_backend("litellm", {"model_name": model_name}))
 outputs = io_processor.create_chat_completion(ChatCompletionInputs(messages=messages, thinking=True))
 ```
-
----
