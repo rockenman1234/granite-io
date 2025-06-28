@@ -14,12 +14,18 @@ Think of it as a toolkit that sits between you and the AI model, making your lif
 
 ## Why Use This Framework?
 
-IBM Granite models are powerful, but using all their features (like RAG, reasoning, or function calling) can be tricky. You might need to:
+IBM Granite models are powerful, but using all their features (like RAG, reasoning, or function calling) can be tricky. 
+
+You might need to:
+
 - Write complex prompts
 - Parse messy outputs
 - Switch between different backends (OpenAI, LiteLLM, Transformers, etc.)
 
-**Granite IO Processing** solves these problems by giving you plug-and-play building blocks. You can:
+**Granite IO Processing** solves these problems by giving you plug-and-play building blocks. 
+
+You can:
+
 - Turn on features with a flag (e.g., `thinking=True` for reasoning)
 - Swap out how you talk to the model (the backend)
 - Customize how you prepare inputs and process outputs
@@ -120,16 +126,3 @@ class MyInputProcessor(InputProcessor):
 - **Want to parse outputs differently?** Write your own output processor.
 
 See the [examples](https://github.com/ibm-granite/granite-io/tree/main/examples) directory for real code you can copy and adapt.
-
----
-
-## For Advanced Users
-
-- Full interface definitions and advanced usage are in the [API Reference](api.md) and the [source code](https://github.com/ibm-granite/granite-io/tree/main/src/granite_io).
-- You can always mix, match, and extend any part of the framework.
-
----
-
-## Summary
-
-Granite IO Processing is designed to make advanced AI model features easy and accessible, whether you're a beginner or an expert. Start with the defaults, and as you grow, customize and extend to fit your needs!
