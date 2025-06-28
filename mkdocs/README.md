@@ -40,7 +40,7 @@ mkdocs build
 
 - `mkdocs.yml` — MkDocs configuration file
 - `docs/` — Markdown documentation pages
-- `site/` — (Generated) Static site output (after build)
+- `docs/img` - Image storage **IBM Logos(s) subject to copyright**
 
 ## More Information
 
