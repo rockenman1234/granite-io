@@ -182,12 +182,6 @@ def test_canned_output():
                 },
                 {
                     "context_begin": 1353,
-                    "context_end": 1430,
-                    "response_begin": 117,
-                    "response_end": 289,
-                },
-                {
-                    "context_begin": 1431,
                     "context_end": 1471,
                     "response_begin": 117,
                     "response_end": 289,
