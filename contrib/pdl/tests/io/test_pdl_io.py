@@ -15,7 +15,7 @@ function:
 return:
   lastOf:
   - processor:
-      model: "granite3.2:2b"
+      model: "granite3.3:2b"
       backend: openai
     input: ${ inputs.messages }
     modelResponse: results

@@ -16,7 +16,7 @@ def hallucination_validator(processor_outputs: ChatCompletionResults):
     return not processor_outputs.results[0].next_message.hallucinations
 
 
-model_name = "granite3.2:8b"
+model_name = "granite3.3:8b"
 io_processor = SequentialScalingInputOutputProcessor(
     model=model_name, backend="openai", validator=hallucination_validator
 )
