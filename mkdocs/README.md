@@ -1,10 +1,10 @@
-# Granite-IO API Documentation with MKDocs
+# `granite-io` API Documentation with MKDocs
 
-This directory contains the documentation site for the Granite IO project, built using [MkDocs](https://www.mkdocs.org/) and the Material for MkDocs theme.
+This directory contains the documentation site for the `granite-io` project, built using [MkDocs](https://www.mkdocs.org/) and the Material for MkDocs theme.
 
 ## What is this?
 
-- This is the source for the Granite IO documentation site.
+- This is the source for the `granite-io` documentation site.
 - Documentation is written in Markdown and lives in the `docs/` subdirectory.
 - The site is built and served using MkDocs, a static site generator for project documentation.
 
@@ -40,6 +40,7 @@ mkdocs build
 
 - `mkdocs.yml` — MkDocs configuration file
 - `docs/` — Markdown documentation pages
+- `site` — Output directory for the built site (only appears after running `mkdocs build`)
 - `docs/img` - Image storage **IBM Logos(s) subject to copyright**
 
 ## More Information

@@ -1,10 +1,10 @@
-# IBM Granite IO
+# IBM `granite-io`
 
 <a href="https://research.ibm.com/" target="_blank"><img src="./img/ibm_logo_rebus.png" alt="IBM Logo" width="300" style="display:block; margin:auto;"/></a>
 
 ## Introduction
 
-IBM Granite IO is a framework that enables you to transform how a user calls or infers an IBM Granite model and how the output from the model is returned. The framework allows you to extend and customize the functionality of model inference and output processing.
+IBM `granite-io` is a framework that enables you to transform how a user calls or infers an IBM Granite model and how the output from the model is returned. The framework allows you to extend and customize the functionality of model inference and output processing.
 
 ---
 
@@ -23,7 +23,7 @@ python3 -m venv granite_io_venv
 source granite_io_venv/bin/activate
 ```
 
-Install Granite IO Processing from PyPI:
+Install `granite-io` Processing from PyPI:
 
 ```sh
 pip install granite-io
@@ -37,7 +37,7 @@ cd granite-io
 pip install -e .
 ```
 
-### Example: Using Granite IO Processing
+### Example: Using `granite-io` Processing
 
 ```python
 from granite_io import make_backend, make_io_processor
@@ -130,7 +130,7 @@ When choosing a method, consider factors like the number of cities, available co
 
 ## Architecture
 
-Granite IO Processing is designed to be modular and extensible. The main components are:
+`granite-io` Processing is designed to be modular and extensible. The main components are:
 
 - **Backend:** Abstraction for different runtime backends for serving models for inference.
 - **Input Processor:** Transforms a chat request prior to sending it to the model.
@@ -138,6 +138,15 @@ Granite IO Processing is designed to be modular and extensible. The main compone
 - **Input/Output (IO) Processor:** Combines both an input and output processor, and (optionally) a backend.
 
 For a detailed explanation and diagrams, see the [Architecture & Design](design.md) page.
+
+<!-- 
+---
+
+## IBM Public Repository Disclosure
+
+All content in this repository including code has been provided by IBM under the associated open source software license and IBM is under no obligation to provide enhancements, updates, or support. IBM developers produced this code as an open source project (not as an IBM product), and IBM makes no assertions as to the level of quality nor security, and will not be maintaining this code going forward. 
+
+-->
 
 ---
 

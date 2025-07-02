@@ -1,5 +1,5 @@
-site_name: IBM Granite-IO Documentation
-site_url: https://github.com/ibm-granite/granite-io
+site_name: IBM granite-io Documentation
+site_url: http://granite-io.github.io
 repo_url: https://github.com/ibm-granite/granite-io
 repo_name: ibm-granite/granite-io
 nav:

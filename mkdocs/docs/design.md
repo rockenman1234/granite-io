@@ -1,4 +1,4 @@
-# Granite IO Processing Design
+# `granite-io` Processing Design
 
 ## Abstract
 
@@ -33,15 +33,15 @@ The overall architecture is fairly straightforward. At the top level, there are 
 
 The first diagram below shows an IO Processor that integrates both processors and backend within a single component:
 
-![Granite IO Full Architecture](./img/granite-io-full-architecture.png)
+![`granite-io` Full Architecture](./img/granite-io-full-architecture.png)
 
 The IO processor architecture above represents a single turn chat request. In other words, you process the chat request input, inference the model, and finally process the output from the model. The IO processor architecture is however flexible and able to handle more multi-turn scenarios where there are multiple inference calls which feed output from one call as input to the next. The diagram that follows demonstrates how the IO processor can be implemented without specific input and output processors:
 
-![Granite IO Processor Architecture](./img/granite-io-io-proc-architecture.png)
+![`granite-io` Processor Architecture](./img/granite-io-io-proc-architecture.png)
 
 The next diagram shows how Input and Output Processors can be used independently with the user performing chat request directly with the model. In this instance the user is free to configure what input and output processor to use -- perhaps using just one instead of both:
 
-![Granite IO Input/Output Architecture](./img/granite-io-input-output-architecture.png)
+![`granite-io` Input/Output Architecture](./img/granite-io-input-output-architecture.png)
 
 ### Input Processor
 

@@ -398,7 +398,7 @@ class _MyInputOutputProcessor(ModelDirectInputOutputProcessor):
 ### model_chat_with_thinking_separate_backend.py
 
 **Purpose:**
-Separates prompt construction and output parsing from model inference, using the OpenAI client directly and Granite IO processors for input/output.
+Separates prompt construction and output parsing from model inference, using the OpenAI client directly and `granite-io` processors for input/output.
 
 **Key API Elements:**
 - `get_input_processor`, `get_output_processor` (see above)
