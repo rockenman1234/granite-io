@@ -4,9 +4,6 @@
 Tests for the core types
 """
 
-# Third Party
-import pytest
-
 # Local
 from granite_io import types
 
@@ -40,8 +37,7 @@ def test_function_definition():
     assert fd.description == "Test function"
     assert fd.parameters is None
 
-    with pytest.raises(NotImplementedError):
-        fd.to_openai_json()
+    fd.to_openai_json()
 
 
 def test_chat_completion_inputs():

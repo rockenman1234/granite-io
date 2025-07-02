@@ -7,17 +7,20 @@ I/O processor for the Granite citations intrinsic.
 # Standard
 import json
 
+# Third Party
+from pydantic import BaseModel, ConfigDict, NonNegativeInt, RootModel
+
 # Local
 from granite_io.backend.base import Backend
 from granite_io.io.base import (
     InputOutputProcessor,
     ModelDirectInputOutputProcessorWithGenerate,
 )
-from granite_io.io.granite_3_2.input_processors.granite_3_2_input_processor import (
+from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
     ControlsRecord,
     Document,
-    Granite3Point2InputProcessor,
-    Granite3Point2Inputs,
+    Granite3Point3InputProcessor,
+    Granite3Point3Inputs,
 )
 from granite_io.optional import nltk_check
 from granite_io.types import (
@@ -36,31 +39,26 @@ _CITATIONS_SYSTEM_PROMPT = (
     "sentences. For each sentence in the response, identify the statement IDs "
     "from the documents that it references. Ensure that your output includes all "
     "response sentence IDs, and for each response sentence ID, provide the "
-    "corresponding referring document sentence IDs."
+    "list of corresponding referring document sentence IDs. "
+    "The output must be a json structure."
 )
 
 
-# We would like to use a JSON schema for the raw output of the model, but can't due
-# to a mismatch between the JSON schema that outlines supports and the current outputs
-# of the model.
-# Here's the JSON schem we would use:
-# _MODEL_OUTPUT_SCHEMA = {
-#     "$schema": "https://json-schema.org/draft/2020-12/schema#",
-#     "type": "object",
-#     "patternProperties": {
-#         "^<r[0-9]+>$": {
-#             "type": "array",
-#             "items": {"type": "string", "pattern": "^<c[0-9]+>$"},
-#         }
-#     },
-#     "additionalProperties": False,
-# }
+# Specify the schema of the raw output of the model to use in contrained decoding
+# This is done by first creating a Pydantic model representing the raw model output
+# and converting it to a JSON schema
+class _MODEL_OUTPUT_ENTRY(BaseModel):
+    r: NonNegativeInt
+    c: list[NonNegativeInt]
 
-# Instead of JSON schema, we use a regex to constrain the output.
-_LIST_ELEMENT_REGEX = r'"<r\d+>": \[(("<c\d+>", ){0,10}"<c\d+>")?\]'
-_MODEL_OUTPUT_REGEX = (
-    r"\{(" + _LIST_ELEMENT_REGEX + r", )*" + _LIST_ELEMENT_REGEX + r"\}"
-)
+    model_config = ConfigDict(extra="forbid")
+
+
+class _MODEL_OUTPUT(RootModel):
+    root: list[_MODEL_OUTPUT_ENTRY]
+
+
+_MODEL_OUTPUT_SCHEMA = _MODEL_OUTPUT.model_json_schema()
 
 
 def mark_sentence_boundaries(
@@ -88,11 +86,62 @@ def mark_sentence_boundaries(
     return result
 
 
+def group_consecutive_context_sentence_indexes(
+    index_list: list[int], sentence_to_doc: dict[int, int]
+) -> list[list[int]]:
+    """
+    Transform flat list of context sentence indexes into list of
+    context sentence index groups, where each group represents a set of
+    consecutive indexes from the same document in the original list.
+
+    A group is represented in the ouput as [x, y], where x and y are
+    the first and last context sentence indexes in the group, resp.
+
+    Example input:
+    [ 1, 3, 2, 5, 6, 8 ]
+
+    Example output:
+    (Assuming all indexes in the input correspond to sentences in the same doc)
+    [ [1, 3], [5, 6], [8, 8] ]
+
+    :param: List of context sentence indexes. The list should consist only
+            of unique indexes that also exist in the input documents
+    :param: Dictionary mapping sentence index to document index
+
+    :returns: List of sentence index groups, where each sentence index group
+    represents a set of consecutive indexes from the same document
+    in the input list
+    """
+    citation_indexes = sorted(index_list)
+    citation_index_groups = []
+
+    cur_group = []
+    last_citation_index = -2
+    last_citation_index_doc = -2
+    for citation_index in citation_indexes:
+        if (
+            citation_index != last_citation_index + 1
+            or sentence_to_doc[citation_index] != last_citation_index_doc
+        ):
+            if len(cur_group) == 1:
+                cur_group.append(last_citation_index)
+                citation_index_groups.append(cur_group)
+            cur_group = [citation_index]
+        last_citation_index = citation_index
+        last_citation_index_doc = sentence_to_doc[citation_index]
+
+    if len(cur_group) == 1:
+        cur_group.append(citation_indexes[-1])
+        citation_index_groups.append(cur_group)
+
+    return citation_index_groups
+
+
 class CitationsIOProcessor(ModelDirectInputOutputProcessorWithGenerate):
     """
     I/O processor for the Granite citations intrinsic, also known as the [LoRA Adapter
     for Citation Generation](https://huggingface.co/ibm-granite/
-    granite-3.2-8b-lora-rag-citation-generation). 
+    granite-3.3-8b-rag-agent-lib/blob/main/citation_generation_lora/README.md). 
     
     Takes as input a chat completion and returns a version of the completion with 
     citations to documents.
@@ -143,26 +192,25 @@ hooks, access tokens, deploy tokens, and deploy keys...."
 
     ```
 <|start_of_role|>system<|end_of_role|>Knowledge Cutoff Date: April 2024.
-Today's Date: April 09, 2025.
-You are Granite, developed by IBM. You are a helpful AI assistant with access to the \
-following tools. When a tool is required to answer the user's query, respond with \
-<|tool_call|> followed by a JSON list of tools used. If a tool does not exist in the \
-provided list of tools, notify the user that you do not have the ability to fulfill \
-the request.<|end_of_text|>
-<|start_of_role|>documents<|end_of_role|>Document 0
+Today's Date: June 06, 2025.
+You are Granite, developed by IBM. Write the response to the user's input by \
+strictly aligning with the facts in the provided documents. If the information \
+needed to answer the question is not available in the documents, inform the user \
+that the question cannot be answered based on the available data.<|end_of_text|>
+<|start_of_role|>document {"document_id": "0"}<|end_of_role|>
 <c0> Git Repos and Issue Tracking is an IBM-hosted component of the Continuous \
 Delivery service. <c1> All of the data that you provide to Git Repos and Issue \
 Tracking, including but not limited to source files, issues, pull requests, and \
 project configuration properties, is managed securely within Continuous Delivery. 
-[...]
+[...]<|end_of_text|>
 
-Document 1
+<|start_of_role|>document {"document_id": "1"}<|end_of_role|>
 <c25> After you create a project in Git Repos and Issue Tracking, but before you \
 entrust any files, issues, records, or other data with the project, review the \
 project settings and change any settings that are necessary to protect your data. \
 <c26> Settings to review include visibility levels, email notifications, integrations, \
 web hooks, access tokens, deploy tokens, and deploy keys. <c27> Project visibility \
-[...]
+[...]<|end_of_text|>
 
 <|start_of_role|>user<|end_of_role|>What is the visibility level of Git Repos and \
 Issue Tracking projects?<|end_of_text|>
@@ -173,14 +221,14 @@ users logged in to IBM Cloud, and public projects are visible to anyone.<|end_of
 <|start_of_role|>system<|end_of_role|>Split the last assistant response into \
 individual sentences. For each sentence in the response, identify the statement IDs \
 from the documents that it references. Ensure that your output includes all response \
-sentence IDs, and for each response sentence ID, provide the corresponding referring \
-document sentence IDs.<|end_of_text|>
+sentence IDs, and for each response sentence ID, provide the list of corresponding \
+referring document sentence IDs. The output must be a json structure.<|end_of_text|>
     ```
 
     Example of raw output of the model for the above request:
 
     ```
-    {"<r0>": ["<c7>"], "<r1>": ["<c8>", "<c10>", "<c11>"]}
+    [{"r": 0, "c": [7]}, {"r": 1, "c": [8, 10, 11]}]
     ```
     (note that constrained decoding is required to produce valid JSON reliably)
 
@@ -260,7 +308,7 @@ projects are visible to anyone.",
             import nltk
 
         # Input processor for the base model, which does most of the input formatting.
-        self.base_input_processor = Granite3Point2InputProcessor()
+        self.base_input_processor = Granite3Point3InputProcessor()
 
         # Object that identifies sentence boundaries. Currently we assume an NLTK
         # sentence tokenizer is used here. This may change in the future.
@@ -272,7 +320,7 @@ projects are visible to anyone.",
         self, inputs: ChatCompletionInputs, add_generation_prompt: bool = True
     ) -> GenerateInputs:
         # Validate the input and convert to Granite input
-        inputs = Granite3Point2Inputs.model_validate(inputs.model_dump())
+        inputs = Granite3Point3Inputs.model_validate(inputs.model_dump())
 
         # Check for the invariants that the model expects its input to satisfy
         if not inputs.messages[-1].role == "assistant":
@@ -308,7 +356,7 @@ projects are visible to anyone.",
         rewritten_messages[-1].content = rewritten_last_message_text
 
         # Put the rewritten docs and last message back into the original chat completion
-        # and let the Granite 3.2 IO processor take care of the rest of the formatting.
+        # and let the Granite 3.3 IO processor take care of the rest of the formatting.
         rewritten_inputs = inputs.model_copy(
             update={"documents": rewritten_docs, "messages": rewritten_messages}
         )
@@ -343,7 +391,7 @@ projects are visible to anyone.",
                 # full output.
                 "max_tokens": 1024,
                 # Enable constrained decoding on vLLM backends
-                "extra_body": {"guided_regex": _MODEL_OUTPUT_REGEX},
+                "extra_body": {"guided_json": _MODEL_OUTPUT_SCHEMA},
             }
         )
         return result
@@ -379,22 +427,23 @@ projects are visible to anyone.",
         for raw_result in output.results:
             try:
                 # Example output:
-                # {"<r0>": ["<c6>"], "<r1>": ["<c7>"], "<r2>": ["<c5>"],
-                # "<r3>": ["<c6>"], "<r4>": ["<c8>", "<c9>"], "<r5>": ["<c10>"]}
+                # [{"r": 0, "c": [6]}, {"r": 1, "c": [7]}, {"r": 2, "c": [5]},
+                # {"r": 3, "c": [6]}, {"r": 4, "c": [8, 9]}, {"r": 5, "c": [10]}]
                 parsed_json = json.loads(raw_result.completion_string)
                 citations = []
                 next_citation_id = 0
                 content = inputs.messages[-1].content
 
-                if not isinstance(parsed_json, dict):
-                    raise TypeError("Model output is not a JSON object")
-                for response_key, value in parsed_json.items():
-                    # Example: <r0>
-                    response_index = int(response_key[2:-1])
+                if not isinstance(parsed_json, list):
+                    raise TypeError("Model output is not a JSON array")
+                for entry in parsed_json:
+                    response_index = entry["r"]
+                    if not isinstance(response_index, int):
+                        raise TypeError(f"{response_index} is not an integer")
                     if response_index >= len(message_sentence_offsets):
                         # Hallucinated sentence offset
                         print(
-                            f"Warning: Skipping out-of-range sentenc offset "
+                            f"Warning: Skipping out-of-range sentence offset "
                             f"{response_index}"
                         )
                         continue
@@ -402,18 +451,30 @@ projects are visible to anyone.",
                         response_index
                     ]
                     response_text = content[response_begin:response_end]
+                    value = entry["c"]
                     if not isinstance(value, list):
-                        raise TypeError(f"Entry for {response_key} is not a list")
-                    for citation_key in value:
-                        if not isinstance(citation_key, str):
-                            raise TypeError(
-                                f"Value in list for {response_key} is not a string"
-                            )
-                        # Example: "<c10>"
-                        citation_index = int(citation_key[2:-1])
-                        doc_num = sentence_to_doc[citation_index]
-                        context_begin, context_end = flat_doc_sentence_offsets[
-                            citation_index
+                        raise TypeError(f"Entry for {response_index} is not a list")
+
+                    # De-deduplicate list and remove invalid context indexes
+                    unique_indexes = list(set(value))
+                    valid_indexes = [
+                        idx
+                        for idx in unique_indexes
+                        if isinstance(idx, int) and 0 <= idx < len(sentence_to_doc)
+                    ]
+
+                    citation_index_groups = group_consecutive_context_sentence_indexes(
+                        valid_indexes, sentence_to_doc
+                    )
+
+                    # Iterate over citation groups and generate output
+                    for citation_index_group in citation_index_groups:
+                        doc_num = sentence_to_doc[citation_index_group[0]]
+                        context_begin, _ = flat_doc_sentence_offsets[
+                            citation_index_group[0]
+                        ]
+                        _, context_end = flat_doc_sentence_offsets[
+                            citation_index_group[1]
                         ]
                         context_text = inputs.documents[doc_num].text[
                             context_begin:context_end
@@ -510,7 +571,7 @@ class CitationsCompositeIOProcessor(InputOutputProcessor):
         self, inputs: ChatCompletionInputs
     ) -> ChatCompletionResults:
         # Downcast to extended Granite inputs. This also creates a copy.
-        inputs = Granite3Point2Inputs.model_validate(inputs.model_dump())
+        inputs = Granite3Point3Inputs.model_validate(inputs.model_dump())
 
         if self._request_citations_from_generator:
             # Code above already copied inputs, so we can modify inputs in place

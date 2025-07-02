@@ -33,6 +33,7 @@ handler.setFormatter(
 logger.addHandler(handler)
 
 
+# pylint: disable-next=too-many-instance-attributes
 class LocalVLLMServer:
     """
     Class that manages a vLLM server subprocess on the local machine.
@@ -41,6 +42,7 @@ class LocalVLLMServer:
     def __init__(
         self,
         model_name: str,
+        *,
         device_name: str = "auto",
         served_model_name: str | None = None,
         api_key: str | None = None,
@@ -79,10 +81,6 @@ class LocalVLLMServer:
         self._lora_adapters = lora_adapters
         self._lora_names = [t[0] for t in lora_adapters]
 
-        vllm_exec = shutil.which("vllm")
-        if vllm_exec is None:
-            raise ValueError("vLLM not installed.")
-
         if not port:
             # Find an open port on localhost
             with socketserver.TCPServer(("localhost", 0), None) as s:
@@ -92,48 +90,18 @@ class LocalVLLMServer:
         # Generate shared secret so that other local processes can't hijack our server.
         self._api_key = api_key if api_key else str(uuid.uuid4())
 
-        environment = os.environ.copy()
-        # Disable annoying log messages about current throughput being zero
-        # Unfortunately the only documented way to do this is to turn off all
-        # logging.
-        # TODO: Look for undocumented solutions.
-        environment["VLLM_LOGGING_LEVEL"] = log_level
-        environment["VLLM_API_KEY"] = self._api_key
+        # Save remaining server parameters
+        self._device_name = device_name
+        self._gpu_memory_utilization = gpu_memory_utilization
+        self._max_model_len = max_model_len
+        self._enforce_eager = enforce_eager
+        self._log_level = log_level
+        self._max_lora_rank = max_lora_rank
 
-        # Immediately start up a server process on the open port
-        command_parts = [
-            vllm_exec,
-            "serve",
-            model_name,
-            "--port",
-            str(self._server_port),
-            "--gpu-memory-utilization",
-            str(gpu_memory_utilization),
-            "--max-model-len",
-            str(max_model_len),
-            "--guided_decoding_backend",
-            "outlines",
-            "--device",
-            device_name,
-        ]
-        if enforce_eager:
-            command_parts.append("--enforce-eager")
-        if served_model_name is not None:
-            command_parts.append("--served-model-name")
-            command_parts.append(served_model_name)
-        if len(lora_adapters) > 0:
-            command_parts.append("--enable-lora")
-            command_parts.append("--max_lora_rank")
-            command_parts.append(str(max_lora_rank))
-            command_parts.append("--lora-modules")
-            for k, v in lora_adapters:
-                command_parts.append(f"{k}={v}")
-
-        logger.info("Running: %s", " ".join(command_parts))  # pylint: disable=logging-not-lazy
-        self._subproc = subprocess.Popen(command_parts, env=environment)  # pylint: disable=consider-using-with
+        self._subproc = None
 
     def __repr__(self):
-        return f"LocalVLLMServer({self._model_name} -> {self._base_url()})"
+        return f"{self.__class__.__name__}({self._model_name} -> {self._base_url()})"
 
     def _base_url(self):
         return f"http://localhost:{self._server_port}"
@@ -146,19 +114,75 @@ class LocalVLLMServer:
     def openai_api_key(self) -> str:
         return self._api_key
 
+    def start_subprocess(self):
+        """
+        Trigger startup of the vLLM subprocess.
+        Does nothing if the subprocess is already running.
+        """
+        if self._subproc is not None:
+            return
+
+        vllm_exec = shutil.which("vllm")
+        if vllm_exec is None:
+            raise ValueError("vLLM not installed.")
+
+        environment = os.environ.copy()
+        # Disable annoying log messages about current throughput being zero
+        # Unfortunately the only documented way to do this is to turn off all
+        # logging.
+        # TODO: Look for undocumented solutions.
+        environment["VLLM_LOGGING_LEVEL"] = self._log_level
+        environment["VLLM_API_KEY"] = self._api_key
+
+        # Immediately start up a server process on the open port
+        command_parts = [
+            vllm_exec,
+            "serve",
+            self._model_name,
+            "--port",
+            str(self._server_port),
+            "--gpu-memory-utilization",
+            str(self._gpu_memory_utilization),
+            "--max-model-len",
+            str(self._max_model_len),
+            "--guided_decoding_backend",
+            "auto",
+            "--device",
+            self._device_name,
+        ]
+        if self._enforce_eager:
+            command_parts.append("--enforce-eager")
+        if self._served_model_name is not None:
+            command_parts.append("--served-model-name")
+            command_parts.append(self._served_model_name)
+        if len(self._lora_adapters) > 0:
+            command_parts.append("--enable-lora")
+            command_parts.append("--max_lora_rank")
+            command_parts.append(str(self._max_lora_rank))
+            command_parts.append("--lora-modules")
+            for k, v in self._lora_adapters:
+                command_parts.append(f"{k}={v}")
+
+        logger.info("Running: %s", " ".join(command_parts))  # pylint: disable=logging-not-lazy
+        self._subproc = subprocess.Popen(command_parts, env=environment)  # pylint: disable=consider-using-with
+
     def wait_for_startup(self, timeout_sec: float | None = None):
         """
         Blocks  until the server has started.
+
+        Triggers server startup if the caller has not already called
+        :func:`start_subprocess()`.
         :param timeout_sec: Optional upper limit for how long to block. If this
          limit is reached, this method will raise a TimeoutError
         """
+        self.start_subprocess()  # Idempotent
         start_sec = time.time()
         while timeout_sec is None or time.time() - start_sec < timeout_sec:
             try:  # Exceptions as control flow due to library design
                 with urllib.request.urlopen(self._base_url() + "/ping") as response:
                     _ = response.read().decode("utf-8")
                 return  # Success
-            except urllib.error.URLError:
+            except (urllib.error.URLError, ConnectionRefusedError):
                 time.sleep(1)
         raise TimeoutError(
             f"Failed to connect to {self._base_url()} after {timeout_sec} seconds."
@@ -167,9 +191,13 @@ class LocalVLLMServer:
     async def await_for_startup(self, timeout_sec: float | None = None):
         """
         Blocks the local coroutine until the server has started.
+
+        Triggers server startup if the caller has not already called
+        :func:`start_subprocess()`.
         :param timeout_sec: Optional upper limit for how long to block. If this
          limit is reached, this method will raise a TimeoutError
         """
+        self.start_subprocess()  # Idempotent
         start_sec = time.time()
         while timeout_sec is None or time.time() - start_sec < timeout_sec:
             try:  # Exceptions as control flow due to aiohttp library design
@@ -188,7 +216,9 @@ class LocalVLLMServer:
     def shutdown(self):
         # Sending SIGINT to the vLLM process seems to be the only way to stop it.
         # DO NOT USE SIGKILL!!!
-        self._subproc.send_signal(signal.SIGINT)
+        if self._subproc is not None:
+            self._subproc.send_signal(signal.SIGINT)
+        self._subproc = None
 
     def make_backend(self) -> OpenAIBackend:
         """

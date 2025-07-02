@@ -7,16 +7,19 @@ I/O processor for the Granite hallucinations intrinsic.
 # Standard
 import json
 
+# Third Party
+from pydantic import BaseModel, ConfigDict, NonNegativeInt, RootModel, StrictStr
+
 # Local
 from granite_io.backend.base import Backend
 from granite_io.io.base import (
     InputOutputProcessor,
     ModelDirectInputOutputProcessorWithGenerate,
 )
-from granite_io.io.granite_3_2.input_processors.granite_3_2_input_processor import (
+from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
     ControlsRecord,
-    Granite3Point2InputProcessor,
-    Granite3Point2Inputs,
+    Granite3Point3InputProcessor,
+    Granite3Point3Inputs,
 )
 from granite_io.optional import nltk_check
 from granite_io.types import (
@@ -33,38 +36,31 @@ from granite_io.types import (
 _HALLUCINATION_SYSTEM_PROMPT = (
     "Split the last assistant response into individual sentences. "
     "For each sentence in the last assistant response, identify the faithfulness "
-    "score range. "
-    "Ensure that your output includes all response sentence IDs, and for each response "
-    "sentence ID, provide the corresponding faithfulness score range. "
+    "by comparing with the provided documents and generate the faithfulness reasoning "
+    "and faithfulness decision. "
+    "Ensure that your output includes all response sentence IDs, "
+    "and for each response sentence ID, provide the corresponding faithfulness "
+    "reasoning and faithfulness decision. "
     "The output must be a json structure."
 )
 
-_FAITHFULNESS_RISK_CONVERT = {
-    "0.1-0": "0.9-1.0",
-    "0.1-0.2": "0.8-0.9",
-    "0.2-0.3": "0.7-0.8",
-    "0.3-0.4": "0.6-0.7",
-    "0.4-0.5": "0.5-0.6",
-    "0.5-0.6": "0.4-0.5",
-    "0.6-0.7": "0.3-0.4",
-    "0.7-0.8": "0.2-0.3",
-    "0.8-0.9": "0.1-0.2",
-    "0.9-1.0": "0-0.1",
-    "unanswerable": "unanswerable",
-    "NA": "NA",
-}
+
+# Specify the schema of the raw output of the model to use in contrained decoding
+# This is done by first creating a Pydantic model representing the raw model output
+# and converting it to a JSON schema
+class _MODEL_OUTPUT_ENTRY(BaseModel):
+    i: NonNegativeInt
+    r: StrictStr
+    f: StrictStr
+
+    model_config = ConfigDict(extra="forbid")
 
 
-def faithfulness_to_risk(input_string):
-    """
-    Takes an input string returns the corresponding
-    output string from the dictionary. Uses try-except for error handling.
-    """
-    try:
-        return _FAITHFULNESS_RISK_CONVERT[input_string]
-    except KeyError:
-        # Handle the case where the key is not found
-        return "NA"  # Or raise an exception, or return a default value
+class _MODEL_OUTPUT(RootModel):
+    root: list[_MODEL_OUTPUT_ENTRY]
+
+
+_MODEL_OUTPUT_SCHEMA = _MODEL_OUTPUT.model_json_schema()
 
 
 def mark_sentence_boundaries(
@@ -94,11 +90,11 @@ def mark_sentence_boundaries(
 
 class HallucinationsIOProcessor(ModelDirectInputOutputProcessorWithGenerate):
     """
-    I/O processor for the Granite hallucinations intrinsic, also known as the 
-    [LoRA Adapter for Hallucination Detection in RAG outputs](
-        https://huggingface.co/ibm-granite/
-        granite-3.2-8b-lora-rag-hallucination-detection
-    )
+    I/O processor for the Granite hallucinations intrinsic, also known as the [LoRA 
+    Adapter for Hallucination Detection](https://huggingface.co/ibm-granite/granite-3.3-8b-rag-agent-lib/blob/main/hallucination_detection_lora/README.md). 
+    
+    Takes as input a chat completion and returns a version of the completion with 
+    hallucinations detected on the last assistant turn.
 
     Example input to the IO processor's :func`acreate_chat_completion()` call:
 
@@ -146,83 +142,87 @@ hooks, access tokens, deploy tokens, and deploy keys...."
 
     ```
 <|start_of_role|>system<|end_of_role|>Knowledge Cutoff Date: April 2024.
-Today's Date: April 09, 2025.
-You are Granite, developed by IBM. You are a helpful AI assistant with access to the \
-following tools. When a tool is required to answer the user's query, respond with \
-<|tool_call|> followed by a JSON list of tools used. If a tool does not exist in the \
-provided list of tools, notify the user that you do not have the ability to fulfill \
-the request.<|end_of_text|>
-<|start_of_role|>documents<|end_of_role|>Document 0
-Git Repos and Issue Tracking is an IBM-hosted component of the Continuous \
-Delivery service. All of the data that you provide to Git Repos and Issue \
-Tracking, including but not limited to source files, issues, pull requests, and \
-project configuration properties, is managed securely within Continuous Delivery. 
-[...]
-
-Document 1
+Today's Date: June 16, 2025.
+You are Granite, developed by IBM. Write the response to the user\'s input \
+by strictly aligning with the facts in the provided documents. If the \
+information needed to answer the question is not available in the documents, \
+inform the user that the question cannot be answered based on the available data.\
+<|end_of_text|>
+<|start_of_role|>document {"document_id": "1"}<|end_of_role|>
+Git Repos and Issue Tracking is an IBM-hosted component of the Continuous Delivery \
+service. All of the data that you provide to Git Repos and Issue Tracking, \
+including but not limited to source files, issues, [...] <|end_of_text|>
+<|start_of_role|>document {"document_id": "2"}<|end_of_role|>
 After you create a project in Git Repos and Issue Tracking, but before you \
-entrust any files, issues, records, or other data with the project, review the \
-project settings and change any settings that are necessary to protect your data. \
-Settings to review include visibility levels, email notifications, integrations, \
-web hooks, access tokens, deploy tokens, and deploy keys. Project visibility \
-[...]
-
+entrust any files, issues, records, or other data with the project, review \
+the project settings and change any settings that are necessary to protect \
+your data. Settings to review include visibility [...] <|end_of_text|>
 <|start_of_role|>user<|end_of_role|>What is the visibility level of Git Repos and \
 Issue Tracking projects?<|end_of_text|>
-<|start_of_role|>assistant<|end_of_role|><r0> Git Repos and Issue Tracking projects \
-can have one of three visibility levels: private, internal, or public. <r1> Private \
+<|start_of_role|>assistant<|end_of_role|><i0> Git Repos and Issue Tracking projects \
+can have one of three visibility levels: private, internal, or public. <i1> Private \
 projects are visible only to project members, internal projects are visible to all \
-users logged in to IBM Cloud, and public projects are visible to anyone.\
-<|end_of_text|> \
-<|start_of_role|>system<|end_of_role|>"Split the last assistant response into \
-individual sentences. \
-For each sentence in the last assistant response, identify the faithfulness score \
-range. \
-Ensure that your output includes all response sentence IDs, and for each response \
-sentence ID, \
-provide the corresponding faithfulness score range. \
-The output must be a json structure.<|end_of_text|>
+logged-in IBM Cloud users, and public projects are visible to anyone.<|end_of_text|>
+<|start_of_role|>system<|end_of_role|>Split the last assistant response into individual\
+sentences. For each sentence in the last assistant response, identify the faithfulness \
+by comparing with the provided documents and generate the faithfulness reasoning and \
+faithfulness decision. Ensure that your output includes all response sentence IDs, and \
+for each response sentence ID, provide the corresponding faithfulness reasoning and \
+faithfulness decision. The output must be a json structure.<|end_of_text|>
     ```
 
     Example of raw output of the model for the above request:
 
     ```
-    "{\\"<r0>\\": \\"0.2-0.3\\", \\"<r1>\\": \\"0.9-1.0\\"}"
+    "[{\"i\": 0, \"r\": \"This sentence makes a factual claim about the visibility \
+levels of Git Repos and Issue Tracking projects. The document states 'Git Repos and \
+Issue Tracking projects can have one of the following visibility levels: private, \
+internal, or public.' This matches exactly with the claim in the sentence. \", \"f\": \
+\"faithful\"}, ...]"
     ```
     Note that the raw model output is JSON data encoded as a JSON string.
 
     Example of processed output from this IO processor for the above raw model output:
     ```
     {
-    "content": "Git Repos and Issue Tracking projects can have one of three visibility \
-levels: private, internal, or public. Private projects are visible only to \
-project members, internal projects are visible to all users logged in to IBM Cloud, \
-and public projects are visible to anyone.",
-    "role": "assistant",
-    "tool_calls": [],
-    "reasoning_content": null,
-    "hallucinations": [
-        {
-          "hallucination_id": "0",
-          "risk": "0.1-0.2",
-          "response_text": "Git Repos and Issue Tracking projects can have one of \
+        "content": "Git Repos and Issue Tracking projects can have one of three \
+visibility levels: private, internal, or public. Private projects are visible only to \
+project members, internal projects are visible to all logged-in IBM Cloud users, and \
+public projects are visible to anyone.",
+        "role": "assistant",
+        "tool_calls": [],
+        "reasoning_content": null,
+        "citations": null,
+        "documents": null,
+        "hallucinations": [
+            {
+            "hallucination_id": "0",
+            "risk": "faithful",
+            "reasoning": "This sentence makes a factual claim about the visibility \
+levels of Git Repos and Issue Tracking projects. The document states 'Git Repos and \
+Issue Tracking projects can have one of the following visibility levels: private, \
+internal, or public.' This matches exactly with the claim in the sentence.",
+            "response_text": "Git Repos and Issue Tracking projects can have one of \
 three visibility levels: private, internal, or public.",
-          "response_begin": 0,
-          "response_end": 108
-        },
-        {
-          "hallucination_id": "1",
-          "risk": "0.9-1.0",
-          "response_text": "Private projects are only visible to project members, \
-internal projects are visible to all users logged in to IBM Cloud, and public projects \
+            "response_begin": 0,
+            "response_end": 108
+            },
+            {
+            "hallucination_id": "1",
+            "risk": "faithful",
+            "reasoning": "This sentence makes factual claims about the visibility of \
+each type of project. The document states 'Private projects are visible only to \
+project members,' 'Internal projects are visible to all users that are logged in to \
+IBM Cloud,' and 'Public projects are visible to anyone.' These statements match \
+exactly with the claims in the sentence.",
+            "response_text": "Private projects are visible only to project members, \
+internal projects are visible to all logged-in IBM Cloud users, and public projects \
 are visible to anyone.",
-          "response_begin": 109,
-          "response_end": 272
-        }
-    ],
-    "hallucinations": null,
-    "hallucinations": null,
-    "stop_reason": null
+            "response_begin": 109,
+            "response_end": 269
+            }
+        ],
+        "stop_reason": "stop"
     }
     ```
     """
@@ -234,7 +234,7 @@ are visible to anyone.",
             import nltk
 
         # Input processor for the base model, which does most of the input formatting.
-        self.base_input_processor = Granite3Point2InputProcessor()
+        self.base_input_processor = Granite3Point3InputProcessor()
 
         # Object that identifies sentence boundaries. Currently we assume an NLTK
         # sentence tokenizer is used here. This may change in the future.
@@ -246,7 +246,7 @@ are visible to anyone.",
         self, inputs: ChatCompletionInputs, add_generation_prompt: bool = True
     ) -> GenerateInputs:
         # Validate the input and convert to Granite input
-        inputs = Granite3Point2Inputs.model_validate(inputs.model_dump())
+        inputs = Granite3Point3Inputs.model_validate(inputs.model_dump())
 
         # Check for the invariants that the model expects its input to satisfy
         if not inputs.messages[-1].role == "assistant":
@@ -262,13 +262,13 @@ are visible to anyone.",
         )
 
         rewritten_last_message_text = mark_sentence_boundaries(
-            [last_message_as_sentences], "r"
+            [last_message_as_sentences], "i"
         )[0]
         rewritten_messages = [m.model_copy() for m in inputs.messages]
         rewritten_messages[-1].content = rewritten_last_message_text
 
         # Put the rewritten docs and last message back into the original chat completion
-        # and let the Granite 3.2 IO processor take care of the rest of the formatting.
+        # and let the Granite 3.3 IO processor take care of the rest of the formatting.
         rewritten_inputs = inputs.model_copy(
             update={"documents": inputs.documents, "messages": rewritten_messages}
         )
@@ -302,6 +302,8 @@ are visible to anyone.",
                 # Ensure we have enough of a token budget to reliably produce the
                 # full output.
                 "max_tokens": 1024,
+                # Enable constrained decoding on vLLM backends
+                "extra_body": {"guided_json": _MODEL_OUTPUT_SCHEMA},
             }
         )
         return result
@@ -320,33 +322,43 @@ are visible to anyone.",
         results = []
         for raw_result in output.results:
             try:
-                # Output of the model is JSON packed into a quoted string for some
-                # reason. So parse twice.
+                # Example output:
+                # [{"i": 0, "r": "....", "f": "..."}, {"i": 1, "r": "....", "f":
+                # "..."},...]
                 parsed_json = json.loads(raw_result.completion_string)
-                parsed_json = json.loads(parsed_json)
                 hallucinations = []
                 next_hallucination_id = 0
                 content = inputs.messages[-1].content
 
-                if not isinstance(parsed_json, dict):
-                    raise TypeError(
-                        f"Model output '{raw_result.completion_string}' "
-                        f"is not a JSON object"
-                    )
-                for response_key, value in parsed_json.items():
-                    # Example: <r0>
-                    response_index = int(response_key[2:-1])
+                if not isinstance(parsed_json, list):
+                    raise TypeError("Model output is not a JSON array")
+                for entry in parsed_json:
+                    response_index = entry["i"]
+                    if not isinstance(response_index, int):
+                        raise TypeError(f"{response_index} is not an integer")
+                    if response_index >= len(message_sentence_offsets):
+                        # Hallucinated sentence offset
+                        print(
+                            f"Warning: Skipping out-of-range sentence offset "
+                            f"{response_index}"
+                        )
+                        continue
                     response_begin, response_end = message_sentence_offsets[
                         response_index
                     ]
                     response_text = content[response_begin:response_end]
+                    reasoning = entry["r"]
+                    value = entry["f"]
                     if not isinstance(value, str):
-                        raise TypeError(f"Entry for {response_key} is not a str")
+                        raise TypeError(f"Entry for {response_index} is not a str")
+                    if not isinstance(reasoning, str):
+                        raise TypeError(f"Entry for {response_index} is not a str")
                     hallucinations.append(
                         Hallucination(
                             hallucination_id=str(next_hallucination_id),
                             response_text=response_text,
-                            risk=faithfulness_to_risk(value),
+                            risk=value,
+                            reasoning=reasoning,
                             response_begin=response_begin,
                             response_end=response_end,
                         )
@@ -411,7 +423,7 @@ class HallucinationsCompositeIOProcessor(InputOutputProcessor):
 
         :param request_hallucinations_from_generator: New value to be applied to
          subsequent calls to the I/O processor."""
-        self.request_hallucinations_from_generator = (
+        self._request_hallucinations_from_generator = (
             request_hallucinations_from_generator
         )
 
@@ -419,7 +431,7 @@ class HallucinationsCompositeIOProcessor(InputOutputProcessor):
         self, inputs: ChatCompletionInputs
     ) -> ChatCompletionResults:
         # Downcast to extended Granite inputs. This also creates a copy.
-        inputs = Granite3Point2Inputs.model_validate(inputs.model_dump())
+        inputs = Granite3Point3Inputs.model_validate(inputs.model_dump())
 
         if self._request_hallucinations_from_generator:
             # Code above already copied inputs, so we can modify inputs in place

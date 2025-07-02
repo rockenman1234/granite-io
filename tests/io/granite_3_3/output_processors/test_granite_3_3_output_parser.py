@@ -10,10 +10,13 @@ import os
 
 # Third Party
 from test_utils import load_text_file
+import pytest
 
 # Local
 from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
+    ControlsRecord,
     Document,
+    Granite3Point3Inputs,
 )
 from granite_io.io.granite_3_3.output_processors.granite_3_3_output_parser import (
     parse_model_output,
@@ -22,9 +25,36 @@ from granite_io.io.granite_3_3.output_processors.granite_3_3_output_parser impor
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "testdata")
 
 
-def test_output():
+@pytest.fixture(name="inputs", scope="session")
+def fixture_inputs():
+    # Tests below do not need the inputs, but in the IO flow, an input is
+    # necessary, so we create a placeholder input object.
+    # Settings on this input object can be correctly enabled, as designed.
+    empty = Granite3Point3Inputs.model_validate(
+        {"messages": [{"role": "user", "content": ""}]}
+    )
+
+    empty_with_citations = empty.model_copy()
+    controls_citation = ControlsRecord()
+    controls_citation.citations = True
+    empty_with_citations.controls = controls_citation
+
+    empty_with_citations_hallucinations = empty.model_copy()
+    controls_citation_hallucination = ControlsRecord()
+    controls_citation_hallucination.citations = True
+    controls_citation_hallucination.hallucinations = True
+    empty_with_citations_hallucinations.controls = controls_citation_hallucination
+
+    return {
+        "empty": empty,
+        "empty_with_citation_control": empty_with_citations,
+        "empty_with_citation_hallucination_controls": empty_with_citations_hallucinations,
+    }
+
+
+def test_output(inputs):
     model_output = load_text_file(os.path.join(TEST_DATA_DIR, "test_output.txt"))
-    parsed_output = parse_model_output(model_output, "")
+    parsed_output = parse_model_output(model_output, inputs["empty"])
 
     assert parsed_output
     assert isinstance(parsed_output, dict)
@@ -41,11 +71,13 @@ def test_output():
     assert parsed_output["hallucinations"] is None
 
 
-def test_output_with_citation():
+def test_output_with_citation(inputs):
     model_output = load_text_file(
         os.path.join(TEST_DATA_DIR, "test_output_with_citation.txt")
     )
-    parsed_output = parse_model_output(model_output, "")
+    parsed_output = parse_model_output(
+        model_output, inputs["empty_with_citation_control"]
+    )
 
     assert parsed_output
     assert isinstance(parsed_output, dict)
@@ -93,21 +125,25 @@ def test_output_with_citation():
     assert parsed_output["hallucinations"] is None
 
 
-def test_output_with_invalid_citation():
+def test_output_with_invalid_citation(inputs):
     model_output = load_text_file(
         os.path.join(TEST_DATA_DIR, "test_output_with_invalid_citation.txt")
     )
-    parsed_output = parse_model_output(model_output, "")
+    parsed_output = parse_model_output(
+        model_output, inputs["empty_with_citation_control"]
+    )
 
     assert parsed_output["citations"] is None
     assert parsed_output["hallucinations"] is None
 
 
-def test_output_with_colons_in_citation_text():
+def test_output_with_colons_in_citation_text(inputs):
     model_output = load_text_file(
         os.path.join(TEST_DATA_DIR, "test_output_with_colons_citation_text.txt")
     )
-    parsed_output = parse_model_output(model_output, "")
+    parsed_output = parse_model_output(
+        model_output, inputs["empty_with_citation_control"]
+    )
 
     assert parsed_output
     assert isinstance(parsed_output, dict)
@@ -168,11 +204,13 @@ def test_output_with_colons_in_citation_text():
         hallc_id += 1
 
 
-def test_output_with_citation_hallucinations():
+def test_output_with_citation_hallucinations(inputs):
     model_output = load_text_file(
         os.path.join(TEST_DATA_DIR, "test_output_with_citation_hallucinations.txt")
     )
-    parsed_output = parse_model_output(model_output, "")
+    parsed_output = parse_model_output(
+        model_output, inputs["empty_with_citation_hallucination_controls"]
+    )
 
     assert parsed_output
     assert isinstance(parsed_output, dict)
@@ -236,13 +274,17 @@ def test_output_with_citation_hallucinations():
         hallc_id += 1
 
 
-def test_output_with_citation_from_source():
+def test_output_with_citation_from_source(inputs):
     model_output = load_text_file(
         os.path.join(TEST_DATA_DIR, "test_output_with_citation_from_source.txt")
     )
     doc_source = load_text_file(os.path.join(TEST_DATA_DIR, "test_document_source.txt"))
     doc_input = [Document(text=f"{doc_source}")]
-    parsed_output = parse_model_output(model_output, doc_input)
+
+    inputs_with_doc = inputs["empty_with_citation_control"]
+    inputs_with_doc.documents = doc_input
+
+    parsed_output = parse_model_output(model_output, inputs_with_doc)
 
     assert parsed_output
     assert isinstance(parsed_output, dict)
@@ -290,13 +332,15 @@ def test_output_with_citation_from_source():
     assert parsed_output["hallucinations"] is None
 
 
-def test_output_with_multiple_citations_per_document():
+def test_output_with_multiple_citations_per_document(inputs):
     model_output = load_text_file(
         os.path.join(
             TEST_DATA_DIR, "test_output_with_multiple_citations_per_document.txt"
         )
     )
-    parsed_output = parse_model_output(model_output, "")
+    parsed_output = parse_model_output(
+        model_output, inputs["empty_with_citation_control"]
+    )
 
     assert parsed_output
     assert isinstance(parsed_output, dict)

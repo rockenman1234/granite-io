@@ -73,7 +73,7 @@ class MajorityVotingProcessor(InputOutputProcessor):
         assert len(sample_contents) == len(normalized_contents)  # Sanity check
 
         # Step 3: Group and aggregate
-        indices = (
+        aggregated_results = (
             # Group results by normalized contents, sort the groups by count, and use
             # the first result in each group as the representative of the group
             pd.DataFrame(
@@ -86,7 +86,8 @@ class MajorityVotingProcessor(InputOutputProcessor):
             .agg({"normalized_result": "count", "result_num": "min"})
             .rename(columns={"normalized_result": "count"})
             .sort_values(["count", "result_num"], ascending=False)
-        )["result_num"].to_list()
+        )
+        indices = aggregated_results["result_num"].to_list()
 
         # If the caller requested multiple completions, return multiple results that
         # each have different normalized forms.
