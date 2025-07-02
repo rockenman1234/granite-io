@@ -1,4 +1,4 @@
-# Granite IO Processing Design
+# `granite-io` Processing Design
 
 ## Abstract
 
@@ -24,28 +24,30 @@ If a user prompts the model and upon receiving the answer is a little unsure abo
 
 The key architectural components are:
 
-- Backend: A shim that provides a thin abstraction to different runtime backends for serving models for inference.
-- Input Processor: A processor that transforms a chat request prior to sending it to the model.
-- Output Processor: A processor that transforms output of a chat request from the model.
-- Input/Output (IO) Processor: A processor that contains both an input and output processor, and (optionally) a backend.
+- **Backend**: A shim that provides a thin abstraction to different runtime backends for serving models for inference.
+- **Input Processor**: A processor that transforms a chat request prior to sending it to the model.
+- **Output Processor**: A processor that transforms output of a chat request from the model.
+- **Input/Output (IO) Processor**: A processor that contains both an input and output processor, and (optionally) a backend.
 
-The overall architecture is fairly straightforward. At the top level, there are _InputProcessors_ and _OutputProcessors_. The Input Processor transforms a chat request into the format the model requires to perform its baked-in additional capabilities. The Output Processor transforms the output from the model into a more usable format. The _InputOutputProcessor_ is a component that combines both an input processor and an output processor within a single entity. It also contains a _Backend_ so that it can perform the chat request with the model and then pipe the output to the output processor. The first diagram below shows an IO Processor that integrates both processors and backend within a single component.
+The overall architecture is fairly straightforward. At the top level, there are _InputProcessors_ and _OutputProcessors_. The Input Processor transforms a chat request into the format the model requires to perform its baked-in additional capabilities. The Output Processor transforms the output from the model into a more usable format. The _InputOutputProcessor_ is a component that combines both an input processor and an output processor within a single entity. It also contains a _Backend_ so that it can perform the chat request with the model and then pipe the output to the output processor.
 
-<img src="./images/granite-io-full-architecture.png" width="600">
+The first diagram below shows an IO Processor that integrates both processors and backend within a single component:
 
-The IO processor architecture above represents a single turn chat request. In other words, you process the chat request input, inference the model, and finally process the output from the model. The IO processor architecture is however flexible and able to handle more multi-turn scenarios where there are multiple inference calls which feed output from one call as input to the next. The diagram that follows demonstrates how the IO processor can be implemented without specific input and output processors 
+![`granite-io` Full Architecture](./img/granite-io-full-architecture.png)
 
-<img src="./images/granite-io-io-proc-architecture.png" width="600">
+The IO processor architecture above represents a single turn chat request. In other words, you process the chat request input, inference the model, and finally process the output from the model. The IO processor architecture is however flexible and able to handle more multi-turn scenarios where there are multiple inference calls which feed output from one call as input to the next. The diagram that follows demonstrates how the IO processor can be implemented without specific input and output processors:
 
-The next diagram shows how Input and Output Processors can be used independently with the user performing chat request directly with the model. In this instance the user is free to configure what input and output processor to use -- perhaps using just one instead of both.
+![`granite-io` Processor Architecture](./img/granite-io-io-proc-architecture.png)
 
-<img src="./images/granite-io-input-output-architecture.png" width="600">
+The next diagram shows how Input and Output Processors can be used independently with the user performing chat request directly with the model. In this instance the user is free to configure what input and output processor to use -- perhaps using just one instead of both:
+
+![`granite-io` Input/Output Architecture](./img/granite-io-input-output-architecture.png)
 
 ### Input Processor
 
 Input processors need to implement the `InputProcessor` interface which is defined [here](https://github.com/ibm-granite/granite-io/blob/main/src/granite_io/io/base.py) (see below for interface snippet).
 
-```Python
+```python
 class InputProcessor(FactoryConstructible):
     """
     Interface for generic input processors. An input processor exposes an
@@ -85,7 +87,7 @@ The framework supports the following input processors out of the box:
 
 Output processors need to implement the `OutputProcessor` interface which is defined [here](https://github.com/ibm-granite/granite-io/blob/main/src/granite_io/io/base.py) (see below for interface snippet).
 
-```Python
+```python
 class OutputProcessor(FactoryConstructible):
     """
     Interface for generic output processors. An output processor exposes an
@@ -127,7 +129,7 @@ IO processors need to implement the `InputOutputProcessor` interface which is de
 
 As you can see from the interface, there is a lot of flexibility to implement your IO processor however you want. There is no restriction on having to use an input and/or output processor. This flexibility is essential when having to implement multi-turn scenarios as described previously.
 
-```Python
+```python
 class InputOutputProcessor(FactoryConstructible):
     """
     Interface for generic input-output processors. An input-output processor exposes an
@@ -191,7 +193,7 @@ The framework supports the following IO processors out of the box:
 
 Backends need to implement the `Backend` interface which is defined [here](https://github.com/ibm-granite/granite-io/blob/main/src/granite_io/backend/base.py) (see below for interface snippet).
 
-```Python
+```python
 class Backend(FactoryConstructible):
     """
     Base class for classes that provide an interface to a string-based completions API
@@ -292,8 +294,8 @@ The framework supports the following backends out of the box:
 
 ### Implementation
 
-The framework is implemented as a Python library. There are examples of model chat requests using the framework in [examples](../examples/).
+The framework is implemented as a Python library. There are examples of model chat requests using the framework in [examples](https://github.com/ibm-granite/granite-io/tree/main/examples).
 
 ## Extending Processor Capability
 
-Creating new input, output and IO processors is supported. The sections in [Specification](#specification) explain the interfaces that are required for each processor to implement. There are examples of creating new processors using the framework in [examples](../examples/).
+Creating new input, output and IO processors is supported. The sections in [Specification](#specification) explain the interfaces that are required for each processor to implement. There are examples of creating new processors using the framework in [examples](https://github.com/ibm-granite/granite-io/tree/main/examples).

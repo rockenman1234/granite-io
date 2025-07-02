@@ -24,6 +24,16 @@ runs:
       run: |
         ollama pull granite3.2:8b
 
+    - name: Download granite3.3:2b model
+      shell: bash
+      run: |
+        ollama pull granite3.3:2b
+
+    - name: Download granite3.3:8b model
+      shell: bash
+      run: |
+        ollama pull granite3.3:8b
+
     - name: Wait for granite3.2:2b download
       shell: bash
       run: |
@@ -38,6 +48,24 @@ runs:
       run: |
         sleep 10
         until ollama list granite3.2:8b
+        do
+          sleep 5
+        done
+
+    - name: Wait for granite3.3:2b download
+      shell: bash
+      run: |
+        sleep 10
+        until ollama list granite3.3:2b
+        do
+          sleep 5
+        done
+
+    - name: Wait for granite3.3:8b download
+      shell: bash
+      run: |
+        sleep 10
+        until ollama list granite3.3:8b
         do
           sleep 5
         done
