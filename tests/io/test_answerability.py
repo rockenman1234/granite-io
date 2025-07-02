@@ -14,13 +14,13 @@ import pytest
 # Local
 from granite_io.backend.vllm_server import LocalVLLMServer
 from granite_io.io.answerability import AnswerabilityIOProcessor
-from granite_io.io.granite_3_2.input_processors.granite_3_2_input_processor import (
-    Granite3Point2Inputs,
+from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
+    Granite3Point3Inputs,
     override_date_for_testing,
 )
 from granite_io.types import GenerateResult, GenerateResults
 
-_EXAMPLE_CHAT_INPUT = Granite3Point2Inputs.model_validate(
+_EXAMPLE_CHAT_INPUT = Granite3Point3Inputs.model_validate(
     {
         "messages": [
             {"role": "assistant", "content": "Welcome to pet questions!"},
