@@ -57,17 +57,18 @@ def test_canned_input():
     print("*****")
     print(output)
     print("*****")
+    doc1 = '{"document_id": "1"}'
+    doc2 = '{"document_id": "2"}'
     expected_output = textwrap.dedent(f"""\
     <|start_of_role|>system<|end_of_role|>Knowledge Cutoff Date: April 2024.
     Today's Date: {_TODAYS_DATE}.
-    You are Granite, developed by IBM.Write the response to the user's input by \
+    You are Granite, developed by IBM. Write the response to the user's input by \
 strictly aligning with the facts in the provided documents. If the information needed \
 to answer the question is not available in the documents, inform the user that the \
 question cannot be answered based on the available data.<|end_of_text|>
-    <|start_of_role|>documents<|end_of_role|>Document 0
-    My dog has fleas.
-    
-    Document 1
+    <|start_of_role|>document {doc1}<|end_of_role|>
+    My dog has fleas.<|end_of_text|>
+    <|start_of_role|>document {doc2}<|end_of_role|>
     My cat does not have fleas.<|end_of_text|>
     <|start_of_role|>assistant<|end_of_role|>Welcome to pet questions!<|end_of_text|>
     <|start_of_role|>user<|end_of_role|>Which of my pets have fleas?<|end_of_text|>
