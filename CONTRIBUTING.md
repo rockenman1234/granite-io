@@ -173,15 +173,22 @@ Signed-off-by: Your Name <your.email@example.com>
 
 ### Setting Up Automatic DCO Signoff
 
-For convenience, you can create an alias that automatically includes signoff:
+You can configure Git globally to always sign off your commits:
 
 ```shell
-# Create an alias that always includes signoff
-git config --global alias.ci 'commit --signoff'
-
-# Now you can use:
-git commit -m "Your commit message"
+git config --global commit.signoff true
 ```
+
+This tells Git to behave as if `--signoff` is always passed to `git commit`.
+
+Now this will work as you expect:
+
+```shell
+git commit -m "Your message"
+# This will include the sign-off line automatically
+```
+
+This is the cleanest and most recommended way if your goal is always to sign off commits.
 
 ### Fixing Missing DCO Signoff
 
