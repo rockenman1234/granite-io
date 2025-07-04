@@ -23,7 +23,7 @@ Granite IO Processing is a framework which enables you to transform how a user c
 
 ### 📋 Requirements
 
-* Python 3.10+ 🐍
+* Python 3.10+
 
 ### 💾 Installation
 
@@ -159,13 +159,13 @@ When choosing a method, consider factors like the number of cities, available co
 
 To help you get up and running as quickly as possible with the Granite IO Processing framework, check out the following resources which demonstrate further how to use the framework:
 
-1. **🐍 Python script examples:**
+1. **Python script examples:**
 
 > [!IMPORTANT]
 > To get started with the examples, make sure you have followed the [Installation](#installation) steps first.
 > You will need additional packages to be able to run the examples. They can be installed by running `pip install -e "granite-io[openai]"` and `pip install -e "granite-io[litellm]`. Replace package name `granite-io` with `.` if installing from source.
 >
-> You will also need an [Ollama](https://ollama.com/) server [running locally](https://github.com/ollama/ollama?tab=readme-ov-file#start-ollama) and [IBM Granite 3.2](https://www.ibm.com/new/announcements/ibm-granite-3-2-open-source-reasoning-and-vision) model cached (`ollama pull granite3.2:8b`). 🦙
+> You will also need an [Ollama](https://ollama.com/) server [running locally](https://github.com/ollama/ollama?tab=readme-ov-file#start-ollama) and [IBM Granite 3.2](https://www.ibm.com/new/announcements/ibm-granite-3-2-open-source-reasoning-and-vision) model cached (`ollama pull granite3.2:8b`).
 
    - 💬 [Granite 3.2 chat request](./examples/model_chat.py)
    - 🧠 [Granite 3.2 chat request with thinking](./examples/inference_with_thinking.py)
@@ -176,7 +176,7 @@ To help you get up and running as quickly as possible with the Granite IO Proces
    - 🔀 [Granite 3.2 separate input and out processors](./examples/model_chat_with_thinking_separate_backend.py)
    - ☁️ [Using watsonx.ai](./examples/watsonx_litellm.py)
 
-2. **📓 Jupyter notebook tutorials:**
+2. **Jupyter notebook tutorials:**
 
 > [!IMPORTANT]
 > To get started with the examples, make sure you have followed the [Installation](#💾-installation) steps first. You will also need additional packages to be able to run the Jupyter notebook. They can be installed by running `pip install -e "granite-io[transformers]"` and `pip install -e "granite-io[notebook]"`. Replace package name `granite-io` with `.` if installing from source. The notebooks can be then run with following command `jupyter notebook <path_to_notebook>`. 📖
@@ -194,8 +194,6 @@ To help you get up and running as quickly as possible with the Granite IO Proces
 
 ## Documentation and Architecture
 
-### 📖 Documentation
-
 This project uses [MkDocs](https://www.mkdocs.org/) with the Material theme for comprehensive documentation. To access and work with the documentation:
 
 - **📁 Documentation source**: Located in [`./mkdocs/docs/`](./mkdocs/docs/)
@@ -209,11 +207,15 @@ pip install mkdocs mkdocs-material
 mkdocs serve
 ```
 
-### 🏗️ Design & Architecture
+<div align="center">
 
-For detailed information about architecture and design decisions, refer to:
-- [Design Documentation](./mkdocs/docs/design.md)
-- [API Reference](./mkdocs/docs/api.md)
+Click the badge below to view the documentation site:
+
+[![Documentation](https://img.shields.io/badge/_View_Documentation_Site-4285F4?style=for-the-badge&logo=googledocs&logoColor=white)](https://ibm-granite.github.io/granite-io/)
+
+</div>
+
+---
 
 ## 🤝 Contributing
 
