@@ -128,3 +128,40 @@ Unsure where to begin contributing? You can start by looking through these issue
 
 - Issues with the [`good first issue` label](https://github.com/ibm-granite/granite-io/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) - these should only require a few lines of code and are good targets if you're just starting contributing.
 - Issues with the [`help wanted` label](https://github.com/ibm-granite/granite-io/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) - these range from simple to more complex, but are generally things we want but can't get to in a short time frame.
+
+## Developer Certificate of Origin (DCO)
+
+We use the [Developer's Certificate of Origin 1.1 (DCO)](https://developercertificate.org/) - the same approach used by the Linux® Kernel community - to manage code contributions. 
+
+All commits must include a `Signed-off-by:` line in the commit message. To enable this:
+
+1. Set your git config:
+   ```shell
+   git config user.name "Your Name"
+   git config user.email "your.email@example.com"
+   ```
+
+2. Sign your commits automatically:
+   ```shell
+   git commit -s
+   ```
+
+3. If you forgot to sign a commit, you can amend it:
+   ```shell
+   git commit --amend -s
+   ```
+
+Your commit message should include a line like:
+```
+Signed-off-by: John Doe <john.doe@example.com>
+```
+
+We automatically verify that all commit messages contain a valid `Signed-off-by:` line with your email address.
+
+### DCO Tools
+
+For easier DCO management, you can use:
+- [DCO command line tool](https://github.com/coderanger/dco) for repo-wide signoffs
+- Browser extensions for GitHub UI:
+  - [Chrome extension](https://chrome.google.com/webstore/detail/dco-github-ui/onhgmjhnaeipfgacbglaphlmllkpoijo)
+  - [Firefox extension](https://addons.mozilla.org/en-US/firefox/addon/scott-rigby/?src=search)
