@@ -156,7 +156,46 @@ Your commit message should include a line like:
 Signed-off-by: John Doe <john.doe@example.com>
 ```
 
-We automatically verify that all commit messages contain a valid `Signed-off-by:` line with your email address.
+We'll automatically verify that all commit messages contain a valid `Signed-off-by:` line with your email address.
+
+### Using DCO Signoff
+
+To sign off on a commit, use the `--signoff` or `-s` flag:
+
+```shell
+git commit -s -m "Fix bug in user authentication"
+```
+
+This will add a line like this to your commit message:
+```
+Signed-off-by: Your Name <your.email@example.com>
+```
+
+### Setting Up Automatic DCO Signoff
+
+For convenience, you can create an alias that automatically includes signoff:
+
+```shell
+# Create an alias that always includes signoff
+git config --global alias.ci 'commit --signoff'
+
+# Now you can use:
+git ci -m "Your commit message"
+```
+
+### Fixing Missing DCO Signoff
+
+If you forgot to sign off on past commits, you can retroactively apply the sign-off:
+
+```shell
+# Note: replace the `#` with however many commits you want to go back and update
+git rebase -i HEAD~# --signoff
+
+# Then run:
+git push --force-with-lease origin main
+```
+
+> **Warning**: This will replace your commit messages if you're not careful! Always backup your work before force-pushing.
 
 ### DCO Tools
 
@@ -165,3 +204,6 @@ For easier DCO management, you can use:
 - Browser extensions for GitHub UI:
   - [Chrome extension](https://chrome.google.com/webstore/detail/dco-github-ui/onhgmjhnaeipfgacbglaphlmllkpoijo)
   - [Firefox extension](https://addons.mozilla.org/en-US/firefox/addon/scott-rigby/?src=search)
+
+---
+
