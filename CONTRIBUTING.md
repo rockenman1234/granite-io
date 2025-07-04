@@ -180,7 +180,7 @@ For convenience, you can create an alias that automatically includes signoff:
 git config --global alias.ci 'commit --signoff'
 
 # Now you can use:
-git ci -m "Your commit message"
+git commit -m "Your commit message"
 ```
 
 ### Fixing Missing DCO Signoff
@@ -188,22 +188,10 @@ git ci -m "Your commit message"
 If you forgot to sign off on past commits, you can retroactively apply the sign-off:
 
 ```shell
+cd /path/to/your/repo
 # Note: replace the `#` with however many commits you want to go back and update
 git rebase -i HEAD~# --signoff
 
 # Then run:
 git push --force-with-lease origin main
 ```
-
-> **Warning**: This will replace your commit messages if you're not careful! Always backup your work before force-pushing.
-
-### DCO Tools
-
-For easier DCO management, you can use:
-- [DCO command line tool](https://github.com/coderanger/dco) for repo-wide signoffs
-- Browser extensions for GitHub UI:
-  - [Chrome extension](https://chrome.google.com/webstore/detail/dco-github-ui/onhgmjhnaeipfgacbglaphlmllkpoijo)
-  - [Firefox extension](https://addons.mozilla.org/en-US/firefox/addon/scott-rigby/?src=search)
-
----
-
