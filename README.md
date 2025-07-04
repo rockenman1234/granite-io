@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./mkdocs/docs/img/ibm_logo_rebus.png" alt="IBM Logo" width="200"/>
+
 # Granite IO Processing
 
 [![PyPI version](https://img.shields.io/pypi/v/granite-io?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/granite-io/)
