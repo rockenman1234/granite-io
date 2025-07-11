@@ -3,9 +3,11 @@
 # Standard
 import datetime
 import json
+import re
 
 # Third Party
 from pydantic_core import PydanticCustomError
+from typing_extensions import Self
 import pydantic
 
 # Local
@@ -16,6 +18,7 @@ from granite_io.io.consts import (
     _GRANITE_3_2_COT_END,
     _GRANITE_3_2_COT_START,
     _GRANITE_3_2_MODEL_NAME,
+    _GRANITE_3_2_SPECIAL_TOKENS,
 )
 from granite_io.io.registry import input_processor
 from granite_io.types import (
@@ -185,6 +188,7 @@ class Granite3Point2Inputs(ChatCompletionInputs):
     controls: ControlsRecord | None = None
 
     thinking: bool = False
+    sanitize: str | None = None
 
     @pydantic.field_validator("messages")
     @classmethod
@@ -236,6 +240,70 @@ class Granite3Point2Inputs(ChatCompletionInputs):
         # messages field. Undo any changes that we made during validation and return
         # the original value.
         return original_messages
+
+    @pydantic.field_validator("sanitize", mode="after")
+    @classmethod
+    def _validate_sanitize(cls, value: str | None) -> str | None:
+        if value is None or value == "inputs" or value == "aggressive":
+            return value
+        raise PydanticCustomError(
+            "sanitize field validator",
+            'sanitize ({sanitize}) must be "inputs" or "aggressive" or None',
+            {"sanitize": value},
+        )
+
+    def _remove_special_tokens(self, text) -> str:
+        """
+        Removes any special tokens from the text string.
+
+        :param text: String for removal of special tokens.
+        :returns: String with any special tokens removed.
+        """
+
+        regex_roles = r"<\|start_of_role\|>.*<\|end_of_role\|>.*<\|end_of_text\|>"
+        regex_tool_call = r"<\|tool_call\|>\{.*\}"
+
+        new_text = text
+        new_text = re.sub(regex_roles, "", new_text)
+        new_text = re.sub(regex_tool_call, "", new_text)
+
+        # Replace any stray special tokens.
+        for special_token in _GRANITE_3_2_SPECIAL_TOKENS:
+            new_text = new_text.replace(special_token, "")
+        return new_text
+
+    @pydantic.model_validator(mode="after")
+    def _sanitize_validator(self) -> Self:
+        """
+        Removes the special tokens from the inputs.
+        - 'None': (default) keeps input as is
+        - 'inputs': only the messages
+        - 'aggressive': everything that's part of a chat completion request,
+            e.g. documents, messages, tools
+        """
+        if self.sanitize:
+            if self.sanitize == "inputs":
+                for message in self.messages:
+                    message.content = self._remove_special_tokens(message.content)
+
+            if self.sanitize == "aggressive":
+                for message in self.messages:
+                    message.content = self._remove_special_tokens(message.content)
+                for document in self.documents:
+                    document.text = self._remove_special_tokens(document.text)
+                for tool in self.tools:
+                    tool.name = self._remove_special_tokens(tool.name)
+                    if tool.description:
+                        tool.description = self._remove_special_tokens(tool.description)
+                    if tool.parameters:
+                        new_params = {}
+                        for k, v in tool.parameters.items():
+                            kk = self._remove_special_tokens(k)
+                            vv = self._remove_special_tokens(v)
+                            if len(kk) > 0:
+                                new_params[kk] = vv
+                        tool.parameters = new_params
+        return self
 
 
 @input_processor(
