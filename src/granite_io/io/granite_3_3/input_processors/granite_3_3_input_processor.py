@@ -295,30 +295,29 @@ class Granite3Point3Inputs(ChatCompletionInputs):
         - 'aggressive': everything that's part of a chat completion request,
             e.g. documents, messages, tools, controls
         """
-        if self.sanitize:
-            if self.sanitize == "inputs":
-                for message in self.messages:
-                    message.content = self._remove_special_tokens(message.content)
+        if self.sanitize and self.sanitize == "inputs":
+            for message in self.messages:
+                message.content = self._remove_special_tokens(message.content)
 
-            if self.sanitize == "aggressive":
-                for message in self.messages:
-                    message.content = self._remove_special_tokens(message.content)
-                for document in self.documents:
-                    if isinstance(document.doc_id, str):
-                        document.doc_id = self._remove_special_tokens(document.doc_id)
-                    document.text = self._remove_special_tokens(document.text)
-                for tool in self.tools:
-                    tool.name = self._remove_special_tokens(tool.name)
-                    if tool.description:
-                        tool.description = self._remove_special_tokens(tool.description)
-                    if tool.parameters:
-                        new_params = {}
-                        for k, v in tool.parameters.items():
-                            kk = self._remove_special_tokens(k)
-                            vv = self._remove_special_tokens(v)
-                            if len(kk) > 0:
-                                new_params[kk] = vv
-                        tool.parameters = new_params
+        if self.sanitize and self.sanitize == "aggressive":
+            for message in self.messages:
+                message.content = self._remove_special_tokens(message.content)
+            for document in self.documents:
+                if isinstance(document.doc_id, str):
+                    document.doc_id = self._remove_special_tokens(document.doc_id)
+                document.text = self._remove_special_tokens(document.text)
+            for tool in self.tools:
+                tool.name = self._remove_special_tokens(tool.name)
+                if tool.description:
+                    tool.description = self._remove_special_tokens(tool.description)
+                if tool.parameters:
+                    new_params = {}
+                    for k, v in tool.parameters.items():
+                        kk = self._remove_special_tokens(k)
+                        vv = self._remove_special_tokens(v)
+                        if len(kk) > 0:
+                            new_params[kk] = vv
+                    tool.parameters = new_params
         return self
 
 
