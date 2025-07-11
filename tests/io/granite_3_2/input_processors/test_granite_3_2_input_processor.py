@@ -32,3 +32,20 @@ def test_run_processor_reasoning():
     )
     assert isinstance(prompt, str)
     assert prompt == fix_granite_date(expected_prompt)
+
+
+def test_remove_special_tokens():
+    input_processor = get_input_processor(_GENERALE_MODEL_NAME)
+
+    input_json_str = load_text_file(
+        os.path.join(_TEST_DATA_DIR, "test_remove_special_tokens_input_json.txt")
+    )
+
+    inputs = ChatCompletionInputs.model_validate_json(input_json_str)
+    prompt = input_processor.transform(inputs)
+
+    expected_prompt = load_text_file(
+        os.path.join(_TEST_DATA_DIR, "test_remove_special_tokens_expected_prompt.txt")
+    )
+    assert isinstance(prompt, str)
+    assert prompt == fix_granite_date(expected_prompt)
