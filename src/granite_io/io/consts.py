@@ -12,6 +12,13 @@ _GRANITE_3_2_2B_OLLAMA = "granite3.2:2b"
 _GRANITE_3_2_2B_HF = "ibm-granite/granite-3.2-2b-instruct"
 _GRANITE_3_2_MODEL_NAME = "Granite 3.2"
 
+_GRANITE_3_2_SPECIAL_TOKENS = [
+    "<|end_of_text|>",
+    "<|start_of_role|>",
+    "<|end_of_role|>",
+    "<|tool_call|>",
+]
+
 # Granite 3.3 constants
 _GRANITE_3_3_MODEL_NAME = "Granite 3.3"
 _GRANITE_3_3_2B_OLLAMA = "granite3.3:2b"
@@ -27,3 +34,14 @@ _GRANITE_3_3_COT_START = "<think>"
 _GRANITE_3_3_COT_END = "</think>"
 _GRANITE_3_3_RESP_START = "<response>"
 _GRANITE_3_3_RESP_END = "</response>"
+
+_GRANITE_3_3_SPECIAL_TOKENS = [
+    "<|end_of_text|>",
+    "<|start_of_role|>",
+    "<|end_of_role|>",
+    "<|tool_call|>",
+    "<|start_of_cite|>",
+    "<|end_of_cite|>",
+    "<|start_of_plugin|>",
+    "<|end_of_plugin|>",
+]

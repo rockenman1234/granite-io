@@ -4,9 +4,11 @@
 # Standard
 import datetime
 import json
+import re
 
 # Third Party
 from pydantic_core import PydanticCustomError
+from typing_extensions import Self
 import pydantic
 
 # Local
@@ -21,6 +23,7 @@ from granite_io.io.consts import (
     _GRANITE_3_3_MODEL_NAME,
     _GRANITE_3_3_RESP_END,
     _GRANITE_3_3_RESP_START,
+    _GRANITE_3_3_SPECIAL_TOKENS,
 )
 from granite_io.io.registry import input_processor
 from granite_io.types import (
@@ -72,7 +75,7 @@ _TOOLS_AND_DOCS_SYSTEM_MESSAGE_PART = """\
  You are a helpful assistant with access to the following tools. When a tool is \
 required to answer the user's query, respond only with <|tool_call|> followed by a JSON \
 list of tools used. If a tool does not exist in the provided list of tools, notify the \
-user that you do not have the ability to fulfill the request. \
+user that you do not have the ability to fulfill the request.
 
 Write the response to the user's input by strictly aligning with the facts in the \
 provided documents. If the information needed to answer the question is not available \
@@ -193,6 +196,7 @@ class Granite3Point3Inputs(ChatCompletionInputs):
     controls: ControlsRecord | None = None
 
     thinking: bool = False
+    sanitize: str | None = None
 
     @pydantic.field_validator("messages")
     @classmethod
@@ -244,6 +248,77 @@ class Granite3Point3Inputs(ChatCompletionInputs):
         # messages field. Undo any changes that we made during validation and return
         # the original value.
         return original_messages
+
+    @pydantic.field_validator("sanitize", mode="after")
+    @classmethod
+    def _validate_sanitize(cls, value: str | None) -> str | None:
+        if value is None or value == "inputs" or value == "aggressive":
+            return value
+        raise PydanticCustomError(
+            "sanitize field validator",
+            'sanitize ({sanitize}) must be "inputs" or "aggressive" or None',
+            {"sanitize": value},
+        )
+
+    def _remove_special_tokens(self, text) -> str:
+        """
+        Removes any special tokens from the text string.
+
+        :param text: String for removal of special tokens.
+        :returns: String with any special tokens removed.
+        """
+
+        regex_roles = r"<\|start_of_role\|>.*<\|end_of_role\|>.*<\|end_of_text\|>"
+        regex_tool_call = r"<\|tool_call\|>\{.*\}"
+        regex_citations = r"<\|start_of_cite\|>.*<\|end_of_cite\|>"
+
+        # This is not used by the Granite 3.3 chat template. Remove it anyway.
+        regex_plugins = r"<\|start_of_plugin\|>.*<\|end_of_plugin\|>"
+
+        new_text = text
+        new_text = re.sub(regex_roles, "", new_text)
+        new_text = re.sub(regex_citations, "", new_text)
+        new_text = re.sub(regex_plugins, "", new_text)
+        new_text = re.sub(regex_tool_call, "", new_text)
+
+        # Replace any stray special tokens.
+        for special_token in _GRANITE_3_3_SPECIAL_TOKENS:
+            new_text = new_text.replace(special_token, "")
+        return new_text
+
+    @pydantic.model_validator(mode="after")
+    def _sanitize_validator(self) -> Self:
+        """
+        Removes the special tokens from the inputs.
+        - 'None': (default) keeps input as is
+        - 'inputs': only the messages
+        - 'aggressive': everything that's part of a chat completion request,
+            e.g. documents, messages, tools, controls
+        """
+        if self.sanitize and self.sanitize == "inputs":
+            for message in self.messages:
+                message.content = self._remove_special_tokens(message.content)
+
+        if self.sanitize and self.sanitize == "aggressive":
+            for message in self.messages:
+                message.content = self._remove_special_tokens(message.content)
+            for document in self.documents:
+                if isinstance(document.doc_id, str):
+                    document.doc_id = self._remove_special_tokens(document.doc_id)
+                document.text = self._remove_special_tokens(document.text)
+            for tool in self.tools:
+                tool.name = self._remove_special_tokens(tool.name)
+                if tool.description:
+                    tool.description = self._remove_special_tokens(tool.description)
+                if tool.parameters:
+                    new_params = {}
+                    for k, v in tool.parameters.items():
+                        kk = self._remove_special_tokens(k)
+                        vv = self._remove_special_tokens(v)
+                        if len(kk) > 0:
+                            new_params[kk] = vv
+                    tool.parameters = new_params
+        return self
 
 
 @input_processor(
