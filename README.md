@@ -61,6 +61,29 @@ cd granite-io
 pip install -e .
 ```
 
+#### 🖥️ CPU-Only vLLM Support
+
+For systems without GPU access or CI environments, Granite IO supports CPU-only vLLM inference with full feature compatibility:
+
+```shell
+# Setup CPU development environment
+make -f Makefile.cpu setup
+
+# Build vLLM CPU wheel (takes 20-60 minutes)
+make -f Makefile.cpu build
+
+# Test CPU installation
+make -f Makefile.cpu test
+```
+
+Features supported with CPU vLLM:
+- ✅ **CPU inference** - Full model inference on CPU
+- ✅ **LoRA adapters** - Fine-tuned model support  
+- ✅ **Constrained decoding** - JSON schema and regex-guided generation
+
+> [!NOTE]
+> CPU vLLM requires AVX512F instruction set and GCC 12.3.0+. See [`scripts/README.md`](scripts/README.md) for detailed setup instructions.
+
 ### 🎯 Framework Example
 
 Sample code snippet showing how to use the framework:

@@ -1,0 +1,81 @@
+# Granite IO CPU vLLM Makefile
+# Convenient targets for building and testing CPU vLLM
+
+.PHONY: help check setup build test test-unit test-notebook clean status
+
+# Default target
+help:
+	@echo "Granite IO CPU vLLM Build System"
+	@echo ""
+	@echo "Available targets:"
+	@echo "  check         - Check system prerequisites"
+	@echo "  setup         - Setup development environment"
+	@echo "  build         - Build vLLM CPU wheel"
+	@echo "  test          - Run all CPU tests"
+	@echo "  test-unit     - Run unit tests only"
+	@echo "  test-notebook - Test RAG notebook"
+	@echo "  status        - Show environment status"
+	@echo "  clean         - Clean up build artifacts and cache"
+	@echo ""
+	@echo "Tox targets:"
+	@echo "  tox-cpu-unit  - Run tox CPU unit tests"
+	@echo "  tox-cpu-nb    - Run tox CPU notebook tests"
+	@echo ""
+	@echo "Environment variables:"
+	@echo "  VLLM_VERSION  - vLLM version to build (default: from config)"
+	@echo "  FORCE_REBUILD - Set to 'true' to force rebuild"
+
+# Check system prerequisites
+check:
+	@scripts/setup-cpu-dev.sh check
+
+# Setup development environment
+setup: check
+	@scripts/setup-cpu-dev.sh setup
+
+# Build vLLM CPU wheel
+build: check
+	@scripts/setup-cpu-dev.sh build
+
+# Run all tests
+test: test-unit test-notebook
+
+# Run unit tests
+test-unit: build
+	@scripts/setup-cpu-dev.sh test unit
+
+# Test notebook compatibility
+test-notebook: build
+	@scripts/setup-cpu-dev.sh test notebook
+
+# Show environment status
+status:
+	@scripts/setup-cpu-dev.sh status
+
+# Clean up
+clean:
+	@scripts/setup-cpu-dev.sh cleanup
+
+# Tox targets
+tox-cpu-unit:
+	tox -e vllm-cpu-unit
+
+tox-cpu-nb:
+	tox -e vllm-cpu-notebooks
+
+tox-cpu-all: tox-cpu-unit tox-cpu-nb
+
+# Development targets
+dev-quick: setup build test-unit
+	@echo "Quick development setup complete!"
+
+dev-full: setup build test
+	@echo "Full development setup complete!"
+
+# CI simulation
+ci-test:
+	@echo "Simulating CI test process..."
+	@make check
+	@make build
+	@make test-unit
+	@echo "CI simulation complete!"
