@@ -37,6 +37,13 @@ def vcr_config():
     return {
         "filter_headers": ["authorization"],
         "before_record_request": _no_pings_please,
+        # Use body of POST requests to index into the cassette. Otherwise vcrpy won't
+        # detect changes to the prompt.
+        # Temporarily disabled pending follow-on PR
+        # "match_on": ["uri", "method", "body"],
+        # Regenerate cassette files if deleted; otherwise fail the test if it produces
+        # a request that doesn't match the existing cassette.
+        "record_mode": "once",
     }
 
 

@@ -15,8 +15,8 @@ import pytest
 from granite_io import make_io_processor
 from granite_io.backend.vllm_server import LocalVLLMServer
 from granite_io.io.certainty import CertaintyCompositeIOProcessor, CertaintyIOProcessor
-from granite_io.io.granite_3_2.input_processors.granite_3_2_input_processor import (
-    Granite3Point2Inputs,
+from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
+    Granite3Point3Inputs,
     override_date_for_testing,
 )
 from granite_io.types import (
@@ -24,7 +24,7 @@ from granite_io.types import (
     GenerateResults,
 )
 
-_EXAMPLE_CHAT_INPUT = Granite3Point2Inputs.model_validate(
+_EXAMPLE_CHAT_INPUT = Granite3Point3Inputs.model_validate(
     {
         "messages": [
             {"role": "assistant", "content": "Welcome to pet questions!"},
@@ -32,8 +32,8 @@ _EXAMPLE_CHAT_INPUT = Granite3Point2Inputs.model_validate(
             {"role": "assistant", "content": "Only your dog has fleas."},
         ],
         "documents": [
-            {"text": "My dog has fleas."},
-            {"text": "My cat does not have fleas."},
+            {"doc_id": 1, "text": "My dog has fleas."},
+            {"doc_id": 5, "text": "My cat does not have fleas."},
         ],
         "generate_inputs": {
             "temperature": 0.0  # Ensure consistency across runs
@@ -63,14 +63,13 @@ def test_canned_input():
     expected_output = textwrap.dedent(f"""\
     <|start_of_role|>system<|end_of_role|>Knowledge Cutoff Date: April 2024.
     Today's Date: {_TODAYS_DATE}.
-    You are Granite, developed by IBM.Write the response to the user's input by \
+    You are Granite, developed by IBM. Write the response to the user's input by \
 strictly aligning with the facts in the provided documents. If the information needed \
 to answer the question is not available in the documents, inform the user that the \
 question cannot be answered based on the available data.<|end_of_text|>
-    <|start_of_role|>documents<|end_of_role|>Document 0
-    My dog has fleas.
-    
-    Document 1
+    <|start_of_role|>document {{"document_id": "1"}}<|end_of_role|>
+    My dog has fleas.<|end_of_text|>
+    <|start_of_role|>document {{"document_id": "5"}}<|end_of_role|>
     My cat does not have fleas.<|end_of_text|>
     <|start_of_role|>assistant<|end_of_role|>Welcome to pet questions!<|end_of_text|>
     <|start_of_role|>user<|end_of_role|>Which of my pets have fleas?<|end_of_text|>
@@ -126,7 +125,7 @@ def test_run_model(lora_server: LocalVLLMServer, fake_date: str):
     chat_result = io_proc.create_chat_completion(_EXAMPLE_CHAT_INPUT)
 
     # We run at temperature zero, so this result should be consistent
-    assert float(chat_result.results[0].next_message.content) == 0.8
+    assert float(chat_result.results[0].next_message.content) == 0.9
 
 
 @pytest.mark.vcr
