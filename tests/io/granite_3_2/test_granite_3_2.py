@@ -204,9 +204,7 @@ expected_citation = Citation(
     response_end=14,
 )
 expected_document = Document(doc_id="0", text="Dog info")
-doc_input = ChatCompletionInputs(
-    messages=[msg], documents=[{"doc_id": "0", "text": "Dog info"}]
-)
+doc_input = ChatCompletionInputs(messages=[msg], documents=[{"text": "Dog info"}])
 expected_hallucination = Hallucination(
     hallucination_id="1",
     risk="low",

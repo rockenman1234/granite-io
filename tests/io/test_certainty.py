@@ -136,7 +136,7 @@ def test_run_composite(lora_server: LocalVLLMServer, fake_date: str):
     """
     granite_backend = lora_server.make_backend()
     lora_backend = lora_server.make_lora_backend("certainty")
-    granite_io_proc = make_io_processor("Granite 3.2", backend=granite_backend)
+    granite_io_proc = make_io_processor("Granite 3.3", backend=granite_backend)
     io_proc = CertaintyCompositeIOProcessor(
         granite_io_proc, lora_backend, threshold=0.5
     )

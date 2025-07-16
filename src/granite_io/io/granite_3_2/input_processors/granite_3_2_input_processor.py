@@ -24,6 +24,7 @@ from granite_io.io.registry import input_processor
 from granite_io.types import (
     AssistantMessage,
     ChatCompletionInputs,
+    Document,
     SystemMessage,
     ToolResultMessage,
     UserMessage,
@@ -141,10 +142,6 @@ Finally, after the response is written, include a numbered list of sentences fro
 response that are potentially hallucinated and not based in the documents."""
 
 
-class Document(pydantic.BaseModel):
-    text: str
-
-
 class ControlsRecord(pydantic.BaseModel):
     citations: bool | None = None
     hallucinations: bool | None = None
@@ -240,6 +237,27 @@ class Granite3Point2Inputs(ChatCompletionInputs):
         # messages field. Undo any changes that we made during validation and return
         # the original value.
         return original_messages
+
+    @pydantic.field_validator("documents")
+    @classmethod
+    def _validate_documents(cls, documents: list[Document] | None) -> list | None:
+        """
+        Granite 3.2 documents should not have document IDs.
+        """
+        if documents is not None:
+            for i, d in enumerate(documents):
+                if not isinstance(d, Document):
+                    raise TypeError(
+                        f"Expected Document at position {i} but found "
+                        f"{d} of type {type(d)}"
+                    )
+                if d.doc_id is not None:
+                    raise ValueError(
+                        f"Document at position {i} contains a `doc_id` "
+                        f"field. This field is not allowed for Granite "
+                        f"3.2."
+                    )
+        return documents
 
     @pydantic.field_validator("sanitize", mode="after")
     @classmethod
