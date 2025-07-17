@@ -1,77 +1,11 @@
 interactions:
 - request:
-    body: '{"model": "granite3.3:2b", "prompt": "<|start_of_role|>system<|end_of_role|>
-      Knowledge Cutoff Date: April 2024.\n Today''s Date: April 16, 2025. You are
-      Granite, developed by IBM. You are a helpful AI assistant.\nRespond to every
-      user query in a comprehensive and detailed way. You can write down your thoughts
-      and reasoning process before responding. In the thought process, engage in a
-      comprehensive cycle of analysis, summarization, exploration, reassessment, reflection,
-      backtracing, and iteration to develop well-considered thinking process. In the
-      response section, based on various attempts, explorations, and reflections from
-      the thoughts section, systematically present the final solution that you deem
-      correct. The response should summarize the thought process. Write your thoughts
-      between <think></think> and write your response between <response></response>
-      for each user query.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>How
-      much wood could a wood chuck chuck?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>",
-      "options": {"extra_body": null}, "stream": false}'
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate
-      connection:
-      - keep-alive
-      content-length:
-      - '1091'
-      host:
-      - localhost:11434
-      user-agent:
-      - litellm/1.65.7
-    method: POST
-    uri: http://localhost:11434/api/generate
-  response:
-    content: "{\"model\":\"granite3.3:2b\",\"created_at\":\"2025-04-16T15:04:46.777505Z\",\"response\":\"\\u003cthink\\u003eThe
-      question \\\"How much wood could a woodchuck chuck, if a woodchuck could chuck
-      wood?\\\" is a well-known tongue twister and riddle that plays on word play.
-      It is often used to demonstrate the ability of language and humor rather than
-      having a definitive scientific answer because woodchucks (also known as groundhogs)
-      do not actually chuck or push wood.\\n\\nWoodchucks are burrowing mammals primarily
-      concerned with excavating tunnels for shelter, not with moving or accumulating
-      wood. Therefore, there's no factual basis in biology or ecology to quantify
-      how much wood a woodchuck could chuck.\\n\\nThe phrase has been used in various
-      forms of humor and wordplay, often as a playful way to test one\u2019s ability
-      to say it quickly without error. It is more of a linguistic curiosity than a
-      serious scientific inquiry. \\n\\nGiven the fictitious nature of the question,
-      there isn't a numerical answer tied to actual woodchuck behavior or capacity.\\u003c/think\\u003e\\u003cresponse\\u003e###
-      The Riddle and its Significance:\\nThe phrase \\\"How much wood could a woodchuck
-      chuck?\\\" is actually a famous tongue twister often used for amusement due
-      to its playful repetition. It stems from the idea that woodchucks (groundhogs)
-      are known for their burrowing nature rather than wood-moving capabilities. \\n\\nIn
-      reality, **woodchucks do not chuck or move large amounts of wood**. They primarily
-      use their powerful front legs to dig burrows. Their diet consists mainly of
-      grasses, fruits, and insects; they are not known for gathering or moving significant
-      quantities of wood.\\n\\nThus, the question is a classic example of a riddle:\\n-
-      **A**: Woodchuck\\n- **B**: Could chuck (move) an amount of wood\\n- But since
-      woodchucks don't actually move large amounts of wood, the answer is typically
-      humorous or nonsensical.\\n\\nIn conclusion, there\u2019s no definitive scientific
-      measurement for how much wood a woodchuck could chuck because it's purely a
-      linguistic and humorous construct with no basis in actual woodchuck behavior.\\u003c/response\\u003e\",\"done\":true,\"done_reason\":\"stop\",\"context\":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,38401,390,17071,2821,44,30468,225,36,34,36,38,32,203,46097,1182,2821,44,30468,225,35,40,30,225,36,34,36,39,32,2448,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,203,33797,372,3638,1256,2467,328,312,44888,461,16360,3352,32,2448,883,2866,2835,1370,26103,461,5966,299,2164,2670,18641,2414,32,701,322,10889,2164,30,14707,381,328,312,44888,14770,432,9209,30,23943,1649,30,49100,30,316,31289,30,26158,30,1751,30000,30,461,13330,372,10227,4487,31,33711,318,19383,2164,32,701,322,1789,4169,30,4122,544,10297,20130,30,27514,993,30,461,26158,101,645,322,26103,4169,30,2664,20725,5024,322,1158,5295,688,844,409,405,3809,32,886,1789,1395,46053,322,10889,2164,32,5950,1370,26103,3733,333,16462,855,16462,48,461,2866,1370,1789,3733,333,1986,855,1986,48,436,2504,1256,2467,32,0,203,49152,496,49153,8257,5610,41878,3065,312,41878,663,7194,663,7194,49,0,203,49152,17594,49153,0,203,49152,17594,49153,46,16462,48,1318,7000,313,8257,5610,41878,3065,312,41878,380,7194,663,7194,30,415,312,41878,380,7194,3065,663,7194,41878,12791,438,312,4487,31,3737,273,788,340,8206,19240,461,540,3422,688,41271,544,3594,4654,32,2030,438,12270,1654,372,31105,322,13609,432,2898,461,21981,271,9283,2784,7696,312,665,1664,661,31722,7592,3301,41878,380,36546,308,12227,8967,619,16398,44770,101,27,745,646,6723,663,7194,556,5840,41878,32,203,203,73,4907,380,36546,884,23598,643,299,345,38169,3528,37897,43638,623,13489,453,1741,29403,101,436,309,2542,391,30,646,623,14089,556,3468,8315,1741,41878,32,20750,30,2017,1182,1289,296,7975,14977,328,16331,4258,556,30487,4258,372,13292,1147,2624,5610,41878,312,41878,380,7194,3065,663,7194,32,203,203,1318,23909,1401,2583,1654,328,10297,10548,432,21981,271,461,3594,1066,30,12270,619,312,4654,2790,3352,372,894,1591,2735,101,13609,372,7617,561,16915,2876,1048,32,2030,438,1829,432,312,456,19616,5401,2738,3945,543,2784,312,31226,31722,328,32885,32,1659,203,16627,322,296,3557,283,2406,24406,432,322,7000,30,2017,7735,1330,312,26344,7592,43922,372,4648,41878,380,7194,5853,556,13802,1730,16462,772,1986,48,1482,886,559,3422,461,2819,7431,1038,723,44,203,1318,23909,313,8257,5610,41878,3065,312,41878,380,7194,663,7194,12791,438,6723,312,15863,3291,273,788,340,8206,19240,12270,1654,436,3860,539,469,7254,372,2819,4654,2790,33820,697,32,2030,376,4889,645,322,8749,688,41878,380,36546,308,1749,44770,101,27,884,8967,436,3623,23598,643,299,24406,9283,2784,41878,31,26171,18804,32,1659,203,383,45794,30,1115,21118,380,36546,745,646,663,7194,556,5169,7622,31651,432,41878,6192,11228,37897,793,3623,27196,8432,999,5360,372,7338,23598,2138,32,886,476,2068,364,21852,31481,432,2914,2515,30,35436,1507,30,461,328,6764,101,45,2953,884,646,8967,436,20133,299,556,14089,14724,13292,2105,432,41878,32,203,203,1027,352,30,322,7000,438,312,39115,2280,432,312,540,3422,44,203,31,1115,51,4914,624,4907,380,7194,203,31,1115,52,4914,12619,663,7194,308,1500,27,600,5168,432,41878,203,31,7141,4558,41878,380,36546,2800,1330,6723,5169,7622,31651,432,41878,30,322,7592,438,18214,21981,271,3291,556,310,2612,1229,1578,32,203,203,383,457,13715,30,2017,2735,101,1289,665,1664,661,31722,18583,436,2624,5610,41878,312,41878,380,7194,3065,663,7194,3301,561,1182,12463,631,312,456,19616,5401,461,21981,271,3291,8520,623,1289,14977,328,4648,41878,380,7194,5853,1730,1986,48],\"total_duration\":5357839166,\"load_duration\":4499416,\"prompt_eval_count\":242,\"prompt_eval_duration\":10157834,\"eval_count\":506,\"eval_duration\":5342670166}"
-    headers:
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 16 Apr 2025 15:04:46 GMT
-      Transfer-Encoding:
-      - chunked
-    http_version: HTTP/1.1
-    status_code: 200
-- request:
     body: '{"name":"granite3.3:2b"}'
     headers:
       accept:
       - '*/*'
       accept-encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       connection:
       - keep-alive
       content-length:
@@ -81,475 +15,585 @@ interactions:
       host:
       - localhost:11434
       user-agent:
-      - litellm/1.65.7
+      - litellm/1.73.0
     method: POST
     uri: http://localhost:11434/api/show
   response:
-    content: '{"license":"                                 Apache License\n                           Version
-      2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS
-      AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\"
-      shall mean the terms and conditions for use, reproduction,\n      and distribution
-      as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall
-      mean the copyright owner or entity authorized by\n      the copyright owner
-      that is granting the License.\n\n      \"Legal Entity\" shall mean the union
-      of the acting entity and all\n      other entities that control, are controlled
-      by, or are under common\n      control with that entity. For the purposes of
-      this definition,\n      \"control\" means (i) the power, direct or indirect,
-      to cause the\n      direction or management of such entity, whether by contract
-      or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding
-      shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\")
-      shall mean an individual or Legal Entity\n      exercising permissions granted
-      by this License.\n\n      \"Source\" form shall mean the preferred form for
-      making modifications,\n      including but not limited to software source code,
-      documentation\n      source, and configuration files.\n\n      \"Object\" form
-      shall mean any form resulting from mechanical\n      transformation or translation
-      of a Source form, including but\n      not limited to compiled object code,
-      generated documentation,\n      and conversions to other media types.\n\n      \"Work\"
-      shall mean the work of authorship, whether in Source or\n      Object form,
-      made available under the License, as indicated by a\n      copyright notice
-      that is included in or attached to the work\n      (an example is provided in
-      the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether
-      in Source or Object\n      form, that is based on (or derived from) the Work
-      and for which the\n      editorial revisions, annotations, elaborations, or
-      other modifications\n      represent, as a whole, an original work of authorship.
-      For the purposes\n      of this License, Derivative Works shall not include
-      works that remain\n      separable from, or merely link (or bind by name) to
-      the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\"
-      shall mean any work of authorship, including\n      the original version of
-      the Work and any modifications or additions\n      to that Work or Derivative
-      Works thereof, that is intentionally\n      submitted to Licensor for inclusion
-      in the Work by the copyright owner\n      or by an individual or Legal Entity
-      authorized to submit on behalf of\n      the copyright owner. For the purposes
-      of this definition, \"submitted\"\n      means any form of electronic, verbal,
-      or written communication sent\n      to the Licensor or its representatives,
-      including but not limited to\n      communication on electronic mailing lists,
-      source code control systems,\n      and issue tracking systems that are managed
-      by, or on behalf of, the\n      Licensor for the purpose of discussing and improving
-      the Work, but\n      excluding communication that is conspicuously marked or
-      otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\"
-      shall mean Licensor and any individual or Legal Entity\n      on behalf of whom
-      a Contribution has been received by Licensor and\n      subsequently incorporated
-      within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and
-      conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide,
-      non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license
-      to reproduce, prepare Derivative Works of,\n      publicly display, publicly
-      perform, sublicense, and distribute the\n      Work and such Derivative Works
-      in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms
-      and conditions of\n      this License, each Contributor hereby grants to You
-      a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except
-      as stated in this section) patent license to make, have made,\n      use, offer
-      to sell, sell, import, and otherwise transfer the Work,\n      where such license
-      applies only to those patent claims licensable\n      by such Contributor that
-      are necessarily infringed by their\n      Contribution(s) alone or by combination
-      of their Contribution(s)\n      with the Work to which such Contribution(s)
-      was submitted. If You\n      institute patent litigation against any entity
-      (including a\n      cross-claim or counterclaim in a lawsuit) alleging that
-      the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or
-      contributory patent infringement, then any patent licenses\n      granted to
-      You under this License for that Work shall terminate\n      as of the date such
-      litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute
-      copies of the\n      Work or Derivative Works thereof in any medium, with or
-      without\n      modifications, and in Source or Object form, provided that You\n      meet
-      the following conditions:\n\n      (a) You must give any other recipients of
-      the Work or\n          Derivative Works a copy of this License; and\n\n      (b)
-      You must cause any modified files to carry prominent notices\n          stating
-      that You changed the files; and\n\n      (c) You must retain, in the Source
-      form of any Derivative Works\n          that You distribute, all copyright,
-      patent, trademark, and\n          attribution notices from the Source form of
-      the Work,\n          excluding those notices that do not pertain to any part
-      of\n          the Derivative Works; and\n\n      (d) If the Work includes a
-      \"NOTICE\" text file as part of its\n          distribution, then any Derivative
-      Works that You distribute must\n          include a readable copy of the attribution
-      notices contained\n          within such NOTICE file, excluding those notices
-      that do not\n          pertain to any part of the Derivative Works, in at least
-      one\n          of the following places: within a NOTICE text file distributed\n          as
-      part of the Derivative Works; within the Source form or\n          documentation,
-      if provided along with the Derivative Works; or,\n          within a display
-      generated by the Derivative Works, if and\n          wherever such third-party
-      notices normally appear. The contents\n          of the NOTICE file are for
-      informational purposes only and\n          do not modify the License. You may
-      add Your own attribution\n          notices within Derivative Works that You
-      distribute, alongside\n          or as an addendum to the NOTICE text from the
-      Work, provided\n          that such additional attribution notices cannot be
-      construed\n          as modifying the License.\n\n      You may add Your own
-      copyright statement to Your modifications and\n      may provide additional
-      or different license terms and conditions\n      for use, reproduction, or distribution
-      of Your modifications, or\n      for any such Derivative Works as a whole, provided
-      Your use,\n      reproduction, and distribution of the Work otherwise complies
-      with\n      the conditions stated in this License.\n\n   5. Submission of Contributions.
-      Unless You explicitly state otherwise,\n      any Contribution intentionally
-      submitted for inclusion in the Work\n      by You to the Licensor shall be under
-      the terms and conditions of\n      this License, without any additional terms
-      or conditions.\n      Notwithstanding the above, nothing herein shall supersede
-      or modify\n      the terms of any separate license agreement you may have executed\n      with
-      Licensor regarding such Contributions.\n\n   6. Trademarks. This License does
-      not grant permission to use the trade\n      names, trademarks, service marks,
-      or product names of the Licensor,\n      except as required for reasonable and
-      customary use in describing the\n      origin of the Work and reproducing the
-      content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required
-      by applicable law or\n      agreed to in writing, Licensor provides the Work
-      (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT
-      WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including,
-      without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT,
-      MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely
-      responsible for determining the\n      appropriateness of using or redistributing
-      the Work and assume any\n      risks associated with Your exercise of permissions
-      under this License.\n\n   8. Limitation of Liability. In no event and under
-      no legal theory,\n      whether in tort (including negligence), contract, or
-      otherwise,\n      unless required by applicable law (such as deliberate and
-      grossly\n      negligent acts) or agreed to in writing, shall any Contributor
-      be\n      liable to You for damages, including any direct, indirect, special,\n      incidental,
-      or consequential damages of any character arising as a\n      result of this
-      License or out of the use or inability to use the\n      Work (including but
-      not limited to damages for loss of goodwill,\n      work stoppage, computer
-      failure or malfunction, or any and all\n      other commercial damages or losses),
-      even if such Contributor\n      has been advised of the possibility of such
-      damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the
-      Work or Derivative Works thereof, You may choose to offer,\n      and charge
-      a fee for, acceptance of support, warranty, indemnity,\n      or other liability
-      obligations and/or rights consistent with this\n      License. However, in accepting
-      such obligations, You may act only\n      on Your own behalf and on Your sole
-      responsibility, not on behalf\n      of any other Contributor, and only if You
-      agree to indemnify,\n      defend, and hold each Contributor harmless for any
-      liability\n      incurred by, or claims asserted against, such Contributor by
-      reason\n      of your accepting any such warranty or additional liability.\n\n   END
-      OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your
-      work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate
-      notice, with the fields enclosed by brackets \"[]\"\n      replaced with your
-      own identifying information. (Don''t include\n      the brackets!)  The text
-      should be enclosed in the appropriate\n      comment syntax for the file format.
-      We also recommend that a\n      file or class name and description of purpose
-      be included on the\n      same \"printed page\" as the copyright notice for
-      easier\n      identification within third-party archives.\n\n   Copyright 2025
-      IBM\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you
-      may not use this file except in compliance with the License.\n   You may obtain
-      a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless
-      required by applicable law or agreed to in writing, software\n   distributed
-      under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES
-      OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for
-      the specific language governing permissions and\n   limitations under the License.","modelfile":"#
-      Modelfile generated by \"ollama show\"\n# To build a new Modelfile based on
-      this, replace FROM with:\n# FROM granite3.3:2b\n\nFROM /Users/markstur/.ollama/models/blobs/sha256-ac71e9e32c0bea919b409c5918f69ca74339854b0319c5065e4e9fb6d95c4852\nTEMPLATE
-      \"\"\"{{- /*\n\n------ MESSAGE PARSING ------\n\n*/}}\n{{- /*\nDeclare the prompt
-      structure variables to be filled in from messages\n*/}}\n{{- $system := \"\"
-      }}\n{{- $documents := \"\" }}\n{{- $documentCounter := 0 }}\n{{- $thinking :=
-      false }}\n{{- $citations := false }}\n{{- $hallucinations := false }}\n{{- $length
-      := \"\" }}\n{{- $originality := \"\" }}\n\n{{- /*\nLoop over messages and look
-      for a user-provided system message and documents\n*/ -}}\n{{- range .Messages
-      }}\n\n    {{- /* User defined system prompt(s) */}}\n    {{- if (eq .Role \"system\")}}\n        {{-
-      if (ne $system \"\") }}\n            {{- $system = print $system \"\\n\\n\"
-      }}\n        {{- end}}\n        {{- $system = print $system .Content }}\n    {{-
-      end}}\n\n    {{- /*\n    NOTE: Since Ollama collates consecutive roles, for
-      control and documents, we\n        work around this by allowing the role to
-      contain a qualifier after the\n        role string.\n    */ -}}\n\n    {{- /*
-      Role specified controls */ -}}\n    {{- if (and (ge (len .Role) 7) (eq (slice
-      .Role 0 7) \"control\")) }}\n        {{- if (eq .Content \"thinking\")}}{{-
-      $thinking = true }}{{- end}}\n        {{- if (eq .Content \"citations\")}}{{-
-      $citations = true }}{{- end}}\n        {{- if (eq .Content \"hallucinations\")}}{{-
-      $hallucinations = true }}{{- end}}\n        {{- if (and (ge (len .Content) 7)
-      (eq (slice .Content 0 7) \"length \"))}}\n            {{- $length = slice .Content
-      7 }}\n        {{- end}}\n        {{- if (and (ge (len .Content) 12) (eq (slice
-      .Content 0 12) \"originality \"))}}\n            {{- $originality = slice .Content
-      12 }}\n        {{- end}}\n    {{- end}}\n\n    {{- /* Role specified document
-      */ -}}\n    {{- if (and (ge (len .Role) 8) (eq (slice .Role 0 8) \"document\"))
-      }}\n        {{- if (ne $documentCounter 0)}}\n            {{- $documents = print
-      $documents \"\\n\\n\"}}\n        {{- end}}\n        {{- $identifier := \"\"}}\n        {{-
-      if (ge (len .Role) 9) }}\n            {{- $identifier = (slice .Role 9)}}\n        {{-
-      end}}\n        {{- if (eq $identifier \"\") }}\n            {{- $identifier
-      := print $documentCounter}}\n        {{- end}}\n        {{- $documents = print
-      $documents \"\u003c|start_of_role|\u003edocument {\\\"document_id\\\": \\\"\"
-      $identifier \"\\\"}\u003c|end_of_role|\u003e\\n\" .Content \"\u003c|end_of_text|\u003e\"}}\n        {{-
-      $documentCounter = len (printf \"a%*s\" $documentCounter \"\")}}\n    {{- end}}\n{{-
-      end}}\n\n{{- /*\nIf no user message provided, build the default system message\n*/
-      -}}\n{{- if eq $system \"\" }}\n    {{- $system = \"Knowledge Cutoff Date: April
-      2024.\\nYou are Granite, developed by IBM.\"}}\n\n    {{- /* Add Tools prompt
-      */}}\n    {{- if .Tools }}\n        {{- $system = print $system \" You are a
-      helpful assistant with access to the following tools. When a tool is required
-      to answer the user''s query, respond only with \u003c|tool_call|\u003e followed
-      by a JSON list of tools used. If a tool does not exist in the provided list
-      of tools, notify the user that you do not have the ability to fulfill the request.\"
-      }}\n    {{- end}}\n\n    {{- /* Add documents prompt */}}\n    {{- if $documents
-      }}\n        {{- if .Tools }}\n            {{- $system = print $system \"\\n\"}}\n        {{-
-      else }}\n            {{- $system = print $system \" \"}}\n        {{- end}}\n        {{-
-      $system = print $system \"Write the response to the user''s input by strictly
-      aligning with the facts in the provided documents. If the information needed
-      to answer the question is not available in the documents, inform the user that
-      the question cannot be answered based on the available data.\" }}\n        {{-
-      if $citations}}\n            {{- $system = print $system \"\\nUse the symbols
-      \u003c|start_of_cite|\u003e and \u003c|end_of_cite|\u003e to indicate when a
-      fact comes from a document in the search result, e.g \u003c|start_of_cite|\u003e
-      {document_id: 1}my fact \u003c|end_of_cite|\u003e for a fact from document 1.
-      Afterwards, list all the citations with their corresponding documents in an
-      ordered list.\"}}\n        {{- end}}\n        {{- if $hallucinations}}\n            {{-
-      $system = print $system \"\\nFinally, after the response is written, include
-      a numbered list of sentences from the response with a corresponding risk value
-      that are hallucinated and not based in the documents.\"}}\n        {{- end}}\n    {{-
-      end}}\n\n    {{- /* Prompt without tools or documents */}}\n    {{- if (and
-      (not .Tools) (not $documents)) }}\n        {{- $system = print $system \" You
-      are a helpful AI assistant.\"}}\n        {{- if $thinking}}\n            {{-
-      $system = print $system \"\\nRespond to every user query in a comprehensive
-      and detailed way. You can write down your thoughts and reasoning process before
-      responding. In the thought process, engage in a comprehensive cycle of analysis,
-      summarization, exploration, reassessment, reflection, backtracing, and iteration
-      to develop well-considered thinking process. In the response section, based
-      on various attempts, explorations, and reflections from the thoughts section,
-      systematically present the final solution that you deem correct. The response
-      should summarize the thought process. Write your thoughts between \u003cthink\u003e\u003c/think\u003e
-      and write your response between \u003cresponse\u003e\u003c/response\u003e for
-      each user query.\"}}\n        {{- end}}\n    {{- end}}\n\n{{- end}}\n{{- /*\n\n------
-      TEMPLATE EXPANSION ------\n\n*/}}\n{{- /* System Prompt */ -}}\n\u003c|start_of_role|\u003esystem\u003c|end_of_role|\u003e{{-
-      $system }}\u003c|end_of_text|\u003e\n\n{{- /* Tools */ -}}\n{{- if .Tools }}\n\u003c|start_of_role|\u003eavailable_tools\u003c|end_of_role|\u003e[\n{{-
-      range $index, $_ := .Tools }}\n{{ . }}\n{{- if and (ne (len (slice $.Tools $index))
-      1) (gt (len $.Tools) 1) }},\n{{- end}}\n{{- end }}\n]\u003c|end_of_text|\u003e\n{{-
-      end}}\n\n{{- /* Documents */ -}}\n{{- if $documents }}\n{{ $documents }}\n{{-
-      end}}\n\n{{- /* Standard Messages */}}\n{{- range $index, $_ := .Messages }}\n{{-
-      if (and\n    (ne .Role \"system\")\n    (or (lt (len .Role) 7) (ne (slice .Role
-      0 7) \"control\"))\n    (or (lt (len .Role) 8) (ne (slice .Role 0 8) \"document\"))\n)}}\n\u003c|start_of_role|\u003e\n{{-
-      if eq .Role \"tool\" }}tool_response\n{{- else }}{{ .Role }}\n{{- end }}\u003c|end_of_role|\u003e\n{{-
-      if .Content }}{{ .Content }}\n{{- else if .ToolCalls }}\u003c|tool_call|\u003e\n{{-
-      range .ToolCalls }}{\"name\": \"{{ .Function.Name }}\", \"arguments\": {{ .Function.Arguments
-      }}}\n{{- end }}\n{{- end }}\n{{- if eq (len (slice $.Messages $index)) 1 }}\n{{-
-      if eq .Role \"assistant\" }}\n{{- else }}\u003c|end_of_text|\u003e\n\u003c|start_of_role|\u003eassistant\n{{-
-      if and (ne $length \"\") (ne $originality \"\") }} {\"length\": \"{{ $length
-      }}\", \"originality\": \"{{ $originality }}\"}\n{{- else if ne $length \"\"
-      }} {\"length\": \"{{ $length }}\"}\n{{- else if ne $originality \"\" }} {\"originality\":
-      \"{{ $originality }}\"}\n{{- end }}\u003c|end_of_role|\u003e\n{{- end -}}\n{{-
-      else }}\u003c|end_of_text|\u003e\n{{- end }}\n{{- end }}\n{{- end }}\"\"\"\nLICENSE
-      \"\"\"                                 Apache License\n                           Version
-      2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS
-      AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\"
-      shall mean the terms and conditions for use, reproduction,\n      and distribution
-      as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall
-      mean the copyright owner or entity authorized by\n      the copyright owner
-      that is granting the License.\n\n      \"Legal Entity\" shall mean the union
-      of the acting entity and all\n      other entities that control, are controlled
-      by, or are under common\n      control with that entity. For the purposes of
-      this definition,\n      \"control\" means (i) the power, direct or indirect,
-      to cause the\n      direction or management of such entity, whether by contract
-      or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding
-      shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\")
-      shall mean an individual or Legal Entity\n      exercising permissions granted
-      by this License.\n\n      \"Source\" form shall mean the preferred form for
-      making modifications,\n      including but not limited to software source code,
-      documentation\n      source, and configuration files.\n\n      \"Object\" form
-      shall mean any form resulting from mechanical\n      transformation or translation
-      of a Source form, including but\n      not limited to compiled object code,
-      generated documentation,\n      and conversions to other media types.\n\n      \"Work\"
-      shall mean the work of authorship, whether in Source or\n      Object form,
-      made available under the License, as indicated by a\n      copyright notice
-      that is included in or attached to the work\n      (an example is provided in
-      the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether
-      in Source or Object\n      form, that is based on (or derived from) the Work
-      and for which the\n      editorial revisions, annotations, elaborations, or
-      other modifications\n      represent, as a whole, an original work of authorship.
-      For the purposes\n      of this License, Derivative Works shall not include
-      works that remain\n      separable from, or merely link (or bind by name) to
-      the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\"
-      shall mean any work of authorship, including\n      the original version of
-      the Work and any modifications or additions\n      to that Work or Derivative
-      Works thereof, that is intentionally\n      submitted to Licensor for inclusion
-      in the Work by the copyright owner\n      or by an individual or Legal Entity
-      authorized to submit on behalf of\n      the copyright owner. For the purposes
-      of this definition, \"submitted\"\n      means any form of electronic, verbal,
-      or written communication sent\n      to the Licensor or its representatives,
-      including but not limited to\n      communication on electronic mailing lists,
-      source code control systems,\n      and issue tracking systems that are managed
-      by, or on behalf of, the\n      Licensor for the purpose of discussing and improving
-      the Work, but\n      excluding communication that is conspicuously marked or
-      otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\"
-      shall mean Licensor and any individual or Legal Entity\n      on behalf of whom
-      a Contribution has been received by Licensor and\n      subsequently incorporated
-      within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and
-      conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide,
-      non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license
-      to reproduce, prepare Derivative Works of,\n      publicly display, publicly
-      perform, sublicense, and distribute the\n      Work and such Derivative Works
-      in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms
-      and conditions of\n      this License, each Contributor hereby grants to You
-      a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except
-      as stated in this section) patent license to make, have made,\n      use, offer
-      to sell, sell, import, and otherwise transfer the Work,\n      where such license
-      applies only to those patent claims licensable\n      by such Contributor that
-      are necessarily infringed by their\n      Contribution(s) alone or by combination
-      of their Contribution(s)\n      with the Work to which such Contribution(s)
-      was submitted. If You\n      institute patent litigation against any entity
-      (including a\n      cross-claim or counterclaim in a lawsuit) alleging that
-      the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or
-      contributory patent infringement, then any patent licenses\n      granted to
-      You under this License for that Work shall terminate\n      as of the date such
-      litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute
-      copies of the\n      Work or Derivative Works thereof in any medium, with or
-      without\n      modifications, and in Source or Object form, provided that You\n      meet
-      the following conditions:\n\n      (a) You must give any other recipients of
-      the Work or\n          Derivative Works a copy of this License; and\n\n      (b)
-      You must cause any modified files to carry prominent notices\n          stating
-      that You changed the files; and\n\n      (c) You must retain, in the Source
-      form of any Derivative Works\n          that You distribute, all copyright,
-      patent, trademark, and\n          attribution notices from the Source form of
-      the Work,\n          excluding those notices that do not pertain to any part
-      of\n          the Derivative Works; and\n\n      (d) If the Work includes a
-      \"NOTICE\" text file as part of its\n          distribution, then any Derivative
-      Works that You distribute must\n          include a readable copy of the attribution
-      notices contained\n          within such NOTICE file, excluding those notices
-      that do not\n          pertain to any part of the Derivative Works, in at least
-      one\n          of the following places: within a NOTICE text file distributed\n          as
-      part of the Derivative Works; within the Source form or\n          documentation,
-      if provided along with the Derivative Works; or,\n          within a display
-      generated by the Derivative Works, if and\n          wherever such third-party
-      notices normally appear. The contents\n          of the NOTICE file are for
-      informational purposes only and\n          do not modify the License. You may
-      add Your own attribution\n          notices within Derivative Works that You
-      distribute, alongside\n          or as an addendum to the NOTICE text from the
-      Work, provided\n          that such additional attribution notices cannot be
-      construed\n          as modifying the License.\n\n      You may add Your own
-      copyright statement to Your modifications and\n      may provide additional
-      or different license terms and conditions\n      for use, reproduction, or distribution
-      of Your modifications, or\n      for any such Derivative Works as a whole, provided
-      Your use,\n      reproduction, and distribution of the Work otherwise complies
-      with\n      the conditions stated in this License.\n\n   5. Submission of Contributions.
-      Unless You explicitly state otherwise,\n      any Contribution intentionally
-      submitted for inclusion in the Work\n      by You to the Licensor shall be under
-      the terms and conditions of\n      this License, without any additional terms
-      or conditions.\n      Notwithstanding the above, nothing herein shall supersede
-      or modify\n      the terms of any separate license agreement you may have executed\n      with
-      Licensor regarding such Contributions.\n\n   6. Trademarks. This License does
-      not grant permission to use the trade\n      names, trademarks, service marks,
-      or product names of the Licensor,\n      except as required for reasonable and
-      customary use in describing the\n      origin of the Work and reproducing the
-      content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required
-      by applicable law or\n      agreed to in writing, Licensor provides the Work
-      (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT
-      WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including,
-      without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT,
-      MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely
-      responsible for determining the\n      appropriateness of using or redistributing
-      the Work and assume any\n      risks associated with Your exercise of permissions
-      under this License.\n\n   8. Limitation of Liability. In no event and under
-      no legal theory,\n      whether in tort (including negligence), contract, or
-      otherwise,\n      unless required by applicable law (such as deliberate and
-      grossly\n      negligent acts) or agreed to in writing, shall any Contributor
-      be\n      liable to You for damages, including any direct, indirect, special,\n      incidental,
-      or consequential damages of any character arising as a\n      result of this
-      License or out of the use or inability to use the\n      Work (including but
-      not limited to damages for loss of goodwill,\n      work stoppage, computer
-      failure or malfunction, or any and all\n      other commercial damages or losses),
-      even if such Contributor\n      has been advised of the possibility of such
-      damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the
-      Work or Derivative Works thereof, You may choose to offer,\n      and charge
-      a fee for, acceptance of support, warranty, indemnity,\n      or other liability
-      obligations and/or rights consistent with this\n      License. However, in accepting
-      such obligations, You may act only\n      on Your own behalf and on Your sole
-      responsibility, not on behalf\n      of any other Contributor, and only if You
-      agree to indemnify,\n      defend, and hold each Contributor harmless for any
-      liability\n      incurred by, or claims asserted against, such Contributor by
-      reason\n      of your accepting any such warranty or additional liability.\n\n   END
-      OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your
-      work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate
-      notice, with the fields enclosed by brackets \"[]\"\n      replaced with your
-      own identifying information. (Don''t include\n      the brackets!)  The text
-      should be enclosed in the appropriate\n      comment syntax for the file format.
-      We also recommend that a\n      file or class name and description of purpose
-      be included on the\n      same \"printed page\" as the copyright notice for
-      easier\n      identification within third-party archives.\n\n   Copyright 2025
-      IBM\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you
-      may not use this file except in compliance with the License.\n   You may obtain
-      a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless
-      required by applicable law or agreed to in writing, software\n   distributed
-      under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES
-      OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for
-      the specific language governing permissions and\n   limitations under the License.\"\"\"\n","template":"{{-
-      /*\n\n------ MESSAGE PARSING ------\n\n*/}}\n{{- /*\nDeclare the prompt structure
-      variables to be filled in from messages\n*/}}\n{{- $system := \"\" }}\n{{- $documents
-      := \"\" }}\n{{- $documentCounter := 0 }}\n{{- $thinking := false }}\n{{- $citations
-      := false }}\n{{- $hallucinations := false }}\n{{- $length := \"\" }}\n{{- $originality
-      := \"\" }}\n\n{{- /*\nLoop over messages and look for a user-provided system
-      message and documents\n*/ -}}\n{{- range .Messages }}\n\n    {{- /* User defined
-      system prompt(s) */}}\n    {{- if (eq .Role \"system\")}}\n        {{- if (ne
-      $system \"\") }}\n            {{- $system = print $system \"\\n\\n\" }}\n        {{-
-      end}}\n        {{- $system = print $system .Content }}\n    {{- end}}\n\n    {{-
-      /*\n    NOTE: Since Ollama collates consecutive roles, for control and documents,
-      we\n        work around this by allowing the role to contain a qualifier after
-      the\n        role string.\n    */ -}}\n\n    {{- /* Role specified controls
-      */ -}}\n    {{- if (and (ge (len .Role) 7) (eq (slice .Role 0 7) \"control\"))
-      }}\n        {{- if (eq .Content \"thinking\")}}{{- $thinking = true }}{{- end}}\n        {{-
-      if (eq .Content \"citations\")}}{{- $citations = true }}{{- end}}\n        {{-
-      if (eq .Content \"hallucinations\")}}{{- $hallucinations = true }}{{- end}}\n        {{-
-      if (and (ge (len .Content) 7) (eq (slice .Content 0 7) \"length \"))}}\n            {{-
-      $length = slice .Content 7 }}\n        {{- end}}\n        {{- if (and (ge (len
-      .Content) 12) (eq (slice .Content 0 12) \"originality \"))}}\n            {{-
-      $originality = slice .Content 12 }}\n        {{- end}}\n    {{- end}}\n\n    {{-
-      /* Role specified document */ -}}\n    {{- if (and (ge (len .Role) 8) (eq (slice
-      .Role 0 8) \"document\")) }}\n        {{- if (ne $documentCounter 0)}}\n            {{-
-      $documents = print $documents \"\\n\\n\"}}\n        {{- end}}\n        {{- $identifier
-      := \"\"}}\n        {{- if (ge (len .Role) 9) }}\n            {{- $identifier
-      = (slice .Role 9)}}\n        {{- end}}\n        {{- if (eq $identifier \"\")
-      }}\n            {{- $identifier := print $documentCounter}}\n        {{- end}}\n        {{-
-      $documents = print $documents \"\u003c|start_of_role|\u003edocument {\\\"document_id\\\":
-      \\\"\" $identifier \"\\\"}\u003c|end_of_role|\u003e\\n\" .Content \"\u003c|end_of_text|\u003e\"}}\n        {{-
-      $documentCounter = len (printf \"a%*s\" $documentCounter \"\")}}\n    {{- end}}\n{{-
-      end}}\n\n{{- /*\nIf no user message provided, build the default system message\n*/
-      -}}\n{{- if eq $system \"\" }}\n    {{- $system = \"Knowledge Cutoff Date: April
-      2024.\\nYou are Granite, developed by IBM.\"}}\n\n    {{- /* Add Tools prompt
-      */}}\n    {{- if .Tools }}\n        {{- $system = print $system \" You are a
-      helpful assistant with access to the following tools. When a tool is required
-      to answer the user''s query, respond only with \u003c|tool_call|\u003e followed
-      by a JSON list of tools used. If a tool does not exist in the provided list
-      of tools, notify the user that you do not have the ability to fulfill the request.\"
-      }}\n    {{- end}}\n\n    {{- /* Add documents prompt */}}\n    {{- if $documents
-      }}\n        {{- if .Tools }}\n            {{- $system = print $system \"\\n\"}}\n        {{-
-      else }}\n            {{- $system = print $system \" \"}}\n        {{- end}}\n        {{-
-      $system = print $system \"Write the response to the user''s input by strictly
-      aligning with the facts in the provided documents. If the information needed
-      to answer the question is not available in the documents, inform the user that
-      the question cannot be answered based on the available data.\" }}\n        {{-
-      if $citations}}\n            {{- $system = print $system \"\\nUse the symbols
-      \u003c|start_of_cite|\u003e and \u003c|end_of_cite|\u003e to indicate when a
-      fact comes from a document in the search result, e.g \u003c|start_of_cite|\u003e
-      {document_id: 1}my fact \u003c|end_of_cite|\u003e for a fact from document 1.
-      Afterwards, list all the citations with their corresponding documents in an
-      ordered list.\"}}\n        {{- end}}\n        {{- if $hallucinations}}\n            {{-
-      $system = print $system \"\\nFinally, after the response is written, include
-      a numbered list of sentences from the response with a corresponding risk value
-      that are hallucinated and not based in the documents.\"}}\n        {{- end}}\n    {{-
-      end}}\n\n    {{- /* Prompt without tools or documents */}}\n    {{- if (and
-      (not .Tools) (not $documents)) }}\n        {{- $system = print $system \" You
-      are a helpful AI assistant.\"}}\n        {{- if $thinking}}\n            {{-
-      $system = print $system \"\\nRespond to every user query in a comprehensive
-      and detailed way. You can write down your thoughts and reasoning process before
-      responding. In the thought process, engage in a comprehensive cycle of analysis,
-      summarization, exploration, reassessment, reflection, backtracing, and iteration
-      to develop well-considered thinking process. In the response section, based
-      on various attempts, explorations, and reflections from the thoughts section,
-      systematically present the final solution that you deem correct. The response
-      should summarize the thought process. Write your thoughts between \u003cthink\u003e\u003c/think\u003e
-      and write your response between \u003cresponse\u003e\u003c/response\u003e for
-      each user query.\"}}\n        {{- end}}\n    {{- end}}\n\n{{- end}}\n{{- /*\n\n------
-      TEMPLATE EXPANSION ------\n\n*/}}\n{{- /* System Prompt */ -}}\n\u003c|start_of_role|\u003esystem\u003c|end_of_role|\u003e{{-
-      $system }}\u003c|end_of_text|\u003e\n\n{{- /* Tools */ -}}\n{{- if .Tools }}\n\u003c|start_of_role|\u003eavailable_tools\u003c|end_of_role|\u003e[\n{{-
-      range $index, $_ := .Tools }}\n{{ . }}\n{{- if and (ne (len (slice $.Tools $index))
-      1) (gt (len $.Tools) 1) }},\n{{- end}}\n{{- end }}\n]\u003c|end_of_text|\u003e\n{{-
-      end}}\n\n{{- /* Documents */ -}}\n{{- if $documents }}\n{{ $documents }}\n{{-
-      end}}\n\n{{- /* Standard Messages */}}\n{{- range $index, $_ := .Messages }}\n{{-
-      if (and\n    (ne .Role \"system\")\n    (or (lt (len .Role) 7) (ne (slice .Role
-      0 7) \"control\"))\n    (or (lt (len .Role) 8) (ne (slice .Role 0 8) \"document\"))\n)}}\n\u003c|start_of_role|\u003e\n{{-
-      if eq .Role \"tool\" }}tool_response\n{{- else }}{{ .Role }}\n{{- end }}\u003c|end_of_role|\u003e\n{{-
-      if .Content }}{{ .Content }}\n{{- else if .ToolCalls }}\u003c|tool_call|\u003e\n{{-
-      range .ToolCalls }}{\"name\": \"{{ .Function.Name }}\", \"arguments\": {{ .Function.Arguments
-      }}}\n{{- end }}\n{{- end }}\n{{- if eq (len (slice $.Messages $index)) 1 }}\n{{-
-      if eq .Role \"assistant\" }}\n{{- else }}\u003c|end_of_text|\u003e\n\u003c|start_of_role|\u003eassistant\n{{-
-      if and (ne $length \"\") (ne $originality \"\") }} {\"length\": \"{{ $length
-      }}\", \"originality\": \"{{ $originality }}\"}\n{{- else if ne $length \"\"
-      }} {\"length\": \"{{ $length }}\"}\n{{- else if ne $originality \"\" }} {\"originality\":
-      \"{{ $originality }}\"}\n{{- end }}\u003c|end_of_role|\u003e\n{{- end -}}\n{{-
-      else }}\u003c|end_of_text|\u003e\n{{- end }}\n{{- end }}\n{{- end }}","details":{"parent_model":"/Users/ollama/.ollama/models/blobs/sha256-ac71e9e32c0bea919b409c5918f69ca74339854b0319c5065e4e9fb6d95c4852","format":"gguf","family":"granite","families":["granite"],"parameter_size":"2.5B","quantization_level":"Q4_K_M"},"model_info":{"general.architecture":"granite","general.base_model.0.name":"Granite
-      3.3 2b Base","general.base_model.0.organization":"Ibm Granite","general.base_model.0.repo_url":"https://huggingface.co/ibm-granite/granite-3.3-2b-base","general.base_model.count":1,"general.basename":"granite-3.3","general.file_type":15,"general.finetune":"instruct","general.license":"apache-2.0","general.parameter_count":2533539840,"general.quantization_version":2,"general.size_label":"2B","general.tags":["language","granite-3.3","text-generation"],"general.type":"model","granite.attention.head_count":32,"granite.attention.head_count_kv":8,"granite.attention.layer_norm_rms_epsilon":0.00001,"granite.attention.scale":0.015625,"granite.block_count":40,"granite.context_length":131072,"granite.embedding_length":2048,"granite.embedding_scale":12,"granite.feed_forward_length":8192,"granite.logit_scale":8,"granite.residual_scale":0.22,"granite.rope.dimension_count":64,"granite.rope.freq_base":10000000,"granite.vocab_size":49159,"tokenizer.ggml.add_bos_token":false,"tokenizer.ggml.add_space_prefix":false,"tokenizer.ggml.bos_token_id":0,"tokenizer.ggml.eos_token_id":0,"tokenizer.ggml.merges":null,"tokenizer.ggml.model":"gpt2","tokenizer.ggml.padding_token_id":0,"tokenizer.ggml.pre":"refact","tokenizer.ggml.token_type":null,"tokenizer.ggml.tokens":null,"tokenizer.ggml.unknown_token_id":0},"tensors":[{"name":"output_norm.weight","type":"F32","shape":[2048]},{"name":"token_embd.weight","type":"Q4_K_S","shape":[2048,49159]},{"name":"blk.0.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.0.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.0.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.0.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.0.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.0.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.0.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.0.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.0.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.1.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.1.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.1.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.1.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.1.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.1.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.1.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.1.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.1.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.2.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.2.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.2.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.2.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.2.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.2.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.2.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.2.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.2.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.3.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.3.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.3.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.3.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.3.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.3.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.3.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.3.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.3.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.4.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.4.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.4.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.4.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.4.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.4.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.4.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.4.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.4.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.5.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.5.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.5.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.5.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.5.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.5.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.5.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.5.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.5.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.6.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.6.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.6.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.6.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.6.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.6.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.6.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.6.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.6.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.7.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.7.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.7.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.7.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.7.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.7.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.7.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.7.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.7.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.8.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.8.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.8.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.8.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.8.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.8.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.8.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.8.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.8.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.9.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.9.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.9.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.9.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.9.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.9.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.9.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.9.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.9.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.10.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.10.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.10.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.10.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.10.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.10.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.10.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.10.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.10.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.11.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.11.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.11.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.11.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.11.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.11.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.11.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.11.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.11.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.12.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.12.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.12.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.12.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.12.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.12.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.12.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.12.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.12.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.13.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.13.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.13.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.13.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.13.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.13.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.13.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.13.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.13.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.14.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.14.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.14.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.14.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.14.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.14.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.14.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.14.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.14.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.15.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.15.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.15.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.15.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.15.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.15.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.15.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.15.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.15.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.16.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.16.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.16.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.16.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.16.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.16.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.16.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.16.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.16.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.17.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.17.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.17.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.17.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.17.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.17.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.17.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.17.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.17.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.18.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.18.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.18.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.18.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.18.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.18.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.18.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.18.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.18.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.19.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.19.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.19.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.19.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.19.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.19.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.19.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.19.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.19.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.20.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.20.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.20.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.20.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.20.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.20.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.20.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.20.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.20.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.21.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.21.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.21.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.21.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.21.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.21.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.21.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.21.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.21.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.22.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.22.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.22.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.22.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.22.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.22.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.22.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.22.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.22.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.23.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.23.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.23.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.23.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.23.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.23.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.23.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.23.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.23.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.24.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.24.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.24.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.24.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.24.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.24.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.24.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.24.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.24.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.25.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.25.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.25.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.25.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.25.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.25.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.25.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.25.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.25.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.26.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.26.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.26.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.26.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.26.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.26.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.26.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.26.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.26.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.27.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.27.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.27.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.27.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.27.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.27.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.27.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.27.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.27.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.28.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.28.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.28.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.28.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.28.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.28.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.28.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.28.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.28.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.29.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.29.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.29.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.29.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.29.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.29.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.29.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.29.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.29.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.30.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.30.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.30.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.30.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.30.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.30.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.30.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.30.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.30.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.31.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.31.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.31.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.31.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.31.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.31.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.31.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.31.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.31.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.32.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.32.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.32.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.32.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.32.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.32.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.32.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.32.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.32.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.33.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.33.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.33.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.33.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.33.attn_v.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.33.ffn_down.weight","type":"Q3_K_M","shape":[8192,2048]},{"name":"blk.33.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.33.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.33.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.34.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.34.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.34.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.34.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.34.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.34.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.34.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.34.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.34.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.35.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.35.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.35.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.35.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.35.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.35.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.35.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.35.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.35.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.36.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.36.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.36.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.36.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.36.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.36.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.36.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.36.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.36.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.37.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.37.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.37.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.37.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.37.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.37.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.37.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.37.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.37.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.38.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.38.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.38.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.38.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.38.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.38.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.38.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.38.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.38.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.39.attn_k.weight","type":"Q3_K_M","shape":[2048,512]},{"name":"blk.39.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.39.attn_output.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.39.attn_q.weight","type":"Q3_K_M","shape":[2048,2048]},{"name":"blk.39.attn_v.weight","type":"Q4_K_S","shape":[2048,512]},{"name":"blk.39.ffn_down.weight","type":"Q4_K_S","shape":[8192,2048]},{"name":"blk.39.ffn_gate.weight","type":"Q3_K_M","shape":[2048,8192]},{"name":"blk.39.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.39.ffn_up.weight","type":"Q3_K_M","shape":[2048,8192]}],"capabilities":["completion","tools"],"modified_at":"2025-04-16T08:03:29.568667596-07:00"}'
+    body:
+      string: '{"license":"                                 Apache License\n                           Version
+        2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS
+        AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\"
+        shall mean the terms and conditions for use, reproduction,\n      and distribution
+        as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\"
+        shall mean the copyright owner or entity authorized by\n      the copyright
+        owner that is granting the License.\n\n      \"Legal Entity\" shall mean the
+        union of the acting entity and all\n      other entities that control, are
+        controlled by, or are under common\n      control with that entity. For the
+        purposes of this definition,\n      \"control\" means (i) the power, direct
+        or indirect, to cause the\n      direction or management of such entity, whether
+        by contract or\n      otherwise, or (ii) ownership of fifty percent (50%)
+        or more of the\n      outstanding shares, or (iii) beneficial ownership of
+        such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal
+        Entity\n      exercising permissions granted by this License.\n\n      \"Source\"
+        form shall mean the preferred form for making modifications,\n      including
+        but not limited to software source code, documentation\n      source, and
+        configuration files.\n\n      \"Object\" form shall mean any form resulting
+        from mechanical\n      transformation or translation of a Source form, including
+        but\n      not limited to compiled object code, generated documentation,\n      and
+        conversions to other media types.\n\n      \"Work\" shall mean the work of
+        authorship, whether in Source or\n      Object form, made available under
+        the License, as indicated by a\n      copyright notice that is included in
+        or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative
+        Works\" shall mean any work, whether in Source or Object\n      form, that
+        is based on (or derived from) the Work and for which the\n      editorial
+        revisions, annotations, elaborations, or other modifications\n      represent,
+        as a whole, an original work of authorship. For the purposes\n      of this
+        License, Derivative Works shall not include works that remain\n      separable
+        from, or merely link (or bind by name) to the interfaces of,\n      the Work
+        and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work
+        of authorship, including\n      the original version of the Work and any modifications
+        or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted
+        to Licensor for inclusion in the Work by the copyright owner\n      or by
+        an individual or Legal Entity authorized to submit on behalf of\n      the
+        copyright owner. For the purposes of this definition, \"submitted\"\n      means
+        any form of electronic, verbal, or written communication sent\n      to the
+        Licensor or its representatives, including but not limited to\n      communication
+        on electronic mailing lists, source code control systems,\n      and issue
+        tracking systems that are managed by, or on behalf of, the\n      Licensor
+        for the purpose of discussing and improving the Work, but\n      excluding
+        communication that is conspicuously marked or otherwise\n      designated
+        in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\"
+        shall mean Licensor and any individual or Legal Entity\n      on behalf of
+        whom a Contribution has been received by Licensor and\n      subsequently
+        incorporated within the Work.\n\n   2. Grant of Copyright License. Subject
+        to the terms and conditions of\n      this License, each Contributor hereby
+        grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free,
+        irrevocable\n      copyright license to reproduce, prepare Derivative Works
+        of,\n      publicly display, publicly perform, sublicense, and distribute
+        the\n      Work and such Derivative Works in Source or Object form.\n\n   3.
+        Grant of Patent License. Subject to the terms and conditions of\n      this
+        License, each Contributor hereby grants to You a perpetual,\n      worldwide,
+        non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated
+        in this section) patent license to make, have made,\n      use, offer to sell,
+        sell, import, and otherwise transfer the Work,\n      where such license applies
+        only to those patent claims licensable\n      by such Contributor that are
+        necessarily infringed by their\n      Contribution(s) alone or by combination
+        of their Contribution(s)\n      with the Work to which such Contribution(s)
+        was submitted. If You\n      institute patent litigation against any entity
+        (including a\n      cross-claim or counterclaim in a lawsuit) alleging that
+        the Work\n      or a Contribution incorporated within the Work constitutes
+        direct\n      or contributory patent infringement, then any patent licenses\n      granted
+        to You under this License for that Work shall terminate\n      as of the date
+        such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute
+        copies of the\n      Work or Derivative Works thereof in any medium, with
+        or without\n      modifications, and in Source or Object form, provided that
+        You\n      meet the following conditions:\n\n      (a) You must give any other
+        recipients of the Work or\n          Derivative Works a copy of this License;
+        and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating
+        that You changed the files; and\n\n      (c) You must retain, in the Source
+        form of any Derivative Works\n          that You distribute, all copyright,
+        patent, trademark, and\n          attribution notices from the Source form
+        of the Work,\n          excluding those notices that do not pertain to any
+        part of\n          the Derivative Works; and\n\n      (d) If the Work includes
+        a \"NOTICE\" text file as part of its\n          distribution, then any Derivative
+        Works that You distribute must\n          include a readable copy of the attribution
+        notices contained\n          within such NOTICE file, excluding those notices
+        that do not\n          pertain to any part of the Derivative Works, in at
+        least one\n          of the following places: within a NOTICE text file distributed\n          as
+        part of the Derivative Works; within the Source form or\n          documentation,
+        if provided along with the Derivative Works; or,\n          within a display
+        generated by the Derivative Works, if and\n          wherever such third-party
+        notices normally appear. The contents\n          of the NOTICE file are for
+        informational purposes only and\n          do not modify the License. You
+        may add Your own attribution\n          notices within Derivative Works that
+        You distribute, alongside\n          or as an addendum to the NOTICE text
+        from the Work, provided\n          that such additional attribution notices
+        cannot be construed\n          as modifying the License.\n\n      You may
+        add Your own copyright statement to Your modifications and\n      may provide
+        additional or different license terms and conditions\n      for use, reproduction,
+        or distribution of Your modifications, or\n      for any such Derivative Works
+        as a whole, provided Your use,\n      reproduction, and distribution of the
+        Work otherwise complies with\n      the conditions stated in this License.\n\n   5.
+        Submission of Contributions. Unless You explicitly state otherwise,\n      any
+        Contribution intentionally submitted for inclusion in the Work\n      by You
+        to the Licensor shall be under the terms and conditions of\n      this License,
+        without any additional terms or conditions.\n      Notwithstanding the above,
+        nothing herein shall supersede or modify\n      the terms of any separate
+        license agreement you may have executed\n      with Licensor regarding such
+        Contributions.\n\n   6. Trademarks. This License does not grant permission
+        to use the trade\n      names, trademarks, service marks, or product names
+        of the Licensor,\n      except as required for reasonable and customary use
+        in describing the\n      origin of the Work and reproducing the content of
+        the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable
+        law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor
+        provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES
+        OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without
+        limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT,
+        MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely
+        responsible for determining the\n      appropriateness of using or redistributing
+        the Work and assume any\n      risks associated with Your exercise of permissions
+        under this License.\n\n   8. Limitation of Liability. In no event and under
+        no legal theory,\n      whether in tort (including negligence), contract,
+        or otherwise,\n      unless required by applicable law (such as deliberate
+        and grossly\n      negligent acts) or agreed to in writing, shall any Contributor
+        be\n      liable to You for damages, including any direct, indirect, special,\n      incidental,
+        or consequential damages of any character arising as a\n      result of this
+        License or out of the use or inability to use the\n      Work (including but
+        not limited to damages for loss of goodwill,\n      work stoppage, computer
+        failure or malfunction, or any and all\n      other commercial damages or
+        losses), even if such Contributor\n      has been advised of the possibility
+        of such damages.\n\n   9. Accepting Warranty or Additional Liability. While
+        redistributing\n      the Work or Derivative Works thereof, You may choose
+        to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or
+        other liability obligations and/or rights consistent with this\n      License.
+        However, in accepting such obligations, You may act only\n      on Your own
+        behalf and on Your sole responsibility, not on behalf\n      of any other
+        Contributor, and only if You agree to indemnify,\n      defend, and hold each
+        Contributor harmless for any liability\n      incurred by, or claims asserted
+        against, such Contributor by reason\n      of your accepting any such warranty
+        or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX:
+        How to apply the Apache License to your work.\n\n      To apply the Apache
+        License to your work, attach the following\n      boilerplate notice, with
+        the fields enclosed by brackets \"[]\"\n      replaced with your own identifying
+        information. (Don''t include\n      the brackets!)  The text should be enclosed
+        in the appropriate\n      comment syntax for the file format. We also recommend
+        that a\n      file or class name and description of purpose be included on
+        the\n      same \"printed page\" as the copyright notice for easier\n      identification
+        within third-party archives.\n\n   Copyright 2025 IBM\n\n   Licensed under
+        the Apache License, Version 2.0 (the \"License\");\n   you may not use this
+        file except in compliance with the License.\n   You may obtain a copy of the
+        License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless
+        required by applicable law or agreed to in writing, software\n   distributed
+        under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES
+        OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License
+        for the specific language governing permissions and\n   limitations under
+        the License.","modelfile":"# Modelfile generated by \"ollama show\"\n# To
+        build a new Modelfile based on this, replace FROM with:\n# FROM granite3.3:2b\n\nFROM
+        /var/snap/ollama/common/models/blobs/sha256-ac71e9e32c0bea919b409c5918f69ca74339854b0319c5065e4e9fb6d95c4852\nTEMPLATE
+        \"\"\"{{- /*\n\n------ MESSAGE PARSING ------\n\n*/}}\n{{- /*\nDeclare the
+        prompt structure variables to be filled in from messages\n*/}}\n{{- $system
+        := \"\" }}\n{{- $documents := \"\" }}\n{{- $documentCounter := 0 }}\n{{- $thinking
+        := false }}\n{{- $citations := false }}\n{{- $hallucinations := false }}\n{{-
+        $length := \"\" }}\n{{- $originality := \"\" }}\n\n{{- /*\nLoop over messages
+        and look for a user-provided system message and documents\n*/ -}}\n{{- range
+        .Messages }}\n\n    {{- /* User defined system prompt(s) */}}\n    {{- if
+        (eq .Role \"system\")}}\n        {{- if (ne $system \"\") }}\n            {{-
+        $system = print $system \"\\n\\n\" }}\n        {{- end}}\n        {{- $system
+        = print $system .Content }}\n    {{- end}}\n\n    {{- /*\n    NOTE: Since
+        Ollama collates consecutive roles, for control and documents, we\n        work
+        around this by allowing the role to contain a qualifier after the\n        role
+        string.\n    */ -}}\n\n    {{- /* Role specified controls */ -}}\n    {{-
+        if (and (ge (len .Role) 7) (eq (slice .Role 0 7) \"control\")) }}\n        {{-
+        if (eq .Content \"thinking\")}}{{- $thinking = true }}{{- end}}\n        {{-
+        if (eq .Content \"citations\")}}{{- $citations = true }}{{- end}}\n        {{-
+        if (eq .Content \"hallucinations\")}}{{- $hallucinations = true }}{{- end}}\n        {{-
+        if (and (ge (len .Content) 7) (eq (slice .Content 0 7) \"length \"))}}\n            {{-
+        $length = slice .Content 7 }}\n        {{- end}}\n        {{- if (and (ge
+        (len .Content) 12) (eq (slice .Content 0 12) \"originality \"))}}\n            {{-
+        $originality = slice .Content 12 }}\n        {{- end}}\n    {{- end}}\n\n    {{-
+        /* Role specified document */ -}}\n    {{- if (and (ge (len .Role) 8) (eq
+        (slice .Role 0 8) \"document\")) }}\n        {{- if (ne $documentCounter 0)}}\n            {{-
+        $documents = print $documents \"\\n\\n\"}}\n        {{- end}}\n        {{-
+        $identifier := \"\"}}\n        {{- if (ge (len .Role) 9) }}\n            {{-
+        $identifier = (slice .Role 9)}}\n        {{- end}}\n        {{- if (eq $identifier
+        \"\") }}\n            {{- $identifier := print $documentCounter}}\n        {{-
+        end}}\n        {{- $documents = print $documents \"\u003c|start_of_role|\u003edocument
+        {\\\"document_id\\\": \\\"\" $identifier \"\\\"}\u003c|end_of_role|\u003e\\n\"
+        .Content \"\u003c|end_of_text|\u003e\"}}\n        {{- $documentCounter = len
+        (printf \"a%*s\" $documentCounter \"\")}}\n    {{- end}}\n{{- end}}\n\n{{-
+        /*\nIf no user message provided, build the default system message\n*/ -}}\n{{-
+        if eq $system \"\" }}\n    {{- $system = \"Knowledge Cutoff Date: April 2024.\\nYou
+        are Granite, developed by IBM.\"}}\n\n    {{- /* Add Tools prompt */}}\n    {{-
+        if .Tools }}\n        {{- $system = print $system \" You are a helpful assistant
+        with access to the following tools. When a tool is required to answer the
+        user''s query, respond only with \u003c|tool_call|\u003e followed by a JSON
+        list of tools used. If a tool does not exist in the provided list of tools,
+        notify the user that you do not have the ability to fulfill the request.\"
+        }}\n    {{- end}}\n\n    {{- /* Add documents prompt */}}\n    {{- if $documents
+        }}\n        {{- if .Tools }}\n            {{- $system = print $system \"\\n\"}}\n        {{-
+        else }}\n            {{- $system = print $system \" \"}}\n        {{- end}}\n        {{-
+        $system = print $system \"Write the response to the user''s input by strictly
+        aligning with the facts in the provided documents. If the information needed
+        to answer the question is not available in the documents, inform the user
+        that the question cannot be answered based on the available data.\" }}\n        {{-
+        if $citations}}\n            {{- $system = print $system \"\\nUse the symbols
+        \u003c|start_of_cite|\u003e and \u003c|end_of_cite|\u003e to indicate when
+        a fact comes from a document in the search result, e.g \u003c|start_of_cite|\u003e
+        {document_id: 1}my fact \u003c|end_of_cite|\u003e for a fact from document
+        1. Afterwards, list all the citations with their corresponding documents in
+        an ordered list.\"}}\n        {{- end}}\n        {{- if $hallucinations}}\n            {{-
+        $system = print $system \"\\nFinally, after the response is written, include
+        a numbered list of sentences from the response with a corresponding risk value
+        that are hallucinated and not based in the documents.\"}}\n        {{- end}}\n    {{-
+        end}}\n\n    {{- /* Prompt without tools or documents */}}\n    {{- if (and
+        (not .Tools) (not $documents)) }}\n        {{- $system = print $system \"
+        You are a helpful AI assistant.\"}}\n        {{- if $thinking}}\n            {{-
+        $system = print $system \"\\nRespond to every user query in a comprehensive
+        and detailed way. You can write down your thoughts and reasoning process before
+        responding. In the thought process, engage in a comprehensive cycle of analysis,
+        summarization, exploration, reassessment, reflection, backtracing, and iteration
+        to develop well-considered thinking process. In the response section, based
+        on various attempts, explorations, and reflections from the thoughts section,
+        systematically present the final solution that you deem correct. The response
+        should summarize the thought process. Write your thoughts between \u003cthink\u003e\u003c/think\u003e
+        and write your response between \u003cresponse\u003e\u003c/response\u003e
+        for each user query.\"}}\n        {{- end}}\n    {{- end}}\n\n{{- end}}\n{{-
+        /*\n\n------ TEMPLATE EXPANSION ------\n\n*/}}\n{{- /* System Prompt */ -}}\n\u003c|start_of_role|\u003esystem\u003c|end_of_role|\u003e{{-
+        $system }}\u003c|end_of_text|\u003e\n\n{{- /* Tools */ -}}\n{{- if .Tools
+        }}\n\u003c|start_of_role|\u003eavailable_tools\u003c|end_of_role|\u003e[\n{{-
+        range $index, $_ := .Tools }}\n{{ . }}\n{{- if and (ne (len (slice $.Tools
+        $index)) 1) (gt (len $.Tools) 1) }},\n{{- end}}\n{{- end }}\n]\u003c|end_of_text|\u003e\n{{-
+        end}}\n\n{{- /* Documents */ -}}\n{{- if $documents }}\n{{ $documents }}\n{{-
+        end}}\n\n{{- /* Standard Messages */}}\n{{- range $index, $_ := .Messages
+        }}\n{{- if (and\n    (ne .Role \"system\")\n    (or (lt (len .Role) 7) (ne
+        (slice .Role 0 7) \"control\"))\n    (or (lt (len .Role) 8) (ne (slice .Role
+        0 8) \"document\"))\n)}}\n\u003c|start_of_role|\u003e\n{{- if eq .Role \"tool\"
+        }}tool_response\n{{- else }}{{ .Role }}\n{{- end }}\u003c|end_of_role|\u003e\n{{-
+        if .Content }}{{ .Content }}\n{{- else if .ToolCalls }}\u003c|tool_call|\u003e\n{{-
+        range .ToolCalls }}{\"name\": \"{{ .Function.Name }}\", \"arguments\": {{
+        .Function.Arguments }}}\n{{- end }}\n{{- end }}\n{{- if eq (len (slice $.Messages
+        $index)) 1 }}\n{{- if eq .Role \"assistant\" }}\n{{- else }}\u003c|end_of_text|\u003e\n\u003c|start_of_role|\u003eassistant\n{{-
+        if and (ne $length \"\") (ne $originality \"\") }} {\"length\": \"{{ $length
+        }}\", \"originality\": \"{{ $originality }}\"}\n{{- else if ne $length \"\"
+        }} {\"length\": \"{{ $length }}\"}\n{{- else if ne $originality \"\" }} {\"originality\":
+        \"{{ $originality }}\"}\n{{- end }}\u003c|end_of_role|\u003e\n{{- end -}}\n{{-
+        else }}\u003c|end_of_text|\u003e\n{{- end }}\n{{- end }}\n{{- end }}\"\"\"\nLICENSE
+        \"\"\"                                 Apache License\n                           Version
+        2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS
+        AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\"
+        shall mean the terms and conditions for use, reproduction,\n      and distribution
+        as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\"
+        shall mean the copyright owner or entity authorized by\n      the copyright
+        owner that is granting the License.\n\n      \"Legal Entity\" shall mean the
+        union of the acting entity and all\n      other entities that control, are
+        controlled by, or are under common\n      control with that entity. For the
+        purposes of this definition,\n      \"control\" means (i) the power, direct
+        or indirect, to cause the\n      direction or management of such entity, whether
+        by contract or\n      otherwise, or (ii) ownership of fifty percent (50%)
+        or more of the\n      outstanding shares, or (iii) beneficial ownership of
+        such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal
+        Entity\n      exercising permissions granted by this License.\n\n      \"Source\"
+        form shall mean the preferred form for making modifications,\n      including
+        but not limited to software source code, documentation\n      source, and
+        configuration files.\n\n      \"Object\" form shall mean any form resulting
+        from mechanical\n      transformation or translation of a Source form, including
+        but\n      not limited to compiled object code, generated documentation,\n      and
+        conversions to other media types.\n\n      \"Work\" shall mean the work of
+        authorship, whether in Source or\n      Object form, made available under
+        the License, as indicated by a\n      copyright notice that is included in
+        or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative
+        Works\" shall mean any work, whether in Source or Object\n      form, that
+        is based on (or derived from) the Work and for which the\n      editorial
+        revisions, annotations, elaborations, or other modifications\n      represent,
+        as a whole, an original work of authorship. For the purposes\n      of this
+        License, Derivative Works shall not include works that remain\n      separable
+        from, or merely link (or bind by name) to the interfaces of,\n      the Work
+        and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work
+        of authorship, including\n      the original version of the Work and any modifications
+        or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted
+        to Licensor for inclusion in the Work by the copyright owner\n      or by
+        an individual or Legal Entity authorized to submit on behalf of\n      the
+        copyright owner. For the purposes of this definition, \"submitted\"\n      means
+        any form of electronic, verbal, or written communication sent\n      to the
+        Licensor or its representatives, including but not limited to\n      communication
+        on electronic mailing lists, source code control systems,\n      and issue
+        tracking systems that are managed by, or on behalf of, the\n      Licensor
+        for the purpose of discussing and improving the Work, but\n      excluding
+        communication that is conspicuously marked or otherwise\n      designated
+        in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\"
+        shall mean Licensor and any individual or Legal Entity\n      on behalf of
+        whom a Contribution has been received by Licensor and\n      subsequently
+        incorporated within the Work.\n\n   2. Grant of Copyright License. Subject
+        to the terms and conditions of\n      this License, each Contributor hereby
+        grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free,
+        irrevocable\n      copyright license to reproduce, prepare Derivative Works
+        of,\n      publicly display, publicly perform, sublicense, and distribute
+        the\n      Work and such Derivative Works in Source or Object form.\n\n   3.
+        Grant of Patent License. Subject to the terms and conditions of\n      this
+        License, each Contributor hereby grants to You a perpetual,\n      worldwide,
+        non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated
+        in this section) patent license to make, have made,\n      use, offer to sell,
+        sell, import, and otherwise transfer the Work,\n      where such license applies
+        only to those patent claims licensable\n      by such Contributor that are
+        necessarily infringed by their\n      Contribution(s) alone or by combination
+        of their Contribution(s)\n      with the Work to which such Contribution(s)
+        was submitted. If You\n      institute patent litigation against any entity
+        (including a\n      cross-claim or counterclaim in a lawsuit) alleging that
+        the Work\n      or a Contribution incorporated within the Work constitutes
+        direct\n      or contributory patent infringement, then any patent licenses\n      granted
+        to You under this License for that Work shall terminate\n      as of the date
+        such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute
+        copies of the\n      Work or Derivative Works thereof in any medium, with
+        or without\n      modifications, and in Source or Object form, provided that
+        You\n      meet the following conditions:\n\n      (a) You must give any other
+        recipients of the Work or\n          Derivative Works a copy of this License;
+        and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating
+        that You changed the files; and\n\n      (c) You must retain, in the Source
+        form of any Derivative Works\n          that You distribute, all copyright,
+        patent, trademark, and\n          attribution notices from the Source form
+        of the Work,\n          excluding those notices that do not pertain to any
+        part of\n          the Derivative Works; and\n\n      (d) If the Work includes
+        a \"NOTICE\" text file as part of its\n          distribution, then any Derivative
+        Works that You distribute must\n          include a readable copy of the attribution
+        notices contained\n          within such NOTICE file, excluding those notices
+        that do not\n          pertain to any part of the Derivative Works, in at
+        least one\n          of the following places: within a NOTICE text file distributed\n          as
+        part of the Derivative Works; within the Source form or\n          documentation,
+        if provided along with the Derivative Works; or,\n          within a display
+        generated by the Derivative Works, if and\n          wherever such third-party
+        notices normally appear. The contents\n          of the NOTICE file are for
+        informational purposes only and\n          do not modify the License. You
+        may add Your own attribution\n          notices within Derivative Works that
+        You distribute, alongside\n          or as an addendum to the NOTICE text
+        from the Work, provided\n          that such additional attribution notices
+        cannot be construed\n          as modifying the License.\n\n      You may
+        add Your own copyright statement to Your modifications and\n      may provide
+        additional or different license terms and conditions\n      for use, reproduction,
+        or distribution of Your modifications, or\n      for any such Derivative Works
+        as a whole, provided Your use,\n      reproduction, and distribution of the
+        Work otherwise complies with\n      the conditions stated in this License.\n\n   5.
+        Submission of Contributions. Unless You explicitly state otherwise,\n      any
+        Contribution intentionally submitted for inclusion in the Work\n      by You
+        to the Licensor shall be under the terms and conditions of\n      this License,
+        without any additional terms or conditions.\n      Notwithstanding the above,
+        nothing herein shall supersede or modify\n      the terms of any separate
+        license agreement you may have executed\n      with Licensor regarding such
+        Contributions.\n\n   6. Trademarks. This License does not grant permission
+        to use the trade\n      names, trademarks, service marks, or product names
+        of the Licensor,\n      except as required for reasonable and customary use
+        in describing the\n      origin of the Work and reproducing the content of
+        the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable
+        law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor
+        provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES
+        OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without
+        limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT,
+        MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely
+        responsible for determining the\n      appropriateness of using or redistributing
+        the Work and assume any\n      risks associated with Your exercise of permissions
+        under this License.\n\n   8. Limitation of Liability. In no event and under
+        no legal theory,\n      whether in tort (including negligence), contract,
+        or otherwise,\n      unless required by applicable law (such as deliberate
+        and grossly\n      negligent acts) or agreed to in writing, shall any Contributor
+        be\n      liable to You for damages, including any direct, indirect, special,\n      incidental,
+        or consequential damages of any character arising as a\n      result of this
+        License or out of the use or inability to use the\n      Work (including but
+        not limited to damages for loss of goodwill,\n      work stoppage, computer
+        failure or malfunction, or any and all\n      other commercial damages or
+        losses), even if such Contributor\n      has been advised of the possibility
+        of such damages.\n\n   9. Accepting Warranty or Additional Liability. While
+        redistributing\n      the Work or Derivative Works thereof, You may choose
+        to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or
+        other liability obligations and/or rights consistent with this\n      License.
+        However, in accepting such obligations, You may act only\n      on Your own
+        behalf and on Your sole responsibility, not on behalf\n      of any other
+        Contributor, and only if You agree to indemnify,\n      defend, and hold each
+        Contributor harmless for any liability\n      incurred by, or claims asserted
+        against, such Contributor by reason\n      of your accepting any such warranty
+        or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX:
+        How to apply the Apache License to your work.\n\n      To apply the Apache
+        License to your work, attach the following\n      boilerplate notice, with
+        the fields enclosed by brackets \"[]\"\n      replaced with your own identifying
+        information. (Don''t include\n      the brackets!)  The text should be enclosed
+        in the appropriate\n      comment syntax for the file format. We also recommend
+        that a\n      file or class name and description of purpose be included on
+        the\n      same \"printed page\" as the copyright notice for easier\n      identification
+        within third-party archives.\n\n   Copyright 2025 IBM\n\n   Licensed under
+        the Apache License, Version 2.0 (the \"License\");\n   you may not use this
+        file except in compliance with the License.\n   You may obtain a copy of the
+        License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless
+        required by applicable law or agreed to in writing, software\n   distributed
+        under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES
+        OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License
+        for the specific language governing permissions and\n   limitations under
+        the License.\"\"\"\n","template":"{{- /*\n\n------ MESSAGE PARSING ------\n\n*/}}\n{{-
+        /*\nDeclare the prompt structure variables to be filled in from messages\n*/}}\n{{-
+        $system := \"\" }}\n{{- $documents := \"\" }}\n{{- $documentCounter := 0 }}\n{{-
+        $thinking := false }}\n{{- $citations := false }}\n{{- $hallucinations :=
+        false }}\n{{- $length := \"\" }}\n{{- $originality := \"\" }}\n\n{{- /*\nLoop
+        over messages and look for a user-provided system message and documents\n*/
+        -}}\n{{- range .Messages }}\n\n    {{- /* User defined system prompt(s) */}}\n    {{-
+        if (eq .Role \"system\")}}\n        {{- if (ne $system \"\") }}\n            {{-
+        $system = print $system \"\\n\\n\" }}\n        {{- end}}\n        {{- $system
+        = print $system .Content }}\n    {{- end}}\n\n    {{- /*\n    NOTE: Since
+        Ollama collates consecutive roles, for control and documents, we\n        work
+        around this by allowing the role to contain a qualifier after the\n        role
+        string.\n    */ -}}\n\n    {{- /* Role specified controls */ -}}\n    {{-
+        if (and (ge (len .Role) 7) (eq (slice .Role 0 7) \"control\")) }}\n        {{-
+        if (eq .Content \"thinking\")}}{{- $thinking = true }}{{- end}}\n        {{-
+        if (eq .Content \"citations\")}}{{- $citations = true }}{{- end}}\n        {{-
+        if (eq .Content \"hallucinations\")}}{{- $hallucinations = true }}{{- end}}\n        {{-
+        if (and (ge (len .Content) 7) (eq (slice .Content 0 7) \"length \"))}}\n            {{-
+        $length = slice .Content 7 }}\n        {{- end}}\n        {{- if (and (ge
+        (len .Content) 12) (eq (slice .Content 0 12) \"originality \"))}}\n            {{-
+        $originality = slice .Content 12 }}\n        {{- end}}\n    {{- end}}\n\n    {{-
+        /* Role specified document */ -}}\n    {{- if (and (ge (len .Role) 8) (eq
+        (slice .Role 0 8) \"document\")) }}\n        {{- if (ne $documentCounter 0)}}\n            {{-
+        $documents = print $documents \"\\n\\n\"}}\n        {{- end}}\n        {{-
+        $identifier := \"\"}}\n        {{- if (ge (len .Role) 9) }}\n            {{-
+        $identifier = (slice .Role 9)}}\n        {{- end}}\n        {{- if (eq $identifier
+        \"\") }}\n            {{- $identifier := print $documentCounter}}\n        {{-
+        end}}\n        {{- $documents = print $documents \"\u003c|start_of_role|\u003edocument
+        {\\\"document_id\\\": \\\"\" $identifier \"\\\"}\u003c|end_of_role|\u003e\\n\"
+        .Content \"\u003c|end_of_text|\u003e\"}}\n        {{- $documentCounter = len
+        (printf \"a%*s\" $documentCounter \"\")}}\n    {{- end}}\n{{- end}}\n\n{{-
+        /*\nIf no user message provided, build the default system message\n*/ -}}\n{{-
+        if eq $system \"\" }}\n    {{- $system = \"Knowledge Cutoff Date: April 2024.\\nYou
+        are Granite, developed by IBM.\"}}\n\n    {{- /* Add Tools prompt */}}\n    {{-
+        if .Tools }}\n        {{- $system = print $system \" You are a helpful assistant
+        with access to the following tools. When a tool is required to answer the
+        user''s query, respond only with \u003c|tool_call|\u003e followed by a JSON
+        list of tools used. If a tool does not exist in the provided list of tools,
+        notify the user that you do not have the ability to fulfill the request.\"
+        }}\n    {{- end}}\n\n    {{- /* Add documents prompt */}}\n    {{- if $documents
+        }}\n        {{- if .Tools }}\n            {{- $system = print $system \"\\n\"}}\n        {{-
+        else }}\n            {{- $system = print $system \" \"}}\n        {{- end}}\n        {{-
+        $system = print $system \"Write the response to the user''s input by strictly
+        aligning with the facts in the provided documents. If the information needed
+        to answer the question is not available in the documents, inform the user
+        that the question cannot be answered based on the available data.\" }}\n        {{-
+        if $citations}}\n            {{- $system = print $system \"\\nUse the symbols
+        \u003c|start_of_cite|\u003e and \u003c|end_of_cite|\u003e to indicate when
+        a fact comes from a document in the search result, e.g \u003c|start_of_cite|\u003e
+        {document_id: 1}my fact \u003c|end_of_cite|\u003e for a fact from document
+        1. Afterwards, list all the citations with their corresponding documents in
+        an ordered list.\"}}\n        {{- end}}\n        {{- if $hallucinations}}\n            {{-
+        $system = print $system \"\\nFinally, after the response is written, include
+        a numbered list of sentences from the response with a corresponding risk value
+        that are hallucinated and not based in the documents.\"}}\n        {{- end}}\n    {{-
+        end}}\n\n    {{- /* Prompt without tools or documents */}}\n    {{- if (and
+        (not .Tools) (not $documents)) }}\n        {{- $system = print $system \"
+        You are a helpful AI assistant.\"}}\n        {{- if $thinking}}\n            {{-
+        $system = print $system \"\\nRespond to every user query in a comprehensive
+        and detailed way. You can write down your thoughts and reasoning process before
+        responding. In the thought process, engage in a comprehensive cycle of analysis,
+        summarization, exploration, reassessment, reflection, backtracing, and iteration
+        to develop well-considered thinking process. In the response section, based
+        on various attempts, explorations, and reflections from the thoughts section,
+        systematically present the final solution that you deem correct. The response
+        should summarize the thought process. Write your thoughts between \u003cthink\u003e\u003c/think\u003e
+        and write your response between \u003cresponse\u003e\u003c/response\u003e
+        for each user query.\"}}\n        {{- end}}\n    {{- end}}\n\n{{- end}}\n{{-
+        /*\n\n------ TEMPLATE EXPANSION ------\n\n*/}}\n{{- /* System Prompt */ -}}\n\u003c|start_of_role|\u003esystem\u003c|end_of_role|\u003e{{-
+        $system }}\u003c|end_of_text|\u003e\n\n{{- /* Tools */ -}}\n{{- if .Tools
+        }}\n\u003c|start_of_role|\u003eavailable_tools\u003c|end_of_role|\u003e[\n{{-
+        range $index, $_ := .Tools }}\n{{ . }}\n{{- if and (ne (len (slice $.Tools
+        $index)) 1) (gt (len $.Tools) 1) }},\n{{- end}}\n{{- end }}\n]\u003c|end_of_text|\u003e\n{{-
+        end}}\n\n{{- /* Documents */ -}}\n{{- if $documents }}\n{{ $documents }}\n{{-
+        end}}\n\n{{- /* Standard Messages */}}\n{{- range $index, $_ := .Messages
+        }}\n{{- if (and\n    (ne .Role \"system\")\n    (or (lt (len .Role) 7) (ne
+        (slice .Role 0 7) \"control\"))\n    (or (lt (len .Role) 8) (ne (slice .Role
+        0 8) \"document\"))\n)}}\n\u003c|start_of_role|\u003e\n{{- if eq .Role \"tool\"
+        }}tool_response\n{{- else }}{{ .Role }}\n{{- end }}\u003c|end_of_role|\u003e\n{{-
+        if .Content }}{{ .Content }}\n{{- else if .ToolCalls }}\u003c|tool_call|\u003e\n{{-
+        range .ToolCalls }}{\"name\": \"{{ .Function.Name }}\", \"arguments\": {{
+        .Function.Arguments }}}\n{{- end }}\n{{- end }}\n{{- if eq (len (slice $.Messages
+        $index)) 1 }}\n{{- if eq .Role \"assistant\" }}\n{{- else }}\u003c|end_of_text|\u003e\n\u003c|start_of_role|\u003eassistant\n{{-
+        if and (ne $length \"\") (ne $originality \"\") }} {\"length\": \"{{ $length
+        }}\", \"originality\": \"{{ $originality }}\"}\n{{- else if ne $length \"\"
+        }} {\"length\": \"{{ $length }}\"}\n{{- else if ne $originality \"\" }} {\"originality\":
+        \"{{ $originality }}\"}\n{{- end }}\u003c|end_of_role|\u003e\n{{- end -}}\n{{-
+        else }}\u003c|end_of_text|\u003e\n{{- end }}\n{{- end }}\n{{- end }}","details":{"parent_model":"/Users/ollama/.ollama/models/blobs/sha256-ac71e9e32c0bea919b409c5918f69ca74339854b0319c5065e4e9fb6d95c4852","format":"gguf","family":"granite","families":["granite"],"parameter_size":"2.5B","quantization_level":"Q4_K_M"},"model_info":{"general.architecture":"granite","general.base_model.0.name":"Granite
+        3.3 2b Base","general.base_model.0.organization":"Ibm Granite","general.base_model.0.repo_url":"https://huggingface.co/ibm-granite/granite-3.3-2b-base","general.base_model.count":1,"general.basename":"granite-3.3","general.file_type":15,"general.finetune":"instruct","general.license":"apache-2.0","general.parameter_count":2533539840,"general.quantization_version":2,"general.size_label":"2B","general.tags":null,"general.type":"model","granite.attention.head_count":32,"granite.attention.head_count_kv":8,"granite.attention.layer_norm_rms_epsilon":0.00001,"granite.attention.scale":0.015625,"granite.block_count":40,"granite.context_length":131072,"granite.embedding_length":2048,"granite.embedding_scale":12,"granite.feed_forward_length":8192,"granite.logit_scale":8,"granite.residual_scale":0.22,"granite.rope.dimension_count":64,"granite.rope.freq_base":10000000,"granite.vocab_size":49159,"tokenizer.ggml.add_bos_token":false,"tokenizer.ggml.add_space_prefix":false,"tokenizer.ggml.bos_token_id":0,"tokenizer.ggml.eos_token_id":0,"tokenizer.ggml.merges":null,"tokenizer.ggml.model":"gpt2","tokenizer.ggml.padding_token_id":0,"tokenizer.ggml.pre":"refact","tokenizer.ggml.token_type":null,"tokenizer.ggml.tokens":null,"tokenizer.ggml.unknown_token_id":0},"tensors":[{"name":"output_norm.weight","type":"F32","shape":[2048]},{"name":"token_embd.weight","type":"Q6_K","shape":[2048,49159]},{"name":"blk.0.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.0.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.0.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.0.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.0.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.0.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.0.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.0.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.0.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.1.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.1.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.1.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.1.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.1.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.1.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.1.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.1.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.1.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.2.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.2.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.2.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.2.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.2.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.2.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.2.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.2.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.2.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.3.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.3.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.3.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.3.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.3.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.3.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.3.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.3.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.3.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.4.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.4.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.4.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.4.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.4.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.4.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.4.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.4.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.4.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.5.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.5.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.5.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.5.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.5.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.5.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.5.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.5.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.5.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.6.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.6.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.6.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.6.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.6.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.6.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.6.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.6.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.6.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.7.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.7.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.7.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.7.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.7.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.7.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.7.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.7.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.7.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.8.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.8.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.8.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.8.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.8.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.8.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.8.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.8.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.8.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.9.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.9.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.9.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.9.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.9.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.9.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.9.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.9.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.9.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.10.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.10.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.10.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.10.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.10.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.10.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.10.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.10.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.10.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.11.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.11.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.11.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.11.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.11.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.11.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.11.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.11.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.11.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.12.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.12.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.12.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.12.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.12.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.12.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.12.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.12.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.12.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.13.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.13.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.13.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.13.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.13.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.13.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.13.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.13.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.13.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.14.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.14.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.14.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.14.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.14.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.14.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.14.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.14.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.14.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.15.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.15.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.15.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.15.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.15.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.15.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.15.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.15.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.15.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.16.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.16.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.16.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.16.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.16.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.16.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.16.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.16.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.16.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.17.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.17.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.17.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.17.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.17.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.17.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.17.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.17.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.17.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.18.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.18.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.18.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.18.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.18.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.18.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.18.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.18.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.18.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.19.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.19.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.19.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.19.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.19.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.19.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.19.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.19.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.19.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.20.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.20.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.20.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.20.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.20.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.20.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.20.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.20.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.20.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.21.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.21.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.21.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.21.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.21.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.21.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.21.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.21.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.21.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.22.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.22.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.22.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.22.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.22.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.22.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.22.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.22.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.22.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.23.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.23.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.23.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.23.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.23.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.23.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.23.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.23.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.23.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.24.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.24.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.24.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.24.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.24.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.24.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.24.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.24.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.24.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.25.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.25.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.25.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.25.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.25.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.25.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.25.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.25.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.25.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.26.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.26.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.26.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.26.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.26.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.26.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.26.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.26.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.26.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.27.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.27.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.27.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.27.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.27.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.27.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.27.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.27.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.27.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.28.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.28.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.28.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.28.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.28.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.28.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.28.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.28.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.28.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.29.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.29.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.29.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.29.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.29.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.29.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.29.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.29.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.29.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.30.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.30.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.30.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.30.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.30.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.30.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.30.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.30.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.30.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.31.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.31.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.31.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.31.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.31.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.31.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.31.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.31.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.31.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.32.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.32.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.32.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.32.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.32.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.32.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.32.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.32.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.32.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.33.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.33.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.33.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.33.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.33.attn_v.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.33.ffn_down.weight","type":"Q4_K","shape":[8192,2048]},{"name":"blk.33.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.33.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.33.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.34.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.34.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.34.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.34.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.34.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.34.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.34.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.34.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.34.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.35.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.35.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.35.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.35.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.35.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.35.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.35.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.35.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.35.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.36.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.36.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.36.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.36.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.36.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.36.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.36.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.36.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.36.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.37.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.37.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.37.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.37.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.37.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.37.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.37.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.37.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.37.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.38.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.38.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.38.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.38.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.38.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.38.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.38.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.38.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.38.ffn_up.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.39.attn_k.weight","type":"Q4_K","shape":[2048,512]},{"name":"blk.39.attn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.39.attn_output.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.39.attn_q.weight","type":"Q4_K","shape":[2048,2048]},{"name":"blk.39.attn_v.weight","type":"Q6_K","shape":[2048,512]},{"name":"blk.39.ffn_down.weight","type":"Q6_K","shape":[8192,2048]},{"name":"blk.39.ffn_gate.weight","type":"Q4_K","shape":[2048,8192]},{"name":"blk.39.ffn_norm.weight","type":"F32","shape":[2048]},{"name":"blk.39.ffn_up.weight","type":"Q4_K","shape":[2048,8192]}],"capabilities":["completion","tools"],"modified_at":"2025-06-20T17:56:59.080112167-07:00"}'
     headers:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 16 Apr 2025 15:04:46 GMT
+      - Thu, 17 Jul 2025 21:16:26 GMT
       Transfer-Encoding:
       - chunked
-    http_version: HTTP/1.1
-    status_code: 200
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"model": "granite3.3:2b", "prompt": "<|start_of_role|>system<|end_of_role|>Knowledge
+      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      by IBM. You are a helpful AI assistant.\nRespond to every user query in a comprehensive
+      and detailed way. You can write down your thoughts and reasoning process before
+      responding. In the thought process, engage in a comprehensive cycle of analysis,
+      summarization, exploration, reassessment, reflection, backtracing, and iteration
+      to develop well-considered thinking process. In the response section, based
+      on various attempts, explorations, and reflections from the thoughts section,
+      systematically present the final solution that you deem correct. The response
+      should summarize the thought process. Write your thoughts between <think></think>
+      and write your response between <response></response> for each user query.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>How
+      much wood could a wood chuck chuck?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>",
+      "options": {}, "stream": false}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '1071'
+      host:
+      - localhost:11434
+      user-agent:
+      - litellm/1.73.0
+    method: POST
+    uri: http://localhost:11434/api/generate
+  response:
+    body:
+      string: "{\"model\":\"granite3.3:2b\",\"created_at\":\"2025-07-17T21:16:37.934019839Z\",\"response\":\"\\u003cthink\\u003eThe
+        phrase \\\"how much wood could a woodchuck chuck\\\" is an old tongue twister,
+        often used to amuse or challenge people by asking this seemingly absurd question
+        about the capabilities of a woodchuck. A woodchuck, also known as a groundhog,
+        is a burrowing mammal native to North America.\\n\\nThe humor lies in the
+        fact that no serious scientific study has been conducted to determine exactly
+        how much wood this animal could chuck. The term \\\"woodchuck\\\" itself comes
+        from an Algonquian word for \\\"burrower,\\\" suggesting a more burrowing
+        or digging nature rather than wood-handling.\\n\\nHowever, if we were to play
+        along with the joke:\\n\\n1. Firstly, consider the anatomy of a woodchuck.
+        These animals have strong, clawed front paws that are excellent for digging
+        and moving through soil, but they aren\u2019t particularly known for carrying
+        or chucking heavy objects like logs.\\n\\n2. Woodchucks primarily eat vegetation,
+        not specifically wood; their diet includes grasses, leaves, and roots. They
+        have no specific behavior of collecting or \\\"chucking\\\" large pieces of
+        wood as a significant part of their routine.\\n\\n3. To speculate, if we consider
+        the average size of a log that a woodchuck might manage to move (assuming
+        they could lift it), logs vary greatly in weight and size. A typical mature
+        log might weigh anywhere from 50 to over 100 pounds depending on its species
+        and condition.\\n\\n4. Given the physical constraints of a woodchuck\u2014their
+        powerful but small front claws, not their hind legs for lifting or carrying\u2014the
+        amount they could realistically \\\"chuck\\\" would be significantly limited
+        by these factors.\\n\\n5. Moreover, if we were to assume an average capacity
+        based on their digging prowess, a woodchuck might manage to move several small
+        logs of around 30-40 pounds each, depending on the terrain and effort expended.\\n\\nIn
+        conclusion, considering all aspects\u2014anatomy, behavior, and practical
+        limitations\u2014the amount of wood a woodchuck could \\\"chuck\\\" is more
+        a joke or an imaginative exercise than a quantifiable scientific fact.\\u003c/think\\u003e\\u003cresponse\\u003e###
+        The Wood Chuck\u2019s Wood-Chucking Ability:\\n\\nThe phrase \\\"how much
+        wood could a woodchuck chuck?\\\" is a playful tongue twister with no basis
+        in factual science. Here's why it remains a humorous riddle rather than a
+        quantifiable question:\\n\\n1. **Woodchuck Anatomy and Behavior**: Woodchucks
+        are known for their burrowing abilities, not wood-gathering or heavy object
+        manipulation. They have strong claws useful for digging but not for carrying
+        large logs.\\n\\n2. **Dietary Habits**: Their diet primarily consists of vegetation,
+        grasses, leaves, and roots. Wood is not a significant part of their diet,
+        further reducing the likelihood they could \\\"chuck\\\" substantial amounts
+        of wood.\\n\\n3. **Log Weights**: Even considering small logs, the average
+        weight of a log a woodchuck might handle would be relatively limited\u2014typically
+        around 30-40 pounds for typical logs, but much less than the phrasing implies
+        due to anatomical constraints.\\n\\n4. **Practical Limitations**: A woodchuck's
+        claws are more effective for moving soil and creating burrows rather than
+        lifting or carrying heavy objects like logs, especially when considering their
+        overall body weight (around 15-20 pounds).\\n\\n5. **Humorous Speculation**:
+        If we were to hypothetically assume a woodchuck could manage something realistically,
+        perhaps they might move several smaller logs of 30-40 pounds each depending
+        on terrain and effort, but this is purely speculative due to the animal's
+        natural behaviors.\\n\\nIn summary, while it\u2019s entertaining to consider
+        the idea, there is no serious scientific basis for quantifying how much wood
+        a woodchuck could chuck. It remains an amusing tongue twister and a test of
+        creativity rather than a factual answer.\\u003c/response\\u003e\",\"done\":true,\"done_reason\":\"stop\",\"context\":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,32868,225,35,41,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,203,33797,372,3638,1256,2467,328,312,44888,461,16360,3352,32,2448,883,2866,2835,1370,26103,461,5966,299,2164,2670,18641,2414,32,701,322,10889,2164,30,14707,381,328,312,44888,14770,432,9209,30,23943,1649,30,49100,30,316,31289,30,26158,30,1751,30000,30,461,13330,372,10227,4487,31,33711,318,19383,2164,32,701,322,1789,4169,30,4122,544,10297,20130,30,27514,993,30,461,26158,101,645,322,26103,4169,30,2664,20725,5024,322,1158,5295,688,844,409,405,3809,32,886,1789,1395,46053,322,10889,2164,32,5950,1370,26103,3733,333,16462,855,16462,48,461,2866,1370,1789,3733,333,1986,855,1986,48,436,2504,1256,2467,32,0,203,49152,496,49153,8257,5610,41878,3065,312,41878,663,7194,663,7194,49,0,203,49152,17594,49153,0,203,49152,17594,49153,46,16462,48,1318,23909,313,6893,5610,41878,3065,312,41878,380,7194,663,7194,20,438,600,3610,273,788,340,8206,19240,30,12270,1654,372,3860,539,556,18281,7024,810,24240,458,11911,43490,1399,8841,86,7000,2625,322,18804,432,312,41878,380,7194,32,399,41878,380,7194,30,2329,8967,619,312,16398,44770,30,438,312,23598,643,299,345,404,7904,7555,372,27957,29334,32,203,203,1318,21981,271,46138,328,322,8434,688,1289,31226,31722,14866,1401,2583,25650,318,372,9921,11114,2624,5610,41878,458,26261,3065,663,7194,32,886,5615,313,21118,380,7194,20,8015,12767,645,600,2752,7059,448,2531,3594,436,313,13787,643,265,2360,48350,312,1829,23598,643,299,556,7338,2563,24406,9283,2784,41878,31,26775,32,203,203,17046,30,415,996,4528,372,4654,7947,623,322,8725,479,44,478,35,32,8819,631,30,6295,322,600,4149,107,432,312,41878,380,7194,32,8204,26261,101,1159,12101,30,1532,812,318,8432,298,3955,688,884,39203,436,7338,2563,461,14089,3919,1259,335,30,1273,2953,15420,2735,102,27470,8967,436,18499,299,556,663,7194,299,32389,4684,2124,8821,32,478,36,32,624,4907,380,36546,37897,40808,5292,371,367,30,646,21473,41878,45,3623,2068,364,8600,2914,2515,30,26243,30,461,33032,32,11228,1159,1289,2818,5853,432,46360,556,313,380,7194,299,20,7622,23073,432,41878,619,312,14724,1742,432,3623,16111,32,478,37,32,2614,1374,6197,30,415,996,6295,322,10858,1334,432,312,1245,688,312,41878,380,7194,4796,11856,372,5169,308,350,17364,2953,3065,20021,561,471,8821,21187,39553,328,7533,461,1334,32,399,28531,345,1165,1245,4796,996,1799,24323,645,225,39,34,372,2288,225,35,34,34,298,1053,101,14714,544,2819,21791,461,3700,32,478,38,32,15273,322,14303,13383,432,312,41878,380,7194,7415,46555,27196,1273,5532,8432,1532,3955,30,646,3623,420,552,999,5360,436,456,33654,556,18499,299,7415,1382,5168,2953,3065,4011,5401,1247,313,380,7194,20,2268,526,32323,14943,810,3282,23851,32,478,39,32,12630,1498,30,415,996,4528,372,10014,600,10858,13802,4122,544,3623,7338,2563,534,105,503,30,312,41878,380,7194,4796,11856,372,5169,10204,5532,8821,432,6835,225,37,34,31,38,34,298,1053,101,2504,30,14714,544,322,37247,461,18419,538,22323,32,203,203,383,457,13715,30,31286,1169,30885,7415,278,4149,107,30,5853,30,461,37417,5183,7415,1382,5168,432,41878,312,41878,380,7194,3065,313,380,7194,20,438,1829,312,8725,479,556,600,17463,266,1353,22345,2784,312,13292,15621,31722,8434,1730,16462,772,1986,48,1482,886,624,4907,1884,7194,2735,101,624,4907,31,828,7194,299,40798,44,203,203,1318,23909,313,6893,5610,41878,3065,312,41878,380,7194,663,7194,12791,438,312,4654,2790,273,788,340,8206,19240,623,1289,14977,328,296,7975,27536,32,9540,1182,6916,561,25849,312,21981,271,3291,540,3422,9283,2784,312,13292,15621,7000,44,478,35,32,1115,73,4907,380,7194,2244,4149,107,461,19000,4914,624,4907,380,36546,884,8967,436,3623,23598,643,299,41863,30,646,41878,31,20646,299,556,32389,1300,38828,32,11228,1159,12101,1532,3955,6364,436,7338,2563,1273,646,436,18499,299,7622,8821,32,478,36,32,1115,2820,24848,677,360,1507,4914,886,476,2068,364,37897,21852,432,5292,371,367,30,2914,2515,30,26243,30,461,33032,32,624,4907,438,646,312,14724,1742,432,3623,2068,364,30,9686,45984,322,36313,2953,3065,313,380,7194,20,14226,31651,432,41878,32,478,37,32,1115,1335,2688,4753,4914,21984,31286,5532,8821,30,322,10858,7533,432,312,1245,312,41878,380,7194,4796,2887,2268,526,29858,14943,7415,13074,7637,6835,225,37,34,31,38,34,298,1053,101,436,28531,8821,30,1273,5610,6679,2784,322,2674,100,9949,34506,7254,372,600,4149,1578,13383,32,478,38,32,1115,31503,1578,16106,993,4914,399,41878,380,7194,1182,1532,3955,884,1829,19043,436,14089,1259,335,461,6892,23598,2138,9283,2784,456,33654,556,18499,299,32389,4684,2124,8821,30,17587,1412,31286,3623,18869,3361,7533,308,11279,225,35,39,31,36,34,298,1053,101,547,478,39,32,1115,31213,271,3291,6577,3899,4914,1670,996,4528,372,420,19107,10264,7637,10014,312,41878,380,7194,3065,11856,4660,4011,5401,1247,30,19368,2953,4796,5169,10204,14763,8821,432,225,37,34,31,38,34,298,1053,101,2504,14714,544,37247,461,18419,30,1273,458,438,12463,631,1374,338,1353,7254,372,322,26261,1182,19844,36873,32,203,203,383,8822,30,2218,561,2735,101,1663,581,2690,372,6295,322,8749,30,2017,438,1289,31226,31722,14977,436,13292,20911,2624,5610,41878,312,41878,380,7194,3065,663,7194,32,2030,25849,600,3860,908,273,788,340,8206,19240,461,312,894,432,2020,43826,9283,2784,312,296,7975,7592,1730,1986,48],\"total_duration\":11511867382,\"load_duration\":15526362,\"prompt_eval_count\":243,\"prompt_eval_duration\":37447749,\"eval_count\":948,\"eval_duration\":11457787560}"
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 17 Jul 2025 21:16:37 GMT
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -396,7 +396,7 @@ def test_completion_presence_param(backend_x: Backend):
     assert isinstance(outputs, ChatCompletionResults)
 
 
-@pytest.mark.vcr(record_mode="new_episodes")
+@pytest.mark.vcr
 def test_run_processor(backend_x: Backend, input_json_str: str, fake_date: str):
     # Granite 3.2 prompt includes date string. Change the date so that the prompt is
     # consistent with the vcrpy recording of past network traffic.
@@ -514,8 +514,6 @@ def test_citation_hallucination_parsing(
     assert result.hallucinations == exp_hallucination
 
 
-@pytest.mark.vcr(record_mode="new_episodes")
-@pytest.mark.block_network
 def test_multiple_return(backend_x: Backend, input_json_str: str):
     inputs = ChatCompletionInputs.model_validate_json(input_json_str)
     inputs = inputs.model_copy(

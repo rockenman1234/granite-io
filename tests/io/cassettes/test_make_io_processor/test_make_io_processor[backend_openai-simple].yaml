@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.2:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: March 20, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Hello,
       how are you?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>I''m doing
       great. How can I help you today?<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I''d
@@ -10,29 +10,27 @@ interactions:
       accept:
       - application/json
       accept-encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       connection:
       - keep-alive
       content-length:
-      - '538'
+      - '537'
       content-type:
       - application/json
       host:
       - localhost:11434
-      rits_api_key:
-      - ollama
       user-agent:
-      - AsyncOpenAI/Python 1.66.3
+      - AsyncOpenAI/Python 1.90.0
       x-stainless-arch:
-      - arm64
+      - x64
       x-stainless-async:
       - async:asyncio
       x-stainless-lang:
       - python
       x-stainless-os:
-      - MacOS
+      - Linux
       x-stainless-package-version:
-      - 1.66.3
+      - 1.90.0
       x-stainless-read-timeout:
       - '600'
       x-stainless-retry-count:
@@ -40,42 +38,47 @@ interactions:
       x-stainless-runtime:
       - CPython
       x-stainless-runtime-version:
-      - 3.12.5
+      - 3.11.13
     method: POST
     uri: http://localhost:11434/v1/completions
   response:
-    content: '{"id":"cmpl-558","object":"text_completion","created":1742482865,"model":"granite3.2:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Absolutely,
-      let''s demonstrate chat templating together! This feature allows us to dynamically
-      insert text or variables into a message while keeping the overall structure
-      consistent. It''s quite convenient for generating personalized responses without
-      hardcoding individual phrases for each user. \n\nLet''s take an example: Suppose
-      we are creating a smart response system for customer service messages where
-      we want to notify different users with their names within a general template
-      maintaining consistency. \n\nWe can use a placeholder like `{user_name}` in
-      our template and use it to represent the actual name variable when sending out
-      individual responses. Here''s how it might look:\n\n**Template:** \n\"Hi {user_name},
-      thank you for reaching out today! Your support case # [1234] is ready for your
-      attention.\"\n\nWhen responding personally to \"John\":\n\n- Placeholder: `{user_name}`
-      = John\n- Resulting Message: \"Hi John, thank you for reaching out today! Your
-      support case # 1234 is ready for your attention.\"\n\nAnd if we were replying
-      to \"Emily\":\n\n- Placeholder: `{user_name}` = Emily\n- Resulting Message:
-      \"Hi Emily, thank you for reaching out today! Your support case # 5678 is prepared
-      for your review.\"\n\nThe beauty of chat templating lies in the ability to adapt
-      one message format for multiple users based on a simple yet powerful design.
-      You can replace `user_name` with any variable, including strings derived from
-      other data points such as account details or previous interactions. This not
-      only saves time but also ensures messages remain personalized and respectful,
-      which is crucial in customer service contexts.\n\nShall we use another example
-      or explore something else together?","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":142,"completion_tokens":378,"total_tokens":520}}
-
-      '
+    body:
+      string: "{\"id\":\"cmpl-690\",\"object\":\"text_completion\",\"created\":1752788460,\"model\":\"granite3.2:2b\",\"system_fingerprint\":\"fp_ollama\",\"choices\":[{\"text\":\"Of
+        course! Let's discuss a simple example of chat template, which demonstrates
+        how dynamic content can be displayed in conversation responses.\\n\\nImagine
+        we're building an AI for a restaurant that provides personalized meal recommendations
+        based on user preferences. Here's the idea: \\n\\n1. **User Input:** The user
+        begins by introducing their dietary needs and likes/dislikes with something
+        like, \\\"I'm looking for dinner options now, and I'm vegan, avoiding egg,
+        prefer Italian cuisine.\\\"\\n\\n```\\nUser: Hey, I\u2019m vegan, no eggs
+        please, let's get an Italian meal. \U0001F60B\\n```\\n\\n2. **Chat Template
+        with Dynamic Content:** We use a chat template to format responses. Here it
+        is:\\n\\n```\\n*Based on your preferences (Dietary Needs \\u0026 Cuisine),
+        here are some suggestions:*\\n- **{if diary_free}**\\n  - *You might like
+        our delicious [Vegan Parmesan Pasta]*\\n  - *Alternatively, consider the *Tomato
+        Basil Fettuccine Alfredo*.*\\n- **else diary_free:**\\n  - *Our favorite for
+        vegans is also the mouthwatering *Spaghetti Carbonara*, minus the egg.*\\n
+        \ - *For something slightly creamier but still without egg, there's the delectable
+        [Pesto Chicken Parmesan]*.\\n- **else:**\\n  - You have excellent choices
+        with our top picks:\\n    - *Spicy Zucchini Tortelloni*\\n    - *Garden Mushroom
+        Ravioli*\\n  \\n```\\n\\nWhen given input, the AI can fill in those sections
+        with actual restaurant options suited to dietary restrictions and cuisine
+        preferences. When it generates a response like this:\\n\\n\\\"Based on your
+        preferences (Diary Free), here are some suggestions:\\n  - You might like
+        our delicious Vegan Parmesan Pasta\\n  - Alternatively, consider the Tomato
+        Basil Fettuccine Alfredo.\\\"\\n\\nThe parts `{if diary_free}` and `else`
+        indicate whether to include recipes free from dairy. This allows for seamless
+        personalization in the AI's dialogue without manual coding each possibility
+        individually. I hope this demonstrates how chat templates can add flexibility
+        and customization where needed, making our conversational agent more adaptable!\",\"index\":0,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":142,\"completion_tokens\":519,\"total_tokens\":661}}\n"
     headers:
-      Content-Length:
-      - '1964'
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Mar 2025 15:01:05 GMT
-    http_version: HTTP/1.1
-    status_code: 200
+      - Thu, 17 Jul 2025 21:41:00 GMT
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
 version: 1

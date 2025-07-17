@@ -1,160 +1,106 @@
 interactions:
 - request:
-    body: '{"model":"ibm-granite/granite-3.3-2b-instruct","prompt":"<|start_of_role|>system<|end_of_role|>
-      Knowledge Cutoff Date: April 2024.\n Today''s Date: April 16, 2025. You are
-      Granite, developed by IBM. You are a helpful AI assistant.\nRespond to every
-      user query in a comprehensive and detailed way. You can write down your thoughts
-      and reasoning process before responding. In the thought process, engage in a
-      comprehensive cycle of analysis, summarization, exploration, reassessment, reflection,
-      backtracing, and iteration to develop well-considered thinking process. In the
-      response section, based on various attempts, explorations, and reflections from
-      the thoughts section, systematically present the final solution that you deem
-      correct. The response should summarize the thought process. Write your thoughts
-      between <think></think> and write your response between <response></response>
-      for each user query.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>How
+    body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
+      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      by IBM. You are a helpful AI assistant.\nRespond to every user query in a comprehensive
+      and detailed way. You can write down your thoughts and reasoning process before
+      responding. In the thought process, engage in a comprehensive cycle of analysis,
+      summarization, exploration, reassessment, reflection, backtracing, and iteration
+      to develop well-considered thinking process. In the response section, based
+      on various attempts, explorations, and reflections from the thoughts section,
+      systematically present the final solution that you deem correct. The response
+      should summarize the thought process. Write your thoughts between <think></think>
+      and write your response between <response></response> for each user query.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>How
       much wood could a wood chuck chuck?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>"}'
     headers:
       accept:
       - application/json
       accept-encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       connection:
       - keep-alive
       content-length:
-      - '1060'
-      content-type:
-      - application/json
-      host:
-      - localhost:8000
-      user-agent:
-      - AsyncOpenAI/Python 1.72.0
-      x-stainless-arch:
-      - arm64
-      x-stainless-async:
-      - async:asyncio
-      x-stainless-lang:
-      - python
-      x-stainless-os:
-      - MacOS
-      x-stainless-package-version:
-      - 1.72.0
-      x-stainless-read-timeout:
-      - '600'
-      x-stainless-retry-count:
-      - '1'
-      x-stainless-runtime:
-      - CPython
-      x-stainless-runtime-version:
-      - 3.12.6
-    method: POST
-    uri: http://localhost:8000/v1/completions
-  response:
-    content: '{"id":"cmpl-f9730f93f99e4818adb7d85db2a4f13b","object":"text_completion","created":1744791310,"model":"ibm-granite/granite-3.3-2b-instruct","choices":[{"index":0,"text":"<think>The
-      phrase \"How much wood could a wood chuck chuck","logprobs":null,"finish_reason":"length","stop_reason":null,"prompt_logprobs":null}],"usage":{"prompt_tokens":199,"total_tokens":215,"completion_tokens":16,"prompt_tokens_details":null}}'
-    headers:
-      content-length:
-      - '416'
-      content-type:
-      - application/json
-      date:
-      - Wed, 16 Apr 2025 08:15:09 GMT
-      server:
-      - uvicorn
-    http_version: HTTP/1.1
-    status_code: 200
-- request:
-    body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>
-      Knowledge Cutoff Date: April 2024.\n Today''s Date: April 16, 2025. You are
-      Granite, developed by IBM. You are a helpful AI assistant.\nRespond to every
-      user query in a comprehensive and detailed way. You can write down your thoughts
-      and reasoning process before responding. In the thought process, engage in a
-      comprehensive cycle of analysis, summarization, exploration, reassessment, reflection,
-      backtracing, and iteration to develop well-considered thinking process. In the
-      response section, based on various attempts, explorations, and reflections from
-      the thoughts section, systematically present the final solution that you deem
-      correct. The response should summarize the thought process. Write your thoughts
-      between <think></think> and write your response between <response></response>
-      for each user query.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>How
-      much wood could a wood chuck chuck?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>"}'
-    headers:
-      accept:
-      - application/json
-      accept-encoding:
-      - gzip, deflate
-      connection:
-      - keep-alive
-      content-length:
-      - '1038'
+      - '1036'
       content-type:
       - application/json
       host:
       - localhost:11434
       user-agent:
-      - AsyncOpenAI/Python 1.72.0
+      - AsyncOpenAI/Python 1.90.0
       x-stainless-arch:
-      - arm64
+      - x64
       x-stainless-async:
       - async:asyncio
       x-stainless-lang:
       - python
       x-stainless-os:
-      - MacOS
+      - Linux
       x-stainless-package-version:
-      - 1.72.0
+      - 1.90.0
       x-stainless-read-timeout:
       - '600'
       x-stainless-retry-count:
-      - '1'
+      - '0'
       x-stainless-runtime:
       - CPython
       x-stainless-runtime-version:
-      - 3.12.6
+      - 3.11.13
     method: POST
     uri: http://localhost:11434/v1/completions
   response:
-    content: "{\"id\":\"cmpl-522\",\"object\":\"text_completion\",\"created\":1744815873,\"model\":\"granite3.3:2b\",\"system_fingerprint\":\"fp_ollama\",\"choices\":[{\"text\":\"\\u003cthink\\u003eThe
-      phrase \\\"how much wood could a woodchuck chuck\\\" is a well-known tongue
-      twister designed to amuse rather than have a definitive, scientific answer.
-      Woodchucks, or groundhogs, are burrowing mammals that do emit small amounts
-      of material during their excavations as they move through the soil.\\n\\nHowever,
-      to approach this seriously, we must consider:\\n\\n1. **Scientific Literature**:
-      There isn't any extensive scientific research directly measuring how much wood
-      a single woodchuck could chuck. The phrase is often cited in humorous contexts
-      or used for storytelling purposes.\\n\\n2. **Estimation**: A common misconception
-      arises from an old wive's tale where it\u2019s suggested a woodchuck can move
-      about 300 pounds of dirt when burrowing, which is then mistakenly extrapolated
-      to mean they could chuck (move) something equivalent. However, this is not related
-      accurately to their actual activity or capacity for carrying things.\\n\\nGiven
-      these points, a concrete factual answer based on empirical evidence isn't available
-      because:\\n- There's no standardized measure of \\\"woodchucking\\\" ability.\\n-
-      Woodchucks primarily clear earth for burrowing, not specifically to move logs
-      or wood.\\n\\nThus, the response typically remains humorous and non-quantitative.\\u003c/think\\u003e\\u003cresponse\\u003e###
-      The Tongue Twister and Reality:\\n\\nThe phrase \\\"how much wood could a woodchuck
-      chuck?\\\" is a whimsical expression popularized by tall tales and song lyrics.
-      It originates in an old wive's proverb suggesting that a woodchuck\u2014a burrowing
-      mammal\u2014could move enough earth to carry 300 pounds.\\n\\n### Truth Behind
-      \\\"Chuck\\\":\\n- **Woodchucks (Groundhogs)**: While these animals are excellent
-      diggers, they move soil during their activities rather than lifting and moving
-      substantial wooden objects in a meaningful manner. Their burrowing behavior
-      is about tunneling for shelter, not transportation of heavy logs.\\n- **Scientific
-      Consistency**: There's no scientific data supporting or validating the \\\"chuck\\\"
-      capability quantitatively. No study has accurately measured how much wood a
-      single woodchuck could carry; they primarily handle earth piles and not timber.\\n\\n###
-      Humorous Conclusion:\\nThe phrase is entertaining but doesn't offer a genuine
-      scientific answer due to the contrast between their earth-moving burrowing habits
-      and carrying real wood. In essence, while woodchucks may metaphorically 'chuck'
-      out dirt in abundance, the concept of them moving substantial amounts of solid
-      wood is fanciful and lacks real-world equivalence based on their biology or
-      behavior. \\n\\nSo, while it's fun to utter \\\"a woodchuck could chuck,\\\"
-      there's no specific numeric response backed by empirical evidence, maintaining
-      its status as a humorous riddle.\\u003c/response\\u003e\",\"index\":0,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":242,\"completion_tokens\":680,\"total_tokens\":922}}\n"
+    body:
+      string: "{\"id\":\"cmpl-84\",\"object\":\"text_completion\",\"created\":1752787009,\"model\":\"granite3.3:2b\",\"system_fingerprint\":\"fp_ollama\",\"choices\":[{\"text\":\"\\u003cthink\\u003eThe
+        question you're asking is actually a tongue twister, often used to demonstrate
+        the natural rhyming pattern of the phrase, rather than seeking a literal quantification.
+        The term \\\"woodchuck\\\" refers to a type of rodent known as a groundhog.
+        \\n\\nThe popular expression associated with this animal's name is: \u201CHow
+        much wood would a woodchuck chuck if a woodchuck could chuck wood?\u201D It's
+        more of a playful, rhyming question rather than an inquiry for factual data
+        regarding the actual amount a woodchuck (groundhog) can move.\\n\\nIn reality,
+        woodchucks are burrowing animals and their primary activity involves digging,
+        not moving large amounts of wood. A woodchuck's burrowing habit is more about
+        shifting soil than handling significant logs or chunks of timber due to their
+        predominantly herbivorous diet focused on grasses and vegetation, not wood.\\n\\nHowever,
+        if we were to engage in a light-hearted, fanciful calculation:\\n- A woodchuck's
+        burrowing is primarily for shelter and nesting. It can dig up to 700 pounds
+        of dirt, but they wouldn't \\\"chuck\\\" that as it\u2019s part of their survival
+        behavior rather than a voluntary act.\\n- They could potentially pick up small
+        wood pieces during their digging, especially while removing vegetation, but
+        it's not comparable to manually moving large logs.\\n\\nGiven the inherently
+        humorous and non-literal nature of the question, any definitive, scientific
+        answer would be speculative or nonsensual because woodchucks cannot chuck
+        considerable quantities of wood beyond their burrowing routine.\\u003c/think\\u003e\\u003cresponse\\u003e###
+        The Woodchuck's Mythology\\nThe query \\\"How much wood could a woodchuck
+        chuck?\\\" is famously a tongue twister and a humorous play on words. It\u2019s
+        more an amusing question rather than something to take literally or scientifically
+        evaluate, as woodchucks (actually groundhogs) don't move logs in the way one
+        might suggest.\\n\\n### Factual Context\\n- **Woodchuck's Behavior**: These
+        animals are primarily known for their burrowing habits and herbivorous diet
+        consisting of grasses, fruits, and vegetables. \\n- **Burrowing**: Groundhogs
+        dig elaborate tunnel systems for shelter in nature, creating extensive networks
+        that involve moving significant amounts of soil. A study estimated a woodchuck
+        can move about 700 pounds of earth during their burrowing activities! But
+        this is not related to \\\"chucking\\\" logs, as they consume plants rather
+        than logs.\\n- **Log Consumption**: Woodchucks do eat small pieces of wood
+        incidentally or when vegetation has been broken down to include pieces of
+        wood, but there's no evidence that they actively seek out logs to chuck.\\n\\n###
+        Conclusion on Quantifying Wood\\nGiven their burrowing nature and diet focused
+        on plant matter, a literal interpretation of how much \\\"wood\\\" (as in
+        logs) a woodchuck could chuck would be highly unrealistic. The phrase is more
+        about linguistic play rather than scientific inquiry. In summary, while woodchucks
+        can dig extensive burrows involving large amounts of soil, they don\u2019t
+        engage with wood in a way that would allow quantifying how much \\\"wood\\\"
+        they could \\\"chuck.\\\" Therefore, the answer remains: \\n\\n**A woodchuck
+        can move approximately 700 pounds of soil during digging but wouldn't logically
+        chuck any substantial amount of logs.**\\u003c/response\\u003e\",\"index\":0,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":243,\"completion_tokens\":819,\"total_tokens\":1062}}\n"
     headers:
       Content-Type:
       - application/json
       Date:
-      - Wed, 16 Apr 2025 15:04:33 GMT
+      - Thu, 17 Jul 2025 21:16:49 GMT
       Transfer-Encoding:
       - chunked
-    http_version: HTTP/1.1
-    status_code: 200
+    status:
+      code: 200
+      message: OK
 version: 1

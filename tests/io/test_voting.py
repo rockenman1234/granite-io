@@ -22,8 +22,6 @@ from granite_io.io.voting import (
 from granite_io.types import ChatCompletionInputs, ChatCompletionResults
 
 
-@pytest.mark.vcr(record_mode="new_episodes")
-@pytest.mark.block_network
 def test_numeric_voting(backend_x: Backend):
     if isinstance(backend_x, TransformersBackend):
         pytest.xfail(
@@ -71,8 +69,6 @@ def test_numeric_voting(backend_x: Backend):
     #         == first_number + second_number)
 
 
-@pytest.mark.vcr(record_mode="new_episodes")
-@pytest.mark.block_network
 def test_mbrd_majority_voting(backend_x: Backend):
     base_processor = make_io_processor(_GRANITE_3_2_MODEL_NAME, backend=backend_x)
     voting_processor = MBRDMajorityVotingProcessor(
