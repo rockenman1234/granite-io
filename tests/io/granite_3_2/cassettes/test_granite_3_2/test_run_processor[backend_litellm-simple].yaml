@@ -483,7 +483,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:04:02 GMT
+      - Fri, 18 Jul 2025 00:56:40 GMT
       Transfer-Encoding:
       - chunked
     status:
@@ -491,7 +491,7 @@ interactions:
       message: OK
 - request:
     body: '{"model": "granite3.2:2b", "prompt": "<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Hello,
       how are you?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>I''m doing
       great. How can I help you today?<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I''d
@@ -514,24 +514,28 @@ interactions:
     uri: http://localhost:11434/api/generate
   response:
     body:
-      string: "{\"model\":\"granite3.2:2b\",\"created_at\":\"2025-07-17T21:04:04.670976156Z\",\"response\":\"Absolutely,
-        I'd be happy to demonstrate how chat templates work using a simple example.
-        Let's say we want to create a template for responses when someone asks about
-        the weather in New York City. Here's how it would look:\\n\\n**Template:**\\n```\\nHello!
-        The current weather in **City Name**, as reported by a reliable source, is:\\n-
-        Temperature: **Temperature**, \xB0F or **Temperature**, \xB0C\\n- Conditions:
-        **Weather conditions** (like 'Sunny', 'Rainy', etc.)\\n```\\n\\n**Usage:**\\nIf
-        you input: \\\"What's the weather like in New York City?\\\"\\n\\nThe template
-        will generate a response something like this:\\n\\\"Hello! The current weather
-        in New York City, as reported by a reliable source, is: - Temperature: 68\xB0F,
-        Conditions: Sunny.\\\"\\n\\nThis demonstrates how chat templates allow you
-        to create dynamic and consistent responses based on user inputs. You can also
-        incorporate variables within the template for even more customization.\",\"done\":true,\"done_reason\":\"stop\",\"context\":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,32868,225,35,41,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8279,30,2624,884,844,49,0,203,49152,17594,49153,59,3464,8113,8040,32,4971,883,439,3049,844,11610,49,0,203,49152,496,49153,59,5438,2124,372,2519,2126,2624,11210,1779,27055,4847,19,0,203,49152,17594,49153,0,203,49152,17594,49153,2774,35268,30,439,5438,526,15818,372,31105,2624,11210,12877,1389,1471,312,4281,2280,32,10251,1182,7617,996,2637,372,1487,312,3079,436,14812,1412,12753,44276,2625,322,20023,328,3136,22643,17118,32,9540,1182,2624,561,2268,2779,44,478,326,3442,4777,203,914,203,8279,19,886,1550,20023,328,1115,11119,3270,9192,619,14527,810,312,32698,1914,30,438,44,203,31,33830,44,1115,19412,9192,6629,127,56,556,1115,19412,9192,6629,127,53,203,31,46865,44,1115,17462,5479,326,308,6228,330,21605,5562,370,330,40503,107,370,5774,7447,203,914,478,326,6772,4777,203,2797,844,1509,44,313,8197,1182,322,20023,2124,328,3136,22643,17118,12791,478,1318,3079,1098,4450,312,1789,4660,2124,458,44,203,20,8279,19,886,1550,20023,328,3136,22643,17118,30,619,14527,810,312,32698,1914,30,438,44,429,33830,44,225,40,42,23767,56,30,46865,44,21417,5562,3107,478,2272,35968,2624,11210,12877,2608,844,372,1487,7094,461,14488,14812,4122,544,1256,7806,32,2448,883,2329,26286,332,4886,4797,322,3079,436,4444,1829,40148,32],\"total_duration\":2527573502,\"load_duration\":16716129,\"prompt_eval_count\":142,\"prompt_eval_duration\":39018145,\"eval_count\":216,\"eval_duration\":2470509356}"
+      string: '{"model":"granite3.2:2b","created_at":"2025-07-18T00:56:44.046201142Z","response":"Absolutely,
+        I''d be happy to demonstrate chat templates with you. Here''s a simple example:\n\nSuppose
+        we want to create a bot that greets users and asks for their name when it''s
+        initialized.\n\n1. **Define the template:**\n```python\ngreeting = \"Hello!
+        How are you today?\"\nname_prompt = \"What''s your name? \"\n```\n\n2. **Initialize
+        our chat bot function:**\n```python\ndef greet(user_message):\n    return
+        f\"{greeting} {user_message}\\n{name_prompt}\"\n```\n\n3. **Use the template:**\n\nNow,
+        if a user types: ''Hi'', the bot would respond: \"Hello! How are you today?
+        Hi\"\n\nTo enhance this, let''s add a loop so our bot can repeat greeting
+        and name-asking for more users sequentially:\n\n```python\ndef chat_bot():\n    while
+        True:\n        user_input = input(\"You (type ''quit'' to end): \")\n        if
+        user_input.lower() == ''quit'':\n            break\n        \n        response
+        = greet(user_input)\n        print(response)\n\n    return \"Goodbye!\"  #
+        End message\n\n# Call the chat bot function\nprint(chat_bot())\n```\n\nWhen
+        you run this, it will keep asking users for their name and respond as a greeting
+        until you type ''quit''. \n\nWould you like to try another feature with chat
+        templates?","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,30468,225,35,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8279,30,2624,884,844,49,0,203,49152,17594,49153,59,3464,8113,8040,32,4971,883,439,3049,844,11610,49,0,203,49152,496,49153,59,5438,2124,372,2519,2126,2624,11210,1779,27055,4847,19,0,203,49152,17594,49153,0,203,49152,17594,49153,2774,35268,30,439,5438,526,15818,372,31105,11210,12877,623,844,32,9540,1182,312,4281,2280,44,478,6195,3605,996,2637,372,1487,312,7361,688,48774,5231,4250,461,44276,436,3623,636,1412,561,1182,8765,32,478,35,32,1115,19077,322,3079,4777,203,914,2958,203,44969,280,313,8279,19,4971,884,844,11610,12791,203,426,81,13232,280,313,8197,1182,1370,636,49,313,203,914,478,36,32,1115,9962,2992,11210,7361,667,4777,203,914,2958,203,589,485,7104,26,496,81,1436,711,203,264,442,296,9588,44969,111,301,496,81,1436,4104,96,109,426,81,13232,3845,203,914,478,37,32,1115,4391,322,3079,4777,478,6529,30,415,312,1256,3738,44,330,12575,370,322,7361,2268,16533,44,313,8279,19,4971,884,844,11610,49,6778,20,478,705,22631,458,30,1207,1182,1015,312,5258,1259,2992,7361,883,13760,485,32668,461,636,31,912,299,436,1829,4250,408,7795,6321,44,478,914,2958,203,589,11210,81,2195,2262,203,264,2218,2933,44,203,351,1256,81,1131,280,1509,440,4282,308,681,330,16997,25,372,943,711,7788,203,351,415,1256,81,1131,32,5729,346,610,330,16997,950,203,1468,1626,276,203,351,1789,280,485,7104,26,496,81,1131,27,203,351,1459,26,1986,27,478,264,442,313,13716,30327,11555,225,588,4720,1474,478,21,5640,322,11210,7361,667,203,1216,26,6172,81,2195,1157,203,914,478,5786,844,1420,458,30,561,1098,4986,24240,4250,436,3623,636,461,16533,619,312,485,32668,6222,844,827,330,16997,2473,12025,31634,844,2124,372,1596,4674,2787,623,11210,12877,49],"total_duration":3933620976,"load_duration":17113042,"prompt_eval_count":141,"prompt_eval_duration":30089386,"eval_count":317,"eval_duration":3885481342}'
     headers:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:04:04 GMT
+      - Fri, 18 Jul 2025 00:56:44 GMT
       Transfer-Encoding:
       - chunked
     status:

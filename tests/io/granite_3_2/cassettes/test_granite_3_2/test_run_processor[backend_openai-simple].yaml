@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.2:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Hello,
       how are you?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>I''m doing
       great. How can I help you today?<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I''d
@@ -43,38 +43,34 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-682","object":"text_completion","created":1752786039,"model":"granite3.2:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Absolutely,
-        I''d be happy to demonstrate how chat templates work with a simple example.
-        Let''s consider we want to create a conversation template for greetings and
-        asking basic questions about the day:\n\n1. **Template Initialization:**\n\n   ```python\n   day_greeting
-        = (\n       \"Hello! How was your day today? I hope it started on a positive
-        note.\\n\"\n       \"We''d love to hear how you''re feeling.\"\n   )\n   ```\n\n2.
-        **User Input:**\n\n   Suppose the user inputs: \"Nice, thanks for asking!\"\n\n3.
-        **Template Response:** With this conversation template, when the user says
-        \"Nice, thanks for asking!\", our next step would be to respond with something
-        contextually relevant from our template. \n\n   After parsing the input text,
-        it might look like this (in Python pseudo code):\n   ```python\n   if response_prompt
-        in user_input:\n       # Extract possible intent or key phrases \n       user_feelings
-        = extract_intent(\"positive\")  # hypothetical function that analyzes feeling
-        codes\n\n       response = f\"That''s great to hear, {user_feelings}! I hope
-        it continues to stay positive.\"\n   else:\n       response = \"That''s wonderful!
-        How was your day then?\"\n\n   print(f\"{day_greeting} {response}\")  # Outputs:
-        \"Hello! How was your day? We''d love to hear how you''re feeling. That''s
-        great to hear, positive! I hope it continues to stay positive.\"\n   ```\n\nWith
-        this example, even though the user said something else than the exact expected
-        input for a ''how were your feelings'', our template adapts by interpreting
-        their response and crafting a personalized follow-up question based on it.
-        This showcases how chat templates can make conversations more engaging and
-        contextually appropriate.","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":142,"completion_tokens":388,"total_tokens":530}}
-
-        '
+      string: "{\"id\":\"cmpl-562\",\"object\":\"text_completion\",\"created\":1752800022,\"model\":\"granite3.2:2b\",\"system_fingerprint\":\"fp_ollama\",\"choices\":[{\"text\":\"Absolutely,
+        I'd be delighted to demonstrate chat template features with you! Chat templates
+        allow users like us to reuse parts of conversations efficiently. Here's a
+        simple example: let's say we're often discussing the same set of questions
+        about local events around town, such as when they're happening and any amenities
+        available at those venues.\\n\\n```markdown\\n**Chat Template: Local Event
+        Information Check**\\n\\n**User:** Hey [Your Name], do you know what events
+        are happening next week?\\n\\n**Template Assistant (Me):** Of course! I can
+        help with that. Here\u2019s a snapshot of this week's top local events:\\n\\n-
+        **Event 1:** *Name*\\n  - When: [Date]\\n  - Venue: [Place]. It offers [Amenity].\\n\\n-
+        **Event 2:** *Name*\\n  - When: [Date]\\n  - Venue: [Place]. Here, you'll
+        find [Amenity].\\n\\n**User:** What's the parking situation like for Event
+        1?\\n\\n**Template Assistant (Me):** In this case, it's [Parking Information].
+        Remember to allow enough time for navigation and potential traffic.\\n```\\n\\nIn
+        this template, I've used `[Your Name]` as a placeholder that will fill in
+        with each user's personalized greeting when they engage the template again.
+        This way, we don't have to retype the entire conversation if the user asks
+        about events on multiple occasions within one week. It saves everyone time
+        and keeps our interaction consistent while accommodating individual preferences.\\n\\nWould
+        you like an example of a different type of chat template or another aspect
+        of templating?\",\"index\":0,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":141,\"completion_tokens\":358,\"total_tokens\":499}}\n"
     headers:
       Content-Length:
-      - '1964'
+      - '1734'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:00:39 GMT
+      - Fri, 18 Jul 2025 00:53:42 GMT
     status:
       code: 200
       message: OK

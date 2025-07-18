@@ -483,7 +483,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:05:14 GMT
+      - Fri, 18 Jul 2025 00:58:16 GMT
       Transfer-Encoding:
       - chunked
     status:
@@ -491,7 +491,7 @@ interactions:
       message: OK
 - request:
     body: '{"model": "granite3.2:2b", "prompt": "<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>How
       much wood could a wood chuck chuck?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>",
       "options": {"stop": ["woodchuck"]}, "stream": false}'
@@ -512,15 +512,15 @@ interactions:
     uri: http://localhost:11434/api/generate
   response:
     body:
-      string: '{"model":"granite3.2:2b","created_at":"2025-07-17T21:05:14.514128112Z","response":"The
-        popular tongue twister \"How much wood would a ","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,32868,225,35,41,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8257,5610,41878,3065,312,41878,663,7194,663,7194,49,0,203,49152,17594,49153,0,203,49152,17594,49153,1318,23068,273,788,340,8206,19240,313,8257,5610,41878,2268,312,225],"total_duration":156987506,"load_duration":23994774,"prompt_eval_count":113,"prompt_eval_duration":18929832,"eval_count":16,"eval_duration":113053826}'
+      string: '{"model":"granite3.2:2b","created_at":"2025-07-18T00:58:16.659992172Z","response":"\"How
+        much wood a ","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,30468,225,35,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8257,5610,41878,3065,312,41878,663,7194,663,7194,49,0,203,49152,17594,49153,0,203,49152,17594,49153,20,8257,5610,41878,312,225],"total_duration":144405109,"load_duration":16340327,"prompt_eval_count":112,"prompt_eval_duration":20925507,"eval_count":8,"eval_duration":106114265}'
     headers:
       Content-Length:
-      - '899'
+      - '822'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:05:14 GMT
+      - Fri, 18 Jul 2025 00:58:16 GMT
     status:
       code: 200
       message: OK

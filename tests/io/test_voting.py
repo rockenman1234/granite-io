@@ -14,6 +14,9 @@ from granite_io.backend import Backend
 from granite_io.backend.litellm import LiteLLMBackend
 from granite_io.backend.transformers import TransformersBackend
 from granite_io.io.consts import _GRANITE_3_2_MODEL_NAME
+from granite_io.io.granite_3_2.input_processors.granite_3_2_input_processor import (
+    override_date_for_testing,
+)
 from granite_io.io.voting import (
     MajorityVotingProcessor,
     MBRDMajorityVotingProcessor,
@@ -22,7 +25,11 @@ from granite_io.io.voting import (
 from granite_io.types import ChatCompletionInputs, ChatCompletionResults
 
 
-def test_numeric_voting(backend_x: Backend):
+@pytest.mark.vcr
+def test_numeric_voting(backend_x: Backend, fake_date: str):
+    # Granite 3.2 prompt includes date string. Change the date so that the prompt is
+    # consistent with the vcrpy recording of past network traffic.
+    override_date_for_testing(fake_date)
     if isinstance(backend_x, TransformersBackend):
         pytest.xfail(
             "TransformersBackend top-k currently returning low-quality results"
@@ -69,7 +76,11 @@ def test_numeric_voting(backend_x: Backend):
     #         == first_number + second_number)
 
 
-def test_mbrd_majority_voting(backend_x: Backend):
+@pytest.mark.vcr
+def test_mbrd_majority_voting(backend_x: Backend, fake_date: str):
+    # Granite 3.2 prompt includes date string. Change the date so that the prompt is
+    # consistent with the vcrpy recording of past network traffic.
+    override_date_for_testing(fake_date)
     base_processor = make_io_processor(_GRANITE_3_2_MODEL_NAME, backend=backend_x)
     voting_processor = MBRDMajorityVotingProcessor(
         base_processor,
