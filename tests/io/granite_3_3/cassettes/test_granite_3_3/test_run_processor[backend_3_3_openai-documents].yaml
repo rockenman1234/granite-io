@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. Write the response to the user''s input by strictly aligning with the
       facts in the provided documents. If the information needed to answer the question
       is not available in the documents, inform the user that the question cannot
@@ -48,16 +48,16 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-80","object":"text_completion","created":1752786925,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"dictionary","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":218,"completion_tokens":2,"total_tokens":220}}
+      string: '{"id":"cmpl-139","object":"text_completion","created":1752852562,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"enhancements","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":217,"completion_tokens":4,"total_tokens":221}}
 
         '
     headers:
       Content-Length:
-      - '260'
+      - '263'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:15:25 GMT
+      - Fri, 18 Jul 2025 15:29:22 GMT
     status:
       code: 200
       message: OK

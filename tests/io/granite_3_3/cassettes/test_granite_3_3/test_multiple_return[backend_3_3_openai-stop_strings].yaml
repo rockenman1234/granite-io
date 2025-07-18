@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>How
       much wood could a wood chuck chuck?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>","max_tokens":1024,"n":3}'
     headers:
@@ -32,7 +32,7 @@ interactions:
       x-stainless-read-timeout:
       - '600'
       x-stainless-retry-count:
-      - '1'
+      - '0'
       x-stainless-runtime:
       - CPython
       x-stainless-runtime-version:
@@ -41,23 +41,24 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: "{\"id\":\"cmpl-419\",\"object\":\"text_completion\",\"created\":1752786880,\"model\":\"granite3.3:2b\",\"system_fingerprint\":\"fp_ollama\",\"choices\":[{\"text\":\"This
-        question is a fun twist on the classic tongue-twister and has become a popular
-        joke due to its ambiguity. The answer, according to a humorous misunderstanding,
-        is that a woodchuck (also known as a groundhog) could chuck approximately
-        700 pounds of wood if it were a true woodchuck!\\n\\nHowever, the factual
-        answer is quite different. A study by wildlife biologist Richard Thomas determined
-        that a woodchuck could actually move about 300 lbs of soil when digging a
-        burrow for its daily use \u2013 but no wood, not even at that rate. So, while
-        we love the playful response, the literal answer is zero. Woodchucks primarily
-        eat grass, leaves, and other plant material, not wood.\",\"index\":0,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":113,\"completion_tokens\":175,\"total_tokens\":288}}\n"
+      string: '{"id":"cmpl-897","object":"text_completion","created":1752852958,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"This
+        is an interesting tongue twister! The phrase \"How much wood would a woodchuck
+        chuck if a woodchuck could chuck wood?\" comes from an old New England folksong.
+        \n\nThe answer, however, lies in a misconception. Woodchucks (also known as
+        groundhogs) don''t actually chuck or push wood; they burrow and occasionally
+        move soil. The term \"chuck\" in this context is a playful and nonsensical
+        word game, not meant to be taken literally. \n\nSo, there isn''t a factual
+        answer to the amount of wood a woodchuck could chuck, as it''s a grammatical
+        puzzle rather than a scientific or biological question!","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":112,"completion_tokens":158,"total_tokens":270}}
+
+        '
     headers:
       Content-Length:
-      - '929'
+      - '850'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:14:40 GMT
+      - Fri, 18 Jul 2025 15:35:58 GMT
     status:
       code: 200
       message: OK

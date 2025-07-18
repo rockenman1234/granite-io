@@ -483,7 +483,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:41:15 GMT
+      - Fri, 18 Jul 2025 15:29:45 GMT
       Transfer-Encoding:
       - chunked
     status:
@@ -491,7 +491,7 @@ interactions:
       message: OK
 - request:
     body: '{"model": "granite3.2:2b", "prompt": "<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Hello,
       how are you?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>I''m doing
       great. How can I help you today?<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I''d
@@ -514,34 +514,36 @@ interactions:
     uri: http://localhost:11434/api/generate
   response:
     body:
-      string: "{\"model\":\"granite3.2:2b\",\"created_at\":\"2025-07-17T21:41:20.255933232Z\",\"response\":\"Absolutely,
-        I'd be delighted to demonstrate chat templating with you. Chat templates allow
-        us to create dynamic responses based on user input or predefined conditions.
-        Let's use a simple example where the bot can respond differently depending
-        on whether it detects certain keywords in a user's message.\\n\\nHere's how
-        we could set up a basic template:\\n\\n**Template Name:** Greetings\\n\\n**Content:**
-        \\\"Hello, [user]! It seems like you're interested in [keyword]. Let me tell
-        you more about that... [rest of response based on keyword]\\\"\\n\\n**Conditions
-        (if any):**\\n  - If the user's message contains \\\"tech\\\":\\n    - Response:
-        \\\"Excellent choice, [user], 'tech' is a broad term. We can discuss technologies
-        like AI, machine learning, and data science...\\\"\\n  - If the user's message
-        does not contain \\\"tech\\\" but includes keywords such as \\\"books\\\",
-        \\\"history\\\", or \\\"art\\\":\\n    - Response: \\\"[user], it looks like
-        you're interested in [keyword]. In literature, history, or art, these fields
-        often intersect with technology for various purposes. For instance...\\\"\\n\\nUsing
-        this template, if a user types, \\\"I'm really into tech,\\\" the bot would
-        respond as follows:\\n\\n\\u003e Hello, [user]! It seems like you're interested
-        in tech. Let me tell you more about that...\\n\\u003e \\n\\u003e Excellent
-        choice, [user], 'tech' is a broad term. We can discuss technologies like AI,
-        machine learning, and data science\u2026\\n\\nThis demonstrates how templates
-        can adapt responses based on user input, making interactions feel more personalized
-        and engaging. Would you like to see another example or explore other aspects
-        of chat templates?\",\"done\":true,\"done_reason\":\"stop\",\"context\":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,32868,225,35,41,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8279,30,2624,884,844,49,0,203,49152,17594,49153,59,3464,8113,8040,32,4971,883,439,3049,844,11610,49,0,203,49152,496,49153,59,5438,2124,372,2519,2126,2624,11210,1779,27055,4847,19,0,203,49152,17594,49153,0,203,49152,17594,49153,2774,35268,30,439,5438,526,409,2429,318,372,31105,11210,1779,27055,623,844,32,16090,12877,2608,1770,372,1487,7094,14812,4122,544,1256,1509,556,32681,5479,32,10251,1182,793,312,4281,2280,2154,322,7361,883,16533,29928,14714,544,4946,561,11140,101,9437,16400,328,312,1256,1182,1474,32,478,10921,1182,2624,996,3065,739,973,312,6550,3079,44,478,326,3442,3270,4777,570,7104,2052,478,326,1777,4777,313,8279,30,428,496,79,19,2030,6236,2124,844,4484,16574,328,428,7317,997,10251,597,8883,844,1829,2625,688,1179,428,4738,432,1789,4122,544,11659,12032,478,326,17553,308,325,1346,34841,203,225,429,1670,322,1256,1182,1474,4304,313,6631,563,203,264,429,5170,44,313,571,29599,11655,30,428,496,614,330,6631,25,438,312,33001,5615,32,2688,883,23273,30869,2124,19551,30,6652,9608,30,461,706,27536,13585,203,225,429,1670,322,1256,1182,1474,1957,646,4799,313,6631,20,1273,8600,16400,3751,619,313,12254,392,313,6446,392,556,313,502,563,203,264,429,5170,44,7185,496,614,561,7780,2124,844,4484,16574,328,428,7317,997,701,28204,1165,30,8142,30,556,5549,30,3282,3829,12270,25964,623,21519,436,10297,14998,32,2616,1980,13585,478,9515,458,3079,30,415,312,1256,3738,30,313,59,3464,6394,1991,7341,2360,322,7361,2268,16533,619,11588,44,478,48,12000,30,428,496,79,19,2030,6236,2124,844,4484,16574,328,7341,32,10251,597,8883,844,1829,2625,688,1179,203,48,1659,48,1283,29599,11655,30,428,496,614,330,6631,25,438,312,33001,5615,32,2688,883,23273,30869,2124,19551,30,6652,9608,30,461,706,27536,10430,478,2272,35968,2624,12877,883,15933,14812,4122,544,1256,1509,30,9018,28653,10871,1829,12268,1191,461,14707,4879,32,20683,844,2124,372,2318,4674,2280,556,26826,1604,30885,432,11210,12877,49],\"total_duration\":4482505105,\"load_duration\":16150846,\"prompt_eval_count\":142,\"prompt_eval_duration\":25620587,\"eval_count\":364,\"eval_duration\":4439839590}"
+      string: '{"model":"granite3.2:2b","created_at":"2025-07-18T15:29:48.866990386Z","response":"Absolutely,
+        let''s create a simple chat template example. Chat templates allow us to dynamically
+        generate responses based on user input or predefined patterns. Here''s an
+        example in pseudo-code:\n\n```plaintext\nTemplate for Greeting: \"Hello, {user}!\"\n\nTemplate
+        for Farewell: \"{user}, goodbye!\"\n\nUser Input: \"Hi\"\n\nGenerated Response
+        Using Template: Apply the ''Greeting'' template to user input: \nHello, Hi!\n\nUser
+        Input: \"How are you?\"\n\nGenerated Response Using Template: Apply the ''Farewell''
+        template to user input:\nYou, goodbye!\n```\n\nIn this example, we have two
+        templates for generating greetings and farewells. When the user types \"Hi\"
+        or \"How are you?\", we apply these templates dynamically based on their input.
+        This shows how chat systems can use predefined patterns to respond in a consistent
+        manner while adapting to different user messages.\n\nWould you like to see
+        this implemented in a programming language? I''m equipped to handle Python
+        for demonstration purposes. Let''s proceed with that.\n```python\ndef template_chat(input_user):\n    #
+        Greeting Template\n    greeting = \"Hello, {user}!\"\n    \n    # Farewell
+        Template\n    farewell = \"{user}, goodbye!\"\n\n    if input_user == ''Hi'':\n        return
+        greeting.format(user=''Hi'')\n    elif input_user == ''How are you?'':\n        return
+        farewell.format(user=''you'')\n\n# Test the function with a few user inputs\ninputs
+        = [''Hi'', ''How are you?'']\nfor user in inputs:\n    print(f\"User Input:
+        {user}\")\n    response = template_chat(user)\n    print(f\"Generated Response
+        Using Template: {response}\\n\")\n```\nThis Python code defines a function
+        `template_chat` that takes a single parameter `input_user`. Depending on the
+        value of this parameter, it returns either a greeting or a farewell using
+        the defined templates. It then prints out how these templates would respond
+        to each input in the provided list.","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,30468,225,35,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8279,30,2624,884,844,49,0,203,49152,17594,49153,59,3464,8113,8040,32,4971,883,439,3049,844,11610,49,0,203,49152,496,49153,59,5438,2124,372,2519,2126,2624,11210,1779,27055,4847,19,0,203,49152,17594,49153,0,203,49152,17594,49153,2774,35268,30,1207,1182,1487,312,4281,11210,3079,2280,32,16090,12877,2608,1770,372,22524,4450,14812,4122,544,1256,1509,556,32681,15103,32,9540,1182,600,2280,328,26600,31,687,44,478,914,18003,203,3442,436,570,32668,44,313,8279,30,301,496,111,11555,478,3442,436,506,586,14920,44,10698,496,835,4644,30327,11555,478,1240,4237,44,313,12575,20,478,6533,5170,9606,10838,44,14848,322,330,57,32668,25,3079,372,1256,1509,44,1659,8279,30,6778,19,478,1240,4237,44,313,8257,884,844,12791,478,6533,5170,9606,10838,44,14848,322,330,56,586,14920,25,3079,372,1256,1509,44,203,4282,30,4644,30327,19,203,914,478,383,458,2280,30,996,1159,3134,12877,436,17335,485,7104,2052,461,296,586,14920,101,32,5076,322,1256,3738,313,12575,20,556,313,8257,884,844,14206,996,4871,3282,12877,22524,4122,544,3623,1509,32,1348,9830,2624,11210,10737,883,793,32681,15103,372,16533,328,312,14488,24960,2218,1544,368,1054,372,3449,1256,5218,32,478,31634,844,2124,372,2318,458,7586,328,312,16031,2898,49,439,3464,15588,9974,372,2887,4865,436,15433,367,14998,32,10251,1182,21846,623,688,32,203,914,2958,203,589,3079,81,6172,26,1131,81,496,711,203,264,588,570,32668,10838,203,264,485,32668,280,313,8279,30,301,496,111,11555,203,29791,264,588,506,586,14920,10838,203,264,296,586,14920,280,10698,496,835,4644,30327,11555,478,264,415,1509,81,496,610,330,12575,950,203,351,442,485,32668,32,1643,26,496,1057,12575,683,203,264,4348,1509,81,496,610,330,8257,884,844,49,950,203,351,442,296,586,14920,32,1643,26,496,1057,9619,683,478,21,2108,322,667,623,312,7002,1256,7806,203,8075,280,2107,12575,370,330,8257,884,844,49,785,203,979,1256,328,7806,44,203,264,1459,26,88,20,1240,4237,44,301,496,8474,203,264,1789,280,3079,81,6172,26,496,27,203,264,1459,26,88,20,6533,5170,9606,10838,44,301,1986,4104,96,657,203,914,203,2272,4865,1340,12706,312,667,529,2387,81,6172,82,688,8727,312,3982,3395,529,1131,81,496,2541,5391,4013,544,322,786,432,458,3395,30,561,3217,3154,312,485,32668,556,312,296,586,14920,1471,322,3417,12877,32,2030,1615,23421,963,2624,3282,12877,2268,16533,372,2504,1509,328,322,3943,1149,32],"total_duration":3351464506,"load_duration":16551438,"prompt_eval_count":141,"prompt_eval_duration":21341304,"eval_count":458,"eval_duration":3312714893}'
     headers:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:41:20 GMT
+      - Fri, 18 Jul 2025 15:29:48 GMT
       Transfer-Encoding:
       - chunked
     status:

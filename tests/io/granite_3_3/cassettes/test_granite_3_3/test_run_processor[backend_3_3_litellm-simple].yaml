@@ -498,7 +498,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:17:19 GMT
+      - Fri, 18 Jul 2025 15:22:20 GMT
       Transfer-Encoding:
       - chunked
     status:
@@ -506,7 +506,7 @@ interactions:
       message: OK
 - request:
     body: '{"model": "granite3.3:2b", "prompt": "<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Hello,
       how are you?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>I''m doing
       great. How can I help you today?<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I''d
@@ -529,22 +529,19 @@ interactions:
     uri: http://localhost:11434/api/generate
   response:
     body:
-      string: '{"model":"granite3.3:2b","created_at":"2025-07-17T21:17:20.91840051Z","response":"Absolutely,
-        I''d be happy to assist with that. Chat templates are a way for conversational
-        AI systems like me to understand and respond to user inputs more accurately.
-        They often involve predefined phrases or patterns that the system can recognize
-        and process.\n\nFor example, if you want to test a template like \"What''s
-        your favorite color?\", you could input this as your question: \"Can you tell
-        me about your favorite color?\" The AI would then look for matching patterns
-        in its knowledge base and respond accordingly.\n\nIf you have a specific chat
-        template you''d like demonstrated or explained, feel free to share!","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,32868,225,35,41,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8279,30,2624,884,844,49,0,203,49152,17594,49153,59,3464,8113,8040,32,4971,883,439,3049,844,11610,49,0,203,49152,496,49153,59,5438,2124,372,2519,2126,2624,11210,1779,27055,4847,19,0,203,49152,17594,49153,0,203,49152,17594,49153,2774,35268,30,439,5438,526,15818,372,34916,623,688,32,16090,12877,884,312,3352,436,457,5232,5144,19551,10737,2124,597,372,7648,461,16533,372,1256,7806,1829,21726,12225,32,11228,12270,43033,32681,44217,556,15103,688,322,2664,883,29738,461,2164,32,203,203,1562,2280,30,415,844,2637,372,894,312,3079,2124,313,8197,1182,1370,27448,1963,14206,844,3065,1509,458,619,1370,7000,44,313,4445,844,8883,597,2625,1370,27448,1963,12791,886,19551,2268,1615,2779,436,9215,15103,328,2819,16969,1695,461,16533,23601,32,203,203,2797,844,1159,312,2818,11210,3079,844,5438,2124,15433,733,556,31860,30,10871,3741,372,8623,19],"total_duration":1577463510,"load_duration":15070463,"prompt_eval_count":142,"prompt_eval_duration":15565010,"eval_count":128,"eval_duration":1545767281}'
+      string: '{"model":"granite3.3:2b","created_at":"2025-07-18T15:22:20.775967926Z","response":"That
+        sounds interesting! Chat templating is a method used in conversational AI
+        and user interfaces to create dynamic content by inserting variables into
+        predefined templates. This allows for more personalized and efficient communication.
+        If you have specific questions or demonstrations about chat templating, feel
+        free to ask!","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,30468,225,35,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8279,30,2624,884,844,49,0,203,49152,17594,49153,59,3464,8113,8040,32,4971,883,439,3049,844,11610,49,0,203,49152,496,49153,59,5438,2124,372,2519,2126,2624,11210,1779,27055,4847,19,0,203,49152,17594,49153,0,203,49152,17594,49153,4974,21360,16713,19,16090,1779,27055,438,312,1411,1654,328,457,5232,5144,19551,461,1256,14091,372,1487,7094,1795,810,40034,4886,1991,32681,12877,32,1348,6972,436,1829,12268,1191,461,17457,14854,32,1670,844,1159,2818,10017,556,15433,993,2625,11210,1779,27055,30,10871,3741,372,7660,19],"total_duration":485606116,"load_duration":17948233,"prompt_eval_count":141,"prompt_eval_duration":15672913,"eval_count":59,"eval_duration":450727397}'
     headers:
+      Content-Length:
+      - '1516'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:17:20 GMT
-      Transfer-Encoding:
-      - chunked
+      - Fri, 18 Jul 2025 15:22:20 GMT
     status:
       code: 200
       message: OK

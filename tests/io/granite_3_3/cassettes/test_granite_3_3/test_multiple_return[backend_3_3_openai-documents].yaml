@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. Write the response to the user''s input by strictly aligning with the
       facts in the provided documents. If the information needed to answer the question
       is not available in the documents, inform the user that the question cannot
@@ -39,7 +39,7 @@ interactions:
       x-stainless-read-timeout:
       - '600'
       x-stainless-retry-count:
-      - '1'
+      - '0'
       x-stainless-runtime:
       - CPython
       x-stainless-runtime-version:
@@ -48,16 +48,23 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-578","object":"text_completion","created":1752786926,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"dictionary","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":218,"completion_tokens":2,"total_tokens":220}}
+      string: '{"id":"cmpl-731","object":"text_completion","created":1752850625,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"I''m
+        sorry for any confusion, but this document only mentions \"thesaurus\" in
+        passing. It doesn''t provide a direct synonym or alternative for it. However,
+        a thesaurus is a reference work that lists words showing their origins, definitions,
+        and sometimes cognates, often used to expand vocabulary by offering variations
+        of meaning \u003c|start_of_cite|\u003e{\"document_id\": \"1\"}\u003c|end_of_cite|\u003e.
+        To find an alternative word, one might consider using a different type of
+        dictionary or lexicon.","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":217,"completion_tokens":101,"total_tokens":318}}
 
         '
     headers:
       Content-Length:
-      - '261'
+      - '757'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:15:26 GMT
+      - Fri, 18 Jul 2025 14:57:05 GMT
     status:
       code: 200
       message: OK

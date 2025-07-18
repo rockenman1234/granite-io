@@ -498,7 +498,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:14:40 GMT
+      - Fri, 18 Jul 2025 15:21:25 GMT
       Transfer-Encoding:
       - chunked
     status:
@@ -506,7 +506,7 @@ interactions:
       message: OK
 - request:
     body: '{"model": "granite3.3:2b", "prompt": "<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>How
       much wood could a wood chuck chuck?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>",
       "options": {"stop": ["chuck"], "num_predict": 1000}, "stream": false}'
@@ -527,15 +527,16 @@ interactions:
     uri: http://localhost:11434/api/generate
   response:
     body:
-      string: '{"model":"granite3.3:2b","created_at":"2025-07-17T21:14:40.942410967Z","response":"The
-        phrase \"How much wood would a wood","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,32868,225,35,41,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8257,5610,41878,3065,312,41878,663,7194,663,7194,49,0,203,49152,17594,49153,0,203,49152,17594,49153,1318,23909,313,8257,5610,41878,2268,312,41878],"total_duration":139874154,"load_duration":17427719,"prompt_eval_count":113,"prompt_eval_duration":8572593,"eval_count":11,"eval_duration":112707905}'
+      string: '{"model":"granite3.3:2b","created_at":"2025-07-18T15:21:26.356758075Z","response":"This
+        is a classic tongue twister! The question you''re asking is based on a humorous
+        answer from New England folklore. According to the tune, \"The Wood","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,30468,225,35,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,8257,5610,41878,3065,312,41878,663,7194,663,7194,49,0,203,49152,17594,49153,0,203,49152,17594,49153,2272,438,312,39115,273,788,340,8206,19240,19,886,7000,844,4484,24240,438,4122,544,312,21981,271,3291,7592,645,3136,48105,14801,93,315,268,32,37442,372,322,47874,30,313,1318,624,4907],"total_duration":353215888,"load_duration":14666549,"prompt_eval_count":112,"prompt_eval_duration":12328346,"eval_count":42,"eval_duration":325239157}'
     headers:
       Content-Length:
-      - '865'
+      - '1111'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:14:40 GMT
+      - Fri, 18 Jul 2025 15:21:26 GMT
     status:
       code: 200
       message: OK

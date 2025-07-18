@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.2:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Hello,
       how are you?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>I''m doing
       great. How can I help you today?<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I''d
@@ -43,41 +43,29 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: "{\"id\":\"cmpl-690\",\"object\":\"text_completion\",\"created\":1752788460,\"model\":\"granite3.2:2b\",\"system_fingerprint\":\"fp_ollama\",\"choices\":[{\"text\":\"Of
-        course! Let's discuss a simple example of chat template, which demonstrates
-        how dynamic content can be displayed in conversation responses.\\n\\nImagine
-        we're building an AI for a restaurant that provides personalized meal recommendations
-        based on user preferences. Here's the idea: \\n\\n1. **User Input:** The user
-        begins by introducing their dietary needs and likes/dislikes with something
-        like, \\\"I'm looking for dinner options now, and I'm vegan, avoiding egg,
-        prefer Italian cuisine.\\\"\\n\\n```\\nUser: Hey, I\u2019m vegan, no eggs
-        please, let's get an Italian meal. \U0001F60B\\n```\\n\\n2. **Chat Template
-        with Dynamic Content:** We use a chat template to format responses. Here it
-        is:\\n\\n```\\n*Based on your preferences (Dietary Needs \\u0026 Cuisine),
-        here are some suggestions:*\\n- **{if diary_free}**\\n  - *You might like
-        our delicious [Vegan Parmesan Pasta]*\\n  - *Alternatively, consider the *Tomato
-        Basil Fettuccine Alfredo*.*\\n- **else diary_free:**\\n  - *Our favorite for
-        vegans is also the mouthwatering *Spaghetti Carbonara*, minus the egg.*\\n
-        \ - *For something slightly creamier but still without egg, there's the delectable
-        [Pesto Chicken Parmesan]*.\\n- **else:**\\n  - You have excellent choices
-        with our top picks:\\n    - *Spicy Zucchini Tortelloni*\\n    - *Garden Mushroom
-        Ravioli*\\n  \\n```\\n\\nWhen given input, the AI can fill in those sections
-        with actual restaurant options suited to dietary restrictions and cuisine
-        preferences. When it generates a response like this:\\n\\n\\\"Based on your
-        preferences (Diary Free), here are some suggestions:\\n  - You might like
-        our delicious Vegan Parmesan Pasta\\n  - Alternatively, consider the Tomato
-        Basil Fettuccine Alfredo.\\\"\\n\\nThe parts `{if diary_free}` and `else`
-        indicate whether to include recipes free from dairy. This allows for seamless
-        personalization in the AI's dialogue without manual coding each possibility
-        individually. I hope this demonstrates how chat templates can add flexibility
-        and customization where needed, making our conversational agent more adaptable!\",\"index\":0,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":142,\"completion_tokens\":519,\"total_tokens\":661}}\n"
+      string: '{"id":"cmpl-96","object":"text_completion","created":1752852576,"model":"granite3.2:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Absolutely,
+        I''d be happy to demonstrate chat templates with you. Let''s say we have a
+        simple greeting template for the city of \"Wonderland\". Here it is:\n\n```\n{\n  \"greeting\":
+        \"Welcome to {city}! It''s a wonderful place where [description]. Today''s
+        weather is {weather}.\",\n  \"description\": \"{city} is famous for its magnificent
+        {landmark}, where the wind whispers tales of adventure.\",\n  \"weather\":
+        \"Currently, it''s a bit chilly with gentle breezes.\"\n}\n```\n\nNow, let''s
+        see how you can use this template in conversation:\n\n**User:** I''m about
+        to visit Wonderland. Can you give me an idea of what to expect?\n\n**Chat
+        System (using the template):** \"Welcome to Wonderland! It''s a wonderful
+        place where the wind whispers tales of adventure. Today, it''s a bit chilly
+        with gentle breezes.\"\n\nThis shows how a template can dynamically incorporate
+        placeholders for personalized content while providing context from a pre-defined
+        structure. Do you have any other examples or topics in mind?","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":141,"completion_tokens":256,"total_tokens":397}}
+
+        '
     headers:
+      Content-Length:
+      - '1258'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:41:00 GMT
-      Transfer-Encoding:
-      - chunked
+      - Fri, 18 Jul 2025 15:29:36 GMT
     status:
       code: 200
       message: OK

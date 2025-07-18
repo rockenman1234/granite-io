@@ -47,7 +47,7 @@ interactions:
     uri: http://localhost:35782/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-654751610c394b70a1042099fa6e178c","object":"text_completion","created":1752788777,"model":"ibm-granite/granite-3.3-8b-instruct","choices":[{"index":0,"text":"Yes,
+      string: '{"id":"cmpl-4fd4a664ccc24fcdaa28fdc0bc8676c8","object":"text_completion","created":1752852778,"model":"ibm-granite/granite-3.3-8b-instruct","choices":[{"index":0,"text":"Yes,
         Rex, being an outdoor dog, is indeed more likely to encounter fleas compared
         to Lucy, who stays indoors. Fleas can easily jump from one host to another,
         and they thrive in warm, moist environments, which outdoor spaces often provide.
@@ -59,7 +59,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 17 Jul 2025 21:46:17 GMT
+      - Fri, 18 Jul 2025 15:32:57 GMT
       server:
       - uvicorn
     status:
@@ -111,7 +111,7 @@ interactions:
     uri: http://localhost:35782/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-d87588fe41c348b488567bda9f647c3a","object":"text_completion","created":1752788787,"model":"ibm-granite/granite-3.3-8b-instruct","choices":[{"index":0,"text":"
+      string: '{"id":"cmpl-247beed9645449d79fb387468b86346c","object":"text_completion","created":1752852787,"model":"ibm-granite/granite-3.3-8b-instruct","choices":[{"index":0,"text":"
         How does the outdoor lifestyle of Rex, compared to Lucy''s indoor lifestyle,
         affect their likelihood of encountering fleas?\n        ","logprobs":null,"finish_reason":"stop","stop_reason":"[[Answer]]","prompt_logprobs":null}],"usage":{"prompt_tokens":135,"total_tokens":172,"completion_tokens":37,"prompt_tokens_details":null}}'
     headers:
@@ -120,7 +120,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 17 Jul 2025 21:46:26 GMT
+      - Fri, 18 Jul 2025 15:33:07 GMT
       server:
       - uvicorn
     status:
@@ -176,7 +176,7 @@ interactions:
     uri: http://localhost:35782/v1/completions
   response:
     body:
-      string: "{\"id\":\"cmpl-6783e468ae1c4c8f860cb6aafd4d5723\",\"object\":\"text_completion\",\"created\":1752788787,\"model\":\"ibm-granite/granite-3.3-8b-instruct\",\"choices\":[{\"index\":0,\"text\":\"\U0001F916\\nIs
+      string: "{\"id\":\"cmpl-638fd1f046c04c8a98ea5ae509a14020\",\"object\":\"text_completion\",\"created\":1752852787,\"model\":\"ibm-granite/granite-3.3-8b-instruct\",\"choices\":[{\"index\":0,\"text\":\"\U0001F916\\nIs
         Rex, my outdoor dog, at a higher risk of contracting fleas compared to my
         indoor cat, Lucy?\\n\\n\",\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":\"[[Input]]\",\"prompt_logprobs\":null}],\"usage\":{\"prompt_tokens\":215,\"total_tokens\":253,\"completion_tokens\":38,\"prompt_tokens_details\":null}}"
     headers:
@@ -185,7 +185,7 @@ interactions:
       content-type:
       - application/json
       date:
-      - Thu, 17 Jul 2025 21:46:26 GMT
+      - Fri, 18 Jul 2025 15:33:07 GMT
       server:
       - uvicorn
     status:
@@ -193,7 +193,7 @@ interactions:
       message: OK
 - request:
     body: '{"model":"query_rewrite","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>Welcome
       to pet questions!<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I have
       two pets, a dog named Rex and a cat named Lucy.<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>Great,
@@ -246,16 +246,16 @@ interactions:
     uri: http://localhost:35782/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-2c50c754e1074d69b91122dbb64cc7ab","object":"text_completion","created":1752788787,"model":"query_rewrite","choices":[{"index":0,"text":"```json\n{\n    \"rewritten_question\":
+      string: '{"id":"cmpl-f13da4a0090b4867a7addd0ffe592f2b","object":"text_completion","created":1752852787,"model":"query_rewrite","choices":[{"index":0,"text":"```json\n{\n    \"rewritten_question\":
         \"Is Rex more likely to get fleas because he spends a lot of time in the backyard
-        and outdoors?\"\n}\n```","logprobs":null,"finish_reason":"stop","stop_reason":null,"prompt_logprobs":null}],"usage":{"prompt_tokens":302,"total_tokens":346,"completion_tokens":44,"prompt_tokens_details":null}}'
+        and outdoors?\"\n}\n```","logprobs":null,"finish_reason":"stop","stop_reason":null,"prompt_logprobs":null}],"usage":{"prompt_tokens":301,"total_tokens":345,"completion_tokens":44,"prompt_tokens_details":null}}'
     headers:
       content-length:
       - '479'
       content-type:
       - application/json
       date:
-      - Thu, 17 Jul 2025 21:46:26 GMT
+      - Fri, 18 Jul 2025 15:33:07 GMT
       server:
       - uvicorn
     status:

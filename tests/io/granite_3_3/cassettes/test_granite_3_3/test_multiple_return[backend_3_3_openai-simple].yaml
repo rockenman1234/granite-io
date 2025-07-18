@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Hello,
       how are you?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>I''m doing
       great. How can I help you today?<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I''d
@@ -34,7 +34,7 @@ interactions:
       x-stainless-read-timeout:
       - '600'
       x-stainless-retry-count:
-      - '1'
+      - '0'
       x-stainless-runtime:
       - CPython
       x-stainless-runtime-version:
@@ -43,21 +43,40 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-42","object":"text_completion","created":1752787044,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"That
-        sounds interesting! Could you provide more details about what you''d like
-        me to demonstrate with chat templating? Would you prefer a simple example
-        using Python''s Jinja2 template engine, or are you looking for a specific
-        use case in a particular programming language or framework? Please let me
-        know so I can assist you better.","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":142,"completion_tokens":66,"total_tokens":208}}
+      string: '{"id":"cmpl-279","object":"text_completion","created":1752849811,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Absolutely!
+        Chat templating is a powerful method for creating dynamic content based on
+        user inputs or other variables. It allows for the generation of tailored responses,
+        making it versatile and useful in various applications like customer service,
+        e-commerce, and more.\n\nHere''s an example using Python:\n\n```python\ndef
+        chat_template(user_input, options):\n    # Process user input (e.g., find
+        greeting based on time)\n    user_greeting = \"Good Morning\"  # If the current
+        time is before noon\n\n    # Evaluate options for customization based on a
+        condition or user''s intent\n    if user_input.lower() == \"price\":\n        return
+        f\"The price is {options[''price'']}.\"\n    elif user_input.lower() in [\"color\",
+        \"size\"]:\n        return f\"{options[''get_attribute'']}\"  # If the input
+        matches any of predefined attributes\n\n    else:\n        return user_greeting\n\nuser_input
+        = \"price\"  # Or any other user-provided text\nuser_options = {\n    \"price\":
+        19.99,\n    \"color\": \"Red\",\n    \"size\": \"Medium\"\n}\n\nprint(chat_template(user_input,
+        user_options))\n```\n\nIn this example, we define a function called `chat_template`
+        that takes a user''s input and a dictionary of options. The function processes
+        the user input (in this case, whether it''s related to price) and returns
+        a customized response using string formatting.\n\nWhen you run this snippet
+        with \"price\" as the user input, it will return: \n`The price is 19.99.`
+        using the predefined options from the `user_options` dictionary.\n\nThis is
+        just one example of how chat templating can work, and there are many other
+        programming languages and frameworks that support this functionality (like
+        JavaScript''s string interpolation or Python''s f-strings). Let me know if
+        you''d like to explore specific cases or have any questions about implementing
+        this in a particular context!","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":141,"completion_tokens":434,"total_tokens":575}}
 
         '
     headers:
-      Content-Length:
-      - '582'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:17:24 GMT
+      - Fri, 18 Jul 2025 14:43:31 GMT
+      Transfer-Encoding:
+      - chunked
     status:
       code: 200
       message: OK

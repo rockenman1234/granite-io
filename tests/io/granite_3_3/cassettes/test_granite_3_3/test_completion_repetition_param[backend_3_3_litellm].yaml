@@ -498,7 +498,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:17:31 GMT
+      - Fri, 18 Jul 2025 14:31:31 GMT
       Transfer-Encoding:
       - chunked
     status:
@@ -506,7 +506,7 @@ interactions:
       message: OK
 - request:
     body: '{"model": "granite3.3:2b", "prompt": "<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Can
       you answer my question?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>",
       "options": {"temperature": 0.5, "repetition_penalty": 0.5}, "stream": false}'
@@ -527,16 +527,15 @@ interactions:
     uri: http://localhost:11434/api/generate
   response:
     body:
-      string: '{"model":"granite3.3:2b","created_at":"2025-07-17T21:17:31.52981908Z","response":"Of
-        course! Please go ahead and ask your question, and I''ll do my best to provide
-        a clear, concise, and accurate response.","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,32868,225,35,41,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,4445,844,7592,1672,7000,49,0,203,49152,17594,49153,0,203,49152,17594,49153,1419,8419,19,5294,1983,21960,461,7660,1370,7000,30,461,439,4621,745,1672,5273,372,2355,312,4233,30,30836,30,461,26572,1789,32],"total_duration":504697715,"load_duration":17287893,"prompt_eval_count":108,"prompt_eval_duration":155126907,"eval_count":29,"eval_duration":331411177}'
+      string: '{"model":"granite3.3:2b","created_at":"2025-07-18T14:31:31.317411063Z","response":"Of
+        course! Please go ahead and ask your question. I''m here to help.","done":true,"done_reason":"stop","context":[49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,49152,2946,49153,39558,390,17071,2821,44,30468,225,36,34,36,38,32,203,23669,1182,2821,44,30468,225,35,30,225,36,34,36,39,32,203,4282,884,8080,278,659,30,18909,810,25697,32,2448,884,312,17247,19551,47330,32,0,203,49152,496,49153,4445,844,7592,1672,7000,49,0,203,49152,17594,49153,0,203,49152,17594,49153,1419,8419,19,5294,1983,21960,461,7660,1370,7000,32,439,3464,2442,372,3049,32],"total_duration":166387136,"load_duration":19534403,"prompt_eval_count":107,"prompt_eval_duration":7828626,"eval_count":18,"eval_duration":138154719}'
     headers:
       Content-Length:
-      - '1003'
+      - '896'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 17 Jul 2025 21:17:31 GMT
+      - Fri, 18 Jul 2025 14:31:31 GMT
     status:
       code: 200
       message: OK

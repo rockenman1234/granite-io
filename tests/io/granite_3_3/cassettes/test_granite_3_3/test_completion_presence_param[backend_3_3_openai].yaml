@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Can
       you answer my question?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>","frequency_penalty":0.5,"presence_penalty":0.5,"temperature":0.5}'
     headers:
@@ -41,9 +41,9 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-583","object":"text_completion","created":1752787053,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Of
+      string: '{"id":"cmpl-624","object":"text_completion","created":1752849061,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Of
         course! I''ll do my best to provide accurate and concise answers to your questions.
-        Please go ahead and ask.","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":108,"completion_tokens":25,"total_tokens":133}}
+        Please go ahead and ask.","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":107,"completion_tokens":25,"total_tokens":132}}
 
         '
     headers:
@@ -52,7 +52,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:17:33 GMT
+      - Fri, 18 Jul 2025 14:31:01 GMT
     status:
       code: 200
       message: OK

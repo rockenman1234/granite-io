@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.2:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Can
       you answer my question?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>","frequency_penalty":0.5,"presence_penalty":0.5,"temperature":0.5}'
     headers:
@@ -41,20 +41,20 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-622","object":"text_completion","created":1752785519,"model":"granite3.2:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Of
+      string: '{"id":"cmpl-669","object":"text_completion","created":1752848770,"model":"granite3.2:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Of
         course! Please go ahead and ask your question, and I''ll do my best to provide
-        an accurate response based on the knowledge cutoff date of April 2024. Keep
-        in mind that as a text-based AI model, I don''t have real-time access to current
-        data or events beyond this point.","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":108,"completion_tokens":66,"total_tokens":174}}
+        an accurate response based on the information available up until April 2024.
+        Keep in mind that while I strive for accuracy, there might be some changes
+        or developments since then. What''s your question?","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":107,"completion_tokens":64,"total_tokens":171}}
 
         '
     headers:
       Content-Length:
-      - '522'
+      - '534'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 20:51:59 GMT
+      - Fri, 18 Jul 2025 14:26:10 GMT
     status:
       code: 200
       message: OK

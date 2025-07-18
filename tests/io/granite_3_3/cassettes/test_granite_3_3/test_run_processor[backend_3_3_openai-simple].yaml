@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>Hello,
       how are you?<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>I''m doing
       great. How can I help you today?<|end_of_text|>\n<|start_of_role|>user<|end_of_role|>I''d
@@ -43,20 +43,21 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-435","object":"text_completion","created":1752787042,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"That''s
-        fascinating! Chat templating involves using pre-defined templates or snippets
-        of text that can be personalized with dynamic data. This allows for a more
-        interactive and contextually relevant conversation. Please provide more details
-        if you''d like me to demonstrate this feature.","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":142,"completion_tokens":56,"total_tokens":198}}
+      string: '{"id":"cmpl-496","object":"text_completion","created":1752852508,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"That
+        sounds like an interesting topic! Chat templating involves predefining reusable
+        structures of text, which are then filled with dynamic content in real-time.
+        This is commonly used in customer interactions, helping create a more personalized
+        experience. If you need assistance on how to implement chat templating or
+        have any questions related to this concept, feel free to ask!","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":141,"completion_tokens":74,"total_tokens":215}}
 
         '
     headers:
       Content-Length:
-      - '537'
+      - '632'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:17:22 GMT
+      - Fri, 18 Jul 2025 15:28:28 GMT
     status:
       code: 200
       message: OK

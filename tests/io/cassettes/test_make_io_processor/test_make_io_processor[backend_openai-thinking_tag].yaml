@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.2:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful AI assistant.\nRespond to every user query in a comprehensive
       and detailed way. You can write down your thoughts and reasoning process before
       responding. In the thought process, engage in a comprehensive cycle of analysis,
@@ -50,47 +50,38 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: "{\"id\":\"cmpl-672\",\"object\":\"text_completion\",\"created\":1752788467,\"model\":\"granite3.2:2b\",\"system_fingerprint\":\"fp_ollama\",\"choices\":[{\"text\":\"Here
-        is my thought process:\\n\\nThis question is a classic play on words, specifically
-        a joke based on the idiomatic expression \\\"how much wood would a woodchuck
-        chuck if a woodchuck could chuck wood.\\\" The phrase is a humorous way to
-        compare an animal's actual capacity (woodchucks don't really 'chuck' wood)
-        to their mythical potential.\\n\\nWoodchucks, also known as groundhogs, typically
-        dig burrows in the ground for shelter. They spend little time above ground
-        during the day due to the risk of predators. As such, they wouldn't actually
-        chuck wood \u2014 their duties include making these tunnels and seeking out
-        earthworms which they consume as food, not felling trees or moving logs.\\n\\nThe
-        joke's title plays on this misconception by asking how much actual work the
-        common groundhog could do based on its name. It uses a tongue-in-cheek tone
-        to poke fun at imprecise measurements and idioms. Thus, it makes no logical
-        or scientific sense for a woodchuck to chuck significant quantities of wood
-        because they are burrowers and herbivores by nature.\\n\\nHere is my response:\\n\\nThe
-        question \\\"How much wood could a woodchuck chuck if a woodchuck could chuck
-        wood?\\\" humorously attempts to quantify the potential logging capacity of
-        a woodchuck based on its name, which is ironic since woodchucks don't actually
-        chuck or cut down trees. \\n\\nAs these creatures are native to North America
-        and spend most of their time underground creating burrows for shelter, there
-        isn't a tangible measurement of the amount of wood 'chucking' they could do
-        if they did engage in such activity \u2014 because they don't actually chuck
-        wood. Woodchucks' diet consists primarily of vegetation like roots, grasses,
-        and insects; hence their fur is not derived from felled trees.\\n\\nWhile
-        humans often assess an animal's potential based on its name (for instance,
-        \\\"police\\\" implying law enforcement), this joke uses a playful twist to
-        demonstrate how misleading and absurd such comparisons can be when applied
-        to real-world activities based primarily on characteristics like appearance
-        or vernacular. Therefore, there isn't an actual number or significant quantity
-        of wood that a woodchuck could chuck if one were to take the question literally
-        \u2014 because they don't and never would in reality.\\n\\nIn essence, this
-        question highlights the importance of context over literal interpretation
-        when engaging with unusual phrases and expectations rooted in anthropomorphism
-        or idiomatic language.\",\"index\":0,\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":246,\"completion_tokens\":583,\"total_tokens\":829}}\n"
+      string: '{"id":"cmpl-433","object":"text_completion","created":1752852579,"model":"granite3.2:2b","system_fingerprint":"fp_ollama","choices":[{"text":"Here
+        is my thought process:\n\n1. This question is based on a popular joke, often
+        attributed to a short-faced ground squirrel called \"Chuck.\"\n2. The phrase
+        \"how much wood a woodchuck could chuck\" is fictional and doesn''t have factual
+        data because it''s not something that has been measured in real life.\n3.
+        Woodchucks are burrowing animals; they don''t really chuck or throw wood as
+        part of their natural behavior. The phrase is a play on words, essentially.\n4.
+        Therefore, the answer cannot be derived from scientific observation or real
+        data about woodchucks'' physical capabilities.\n\nHere is my response:\n\nThe
+        question \"How much wood could a woodchuck chuck?\" is indeed a classic joke
+        that''s not meant to be taken literally because actual woodchucks don''t actually
+        chuck wood in real life. Woodchucks are burrowing rodents, often referred
+        to as groundhogs, and their name comes from an early misunderstanding of the
+        noise they make when digging holes rather than what they do with their incisors
+        - a chucking or gnawing motion during digging.\n\nAs there is no factual data
+        about woodchucks'' lumber-moving capabilities due to their natural burrowing
+        habits, any attempt to quantify \"how much\" would be purely absurd and fictional.
+        The phrase exists solely as a fun play on words, not grounded in biology or
+        physical capacity tests of wild animals.\n\nSo, the answer is: There''s no
+        actual wood that can be logged or measured to solve this question; it''s a
+        humorous expression derived from anthropomorphism and misconception about
+        woodchuck behavior. The joke invites us to imagine them as more capable foremen
+        than they truly are!","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":245,"completion_tokens":403,"total_tokens":648}}
+
+        '
     headers:
+      Content-Length:
+      - '1896'
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:41:07 GMT
-      Transfer-Encoding:
-      - chunked
+      - Fri, 18 Jul 2025 15:29:39 GMT
     status:
       code: 200
       message: OK

@@ -1,7 +1,7 @@
 interactions:
 - request:
     body: '{"model":"granite3.3:2b","prompt":"<|start_of_role|>system<|end_of_role|>Knowledge
-      Cutoff Date: April 2024.\nToday''s Date: July 17, 2025.\nYou are Granite, developed
+      Cutoff Date: April 2024.\nToday''s Date: April 1, 2025.\nYou are Granite, developed
       by IBM. You are a helpful assistant with access to the following tools. When
       a tool is required to answer the user''s query, respond only with <|tool_call|>
       followed by a JSON list of tools used. If a tool does not exist in the provided
@@ -54,8 +54,8 @@ interactions:
     uri: http://localhost:11434/v1/completions
   response:
     body:
-      string: '{"id":"cmpl-131","object":"text_completion","created":1752786888,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"\u003c|tool_call|\u003e[{\"name\":
-        \"find_money\", \"arguments\": {\"name\": \"John Doe\", \"age\": 30}}]","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":345,"completion_tokens":28,"total_tokens":373}}
+      string: '{"id":"cmpl-200","object":"text_completion","created":1752852533,"model":"granite3.3:2b","system_fingerprint":"fp_ollama","choices":[{"text":"\u003c|tool_call|\u003e[{\"name\":
+        \"find_money\", \"arguments\": {\"name\": \"John Doe\", \"age\": 30}}]","index":0,"finish_reason":"stop"}],"usage":{"prompt_tokens":344,"completion_tokens":28,"total_tokens":372}}
 
         '
     headers:
@@ -64,7 +64,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 17 Jul 2025 21:14:48 GMT
+      - Fri, 18 Jul 2025 15:28:53 GMT
     status:
       code: 200
       message: OK
