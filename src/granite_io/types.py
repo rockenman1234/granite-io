@@ -118,10 +118,11 @@ class Citation(pydantic.BaseModel):
 
 
 class Document(pydantic.BaseModel):
-    """Document data as returned by the model output parser"""
+    """RAG documents, which in practice are usually snippets drawn from larger
+    documents."""
 
-    doc_id: str
     text: str
+    doc_id: str | int | None = None
 
 
 class _ChatMessageBase(pydantic.BaseModel, NoDefaultsMixin):

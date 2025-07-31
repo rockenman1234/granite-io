@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 
 """
-I/O processor for the Granite certainty intrinsic.
+I/O processor for the Granite 3.3 8B Instruct - Uncertainty LoRA.
 
-See model card at https://huggingface.co/ibm-granite/granite-uncertainty-3.2-8b-lora
+See model card at
+https://huggingface.co/ibm-granite/granite-3.3-8b-rag-agent-lib/blob/main/certainty_lora/README.md
 """
 
 # Local
@@ -12,9 +13,9 @@ from granite_io.io.base import (
     InputOutputProcessor,
     ModelDirectInputOutputProcessorWithGenerate,
 )
-from granite_io.io.granite_3_2.input_processors.granite_3_2_input_processor import (
-    Granite3Point2InputProcessor,
-    Granite3Point2Inputs,
+from granite_io.io.granite_3_3.input_processors.granite_3_3_input_processor import (
+    Granite3Point3InputProcessor,
+    Granite3Point3Inputs,
 )
 from granite_io.types import (
     AssistantMessage,
@@ -28,11 +29,12 @@ from granite_io.types import (
 
 class CertaintyIOProcessor(ModelDirectInputOutputProcessorWithGenerate):
     """
-    I/O processor for the certainty intrinsic, AKA the Granite 3.2 8B Instruct
+    I/O processor for the certainty intrinsic, AKA the Granite 3.3 8B Instruct
     Uncertainty LoRA. See model card [here](
-        https://huggingface.co/ibm-granite/granite-uncertainty-3.2-8b-lora).
+        https://huggingface.co/ibm-granite/granite-3.3-8b-rag-agent-lib/blob/main/certainty_lora/README.md
+).
         
-    The model must be prompted with a variant of the Granite 3.2 prompt. The model needs
+    The model must be prompted with a variant of the Granite 3.3 prompt. The model needs
     constrained decoding to produce a reliable result. The first token of the model
     output will be a certainty score encoded as a number from 0 to 9, inclusive.
     
@@ -101,13 +103,13 @@ class CertaintyIOProcessor(ModelDirectInputOutputProcessorWithGenerate):
         super().__init__(backend=backend)
 
         # I/O processor for the base model, which does most of the input formatting.
-        self.base_input_processor = Granite3Point2InputProcessor()
+        self.base_input_processor = Granite3Point3InputProcessor()
 
     def inputs_to_generate_inputs(
         self, inputs: ChatCompletionInputs, add_generation_prompt: bool = True
     ) -> GenerateInputs:
         # Validate the input and convert to Granite input
-        inputs = Granite3Point2Inputs.model_validate(inputs.model_dump())
+        inputs = Granite3Point3Inputs.model_validate(inputs.model_dump())
 
         # Check for the invariants that the model expects its input to satisfy
         if inputs.messages[-1].role not in ("user", "assistant"):
